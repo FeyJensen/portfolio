@@ -34,6 +34,10 @@ a {
   text-decoration: none;
 }
 
+button {
+  font: inherit;
+}
+
 .page-shell {
   width: min(1200px, calc(100% - 32px));
   margin: 0 auto;
@@ -60,6 +64,11 @@ a {
   gap: 12px;
 }
 
+.brand-button {
+  all: unset;
+  cursor: pointer;
+}
+
 .brand-mark {
   width: 38px;
   height: 38px;
@@ -81,11 +90,21 @@ a {
 .nav {
   display: flex;
   gap: 28px;
+  align-items: center;
 }
 
-.nav a {
+.nav a,
+.nav-button {
   color: var(--muted);
   font-weight: 500;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav-button {
+  color: var(--muted);
 }
 
 .hero {
@@ -370,32 +389,113 @@ a {
   gap: 20px;
 }
 
+.footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
 .footer h2 {
   margin: 10px 0 0;
   font-size: clamp(1.7rem, 2.8vw, 2.6rem);
   letter-spacing: -0.05em;
 }
 
-@media (max-width: 900px) {
-  .hero,
-  .about-grid,
-  .services-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .services-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .hero {
-    padding-top: 42px;
-  }
-
-  .footer {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+.resume-page {
+  padding-top: 28px;
 }
+
+.resume-shell {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: 32px;
+  box-shadow: var(--shadow);
+}
+
+.resume-header h1 {
+  margin: 0;
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  letter-spacing: -0.06em;
+}
+
+.resume-location {
+  margin: 8px 0 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.resume-section {
+  margin-top: 28px;
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+}
+
+.resume-section h2 {
+  margin: 0 0 16px;
+  font-size: 1.25rem;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--brand-dark);
+}
+
+.resume-section p,
+.resume-section li {
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.resume-skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.resume-skill {
+  display: inline-flex;
+  background: rgba(201, 138, 68, 0.12);
+  color: var(--brand-dark);
+  border: 1px solid rgba(201, 138, 68, 0.15);
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.resume-job {
+  margin-bottom: 20px;
+}
+
+.resume-job-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+
+.resume-job-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  letter-spacing: -0.04em;
+}
+
+.resume-job-header span,
+.resume-role {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.resume-job ul {
+  margin: 10px 0 0;
+  padding-left: 20px;
+}
+
+.resume-education p {
+  margin: 8px 0;
+}
+
 
 @media (max-width: 640px) {
   .page-shell {
@@ -421,5 +521,30 @@ a {
 
   .footer {
     padding: 22px 18px;
+  }
+
+  .resume-shell {
+    padding: 20px 18px;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero,
+  .about-grid,
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero {
+    padding-top: 42px;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
