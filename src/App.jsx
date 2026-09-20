@@ -25,7 +25,7 @@ const services = [
 
 const stats = [
   { value: '2+', label: 'Years building digital experiences' },
-  { value: '12+', label: 'Projects designed and developed' },
+  { value: '50+', label: 'Projects designed and developed' },
   { value: '100%', label: 'Custom, user-focused work from concept to launch' },
 ];
 
