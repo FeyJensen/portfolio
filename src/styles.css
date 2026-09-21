@@ -629,6 +629,24 @@ button {
   color: #b4502f;
 }
 
+.skye-dog-warning {
+  display: grid;
+  gap: 3px;
+  margin-top: 22px;
+  padding: 13px 16px 13px 18px;
+  border-left: 4px solid #d4773b;
+  border-radius: 4px 12px 12px 4px;
+  background: rgba(255, 249, 232, 0.86);
+  color: #70452c;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.skye-dog-warning strong {
+  color: #9a4e29;
+  font-size: 0.95rem;
+}
+
 .skye-dog-visual {
   position: relative;
   aspect-ratio: 16 / 10;

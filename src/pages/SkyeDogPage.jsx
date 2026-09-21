@@ -19,6 +19,10 @@ export default function SkyeDogPage() {
               Play Skye Dog <span aria-hidden="true">↗</span>
             </a>
           </div>
+          <div className="skye-dog-warning" role="note">
+            <strong>Computer browser only for now</strong>
+            <span>Mobile support is coming soon.</span>
+          </div>
         </div>
 
         <div className="skye-dog-visual">
