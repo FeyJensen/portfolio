@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import ApiPage from './pages/ApiPage';
 import HomePage from './pages/HomePage';
 import ResumePage from './pages/ResumePage';
 import ShopDemoPage from './pages/ShopDemoPage';
@@ -33,9 +32,6 @@ export default function App() {
           <button type="button" className="nav-button" onClick={() => setCurrentPage('resume')}>
             Resume
           </button>
-          <button type="button" className="nav-button" onClick={() => setCurrentPage('api')}>
-            API
-          </button>
           <button type="button" className="nav-button" onClick={() => setCurrentPage('shop')}>
             Shop Demo
           </button>
@@ -44,8 +40,6 @@ export default function App() {
 
       {currentPage === 'resume' ? (
         <ResumePage />
-      ) : currentPage === 'api' ? (
-        <ApiPage />
       ) : currentPage === 'shop' ? (
         <ShopDemoPage />
       ) : (

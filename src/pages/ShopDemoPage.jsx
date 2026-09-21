@@ -1,16 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import { initialShopListings } from '../data/portfolioData';
-
 export default function ShopDemoPage() {
-  const [listings, setListings] = useState(() => {
-    if (typeof window === 'undefined') {
-      return initialShopListings;
-    }
-
-    const saved = window.localStorage.getItem('shop-demo-listings');
-    return saved ? JSON.parse(saved) : initialShopListings;
-  });
+  const [listings, setListings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   const [formData, setFormData] = useState({
     name: '',
@@ -22,9 +15,27 @@ export default function ShopDemoPage() {
 
   const [editingId, setEditingId] = useState(null);
 
+  const fetchListings = async () => {
+    try {
+      const response = await fetch('/api/products');
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Unable to load products.');
+      }
+
+      setListings(data);
+      setError('');
+    } catch (fetchError) {
+      setError(fetchError.message || 'Something went wrong.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    window.localStorage.setItem('shop-demo-listings', JSON.stringify(listings));
-  }, [listings]);
+    fetchListings();
+  }, []);
 
   const totalInventory = listings.reduce((sum, item) => sum + Number(item.stock || 0), 0);
   const totalValue = listings.reduce((sum, item) => sum + Number(item.price || 0) * Number(item.stock || 0), 0);
@@ -39,7 +50,7 @@ export default function ShopDemoPage() {
     setEditingId(null);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const cleanedListing = {
@@ -54,23 +65,29 @@ export default function ShopDemoPage() {
       return;
     }
 
-    if (editingId) {
-      setListings((current) =>
-        current.map((listing) =>
-          listing.id === editingId ? { ...listing, ...cleanedListing } : listing,
-        ),
-      );
-    } else {
-      setListings((current) => [
-        {
-          id: Date.now(),
-          ...cleanedListing,
-        },
-        ...current,
-      ]);
-    }
+    try {
+      const method = editingId ? 'PUT' : 'POST';
+      const url = editingId ? `/api/products/${editingId}` : '/api/products';
 
-    resetForm();
+      const response = await fetch(url, {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(cleanedListing),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Unable to save product.');
+      }
+
+      await fetchListings();
+      resetForm();
+    } catch (submitError) {
+      setError(submitError.message || 'Unable to save product.');
+    }
   };
 
   const handleEdit = (listing) => {
@@ -84,11 +101,25 @@ export default function ShopDemoPage() {
     });
   };
 
-  const handleDelete = (id) => {
-    setListings((current) => current.filter((listing) => listing.id !== id));
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(`/api/products/${id}`, {
+        method: 'DELETE',
+      });
 
-    if (editingId === id) {
-      resetForm();
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Unable to delete product.');
+      }
+
+      await fetchListings();
+
+      if (editingId === id) {
+        resetForm();
+      }
+    } catch (deleteError) {
+      setError(deleteError.message || 'Unable to delete product.');
     }
   };
 
@@ -96,10 +127,10 @@ export default function ShopDemoPage() {
     <div className="shop-demo-page">
       <div className="shop-demo-shell">
         <header className="shop-demo-header">
-          <span className="eyebrow">Front-end demo</span>
+          <span className="eyebrow">Full-stack demo</span>
           <h1>Shop listings dashboard.</h1>
           <p>
-            A simple CRUD demo that lets you create, edit, and remove product listings. While this is a front-end-only demo, it simulates a real-world dashboard experience with form validation, state management, and local storage persistence.
+            A real CRUD workflow powered by a Node.js API and PostgreSQL-ready data layer. This app demonstrates how a frontend interface connects to backend logic and persisted data.
           </p>
         </header>
 
@@ -117,6 +148,8 @@ export default function ShopDemoPage() {
             <strong>${totalValue}</strong>
           </div>
         </section>
+
+        {error && <p className="shop-error">{error}</p>}
 
         <div className="shop-demo-grid">
           <form className="shop-form" onSubmit={handleSubmit}>
@@ -195,31 +228,35 @@ export default function ShopDemoPage() {
           </form>
 
           <div className="shop-listings">
-            {listings.map((listing) => (
-              <article key={listing.id} className="shop-item-card">
-                <div className="shop-item-header">
-                  <span className="shop-tag">{listing.category}</span>
-                  <span className="shop-price">${listing.price}</span>
-                </div>
+            {loading ? (
+              <div className="shop-item-card"><p>Loading listings...</p></div>
+            ) : (
+              listings.map((listing) => (
+                <article key={listing.id} className="shop-item-card">
+                  <div className="shop-item-header">
+                    <span className="shop-tag">{listing.category}</span>
+                    <span className="shop-price">${listing.price}</span>
+                  </div>
 
-                <h3>{listing.name}</h3>
-                <p>{listing.description}</p>
+                  <h3>{listing.name}</h3>
+                  <p>{listing.description}</p>
 
-                <div className="shop-item-meta">
-                  <span>Stock: {listing.stock}</span>
-                  <span>ID: {String(listing.id).slice(-4)}</span>
-                </div>
+                  <div className="shop-item-meta">
+                    <span>Stock: {listing.stock}</span>
+                    <span>ID: {String(listing.id).slice(-4)}</span>
+                  </div>
 
-                <div className="shop-item-actions">
-                  <button type="button" className="secondary-btn shop-action-btn" onClick={() => handleEdit(listing)}>
-                    Edit
-                  </button>
-                  <button type="button" className="shop-delete-btn" onClick={() => handleDelete(listing.id)}>
-                    Delete
-                  </button>
-                </div>
-              </article>
-            ))}
+                  <div className="shop-item-actions">
+                    <button type="button" className="secondary-btn shop-action-btn" onClick={() => handleEdit(listing)}>
+                      Edit
+                    </button>
+                    <button type="button" className="shop-delete-btn" onClick={() => handleDelete(listing.id)}>
+                      Delete
+                    </button>
+                  </div>
+                </article>
+              ))
+            )}
           </div>
         </div>
       </div>
