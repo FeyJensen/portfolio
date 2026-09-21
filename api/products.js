@@ -2,6 +2,8 @@ import { createProduct, deleteProduct, readProducts, updateProduct } from './db.
 
 export default async function handler(req, res) {
   try {
+    const idFromRequest = Number(req.query?.id ?? req.params?.id ?? req.body?.id);
+
     if (req.method === 'GET') {
       const products = await readProducts();
       return res.status(200).json(products);
@@ -13,14 +15,20 @@ export default async function handler(req, res) {
     }
 
     if (req.method === 'PUT') {
-      const productId = Number(req.query.id || req.body.id);
-      const product = await updateProduct(productId, req.body || {});
+      if (!Number.isFinite(idFromRequest)) {
+        return res.status(400).json({ error: 'Product id is required.' });
+      }
+
+      const product = await updateProduct(idFromRequest, req.body || {});
       return res.status(200).json(product);
     }
 
     if (req.method === 'DELETE') {
-      const productId = Number(req.query.id || req.body.id);
-      const product = await deleteProduct(productId);
+      if (!Number.isFinite(idFromRequest)) {
+        return res.status(400).json({ error: 'Product id is required.' });
+      }
+
+      const product = await deleteProduct(idFromRequest);
       return res.status(200).json(product);
     }
 

@@ -1,5 +1,42 @@
 import { useEffect, useState } from 'react';
 
+function buildApiUrl(path) {
+  const configuredBase = import.meta.env.VITE_API_URL;
+
+  if (configuredBase) {
+    return `${configuredBase.replace(/\/$/, '')}${path}`;
+  }
+
+  if (typeof window === 'undefined') {
+    return path;
+  }
+
+  return `${window.location.origin}${path}`;
+}
+
+async function fetchJson(url, options) {
+  const response = await fetch(url, options);
+  const contentType = response.headers.get('content-type') || '';
+  const rawBody = await response.text();
+
+  let payload = null;
+
+  if (rawBody) {
+    try {
+      payload = contentType.includes('application/json') ? JSON.parse(rawBody) : rawBody;
+    } catch {
+      payload = rawBody;
+    }
+  }
+
+  if (!response.ok) {
+    const message = typeof payload === 'string' ? payload : payload?.error || `Request failed with ${response.status}`;
+    throw new Error(message);
+  }
+
+  return payload;
+}
+
 export default function ShopDemoPage() {
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,14 +54,8 @@ export default function ShopDemoPage() {
 
   const fetchListings = async () => {
     try {
-      const response = await fetch('/api/products');
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Unable to load products.');
-      }
-
-      setListings(data);
+      const data = await fetchJson(buildApiUrl('/api/products'));
+      setListings(Array.isArray(data) ? data : []);
       setError('');
     } catch (fetchError) {
       setError(fetchError.message || 'Something went wrong.');
@@ -67,21 +98,17 @@ export default function ShopDemoPage() {
 
     try {
       const method = editingId ? 'PUT' : 'POST';
-      const url = editingId ? `/api/products/${editingId}` : '/api/products';
+      const url = buildApiUrl(
+        editingId ? `/api/products?id=${editingId}` : '/api/products',
+      );
 
-      const response = await fetch(url, {
+      await fetchJson(url, {
         method,
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(cleanedListing),
       });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Unable to save product.');
-      }
 
       await fetchListings();
       resetForm();
@@ -103,15 +130,9 @@ export default function ShopDemoPage() {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`/api/products/${id}`, {
+      await fetchJson(buildApiUrl(`/api/products?id=${id}`), {
         method: 'DELETE',
       });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Unable to delete product.');
-      }
 
       await fetchListings();
 
