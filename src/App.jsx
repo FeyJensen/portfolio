@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import HomePage from './pages/HomePage';
 import ResumePage from './pages/ResumePage';
+import SkyeDogPage from './pages/SkyeDogPage';
 import ShopDemoPage from './pages/ShopDemoPage';
 
 export default function App() {
@@ -35,6 +36,9 @@ export default function App() {
           <button type="button" className="nav-button" onClick={() => setCurrentPage('shop')}>
             Shop Demo
           </button>
+          <button type="button" className="nav-button" onClick={() => setCurrentPage('skye-dog')}>
+            Skye Dog
+          </button>
         </nav>
       </header>
 
@@ -42,6 +46,8 @@ export default function App() {
         <ResumePage />
       ) : currentPage === 'shop' ? (
         <ShopDemoPage />
+      ) : currentPage === 'skye-dog' ? (
+        <SkyeDogPage />
       ) : (
         <HomePage />
       )}

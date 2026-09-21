@@ -585,6 +585,330 @@ button {
   padding-top: 28px;
 }
 
+.skye-dog-page {
+  padding-top: 28px;
+}
+
+.skye-dog-shell {
+  min-height: 620px;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 28px;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(35, 66, 51, 0.12);
+  border-radius: 28px;
+  padding: 46px;
+  background: #f4ead8;
+  box-shadow: var(--shadow);
+}
+
+.skye-dog-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.skye-dog-copy h1 {
+  margin: 18px 0 14px;
+  color: #234233;
+  font-size: clamp(3rem, 6vw, 5.8rem);
+  line-height: 0.92;
+  letter-spacing: -0.08em;
+}
+
+.skye-dog-copy p {
+  max-width: 440px;
+  margin: 0;
+  color: #536257;
+  font-size: 1.08rem;
+  line-height: 1.75;
+}
+
+.skye-dog-copy .eyebrow {
+  background: rgba(226, 119, 67, 0.14);
+  color: #b4502f;
+}
+
+.skye-dog-visual {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 22px;
+  background: #08a4e8;
+}
+
+.skye-dog-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.skye-dog-controls {
+  display: grid;
+  grid-template-columns: 0.7fr 1.3fr;
+  gap: 28px;
+  align-items: center;
+  padding: 48px 8px 8px;
+}
+
+.skye-dog-controls-heading h2 {
+  margin: 14px 0 0;
+  color: #234233;
+  font-size: clamp(1.8rem, 3vw, 2.7rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+
+.skye-dog-controls-heading .eyebrow {
+  background: rgba(226, 119, 67, 0.14);
+  color: #b4502f;
+}
+
+.skye-dog-controls-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.skye-dog-control {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 118px;
+  padding: 18px;
+  border: 1px solid rgba(35, 66, 51, 0.12);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.skye-dog-control h3 {
+  margin: 0 0 6px;
+  color: #234233;
+  font-size: 1.05rem;
+}
+
+.skye-dog-control p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.skye-dog-control kbd {
+  display: inline-grid;
+  min-width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid rgba(35, 66, 51, 0.2);
+  border-bottom-width: 3px;
+  border-radius: 8px;
+  background: #fffdf8;
+  color: #234233;
+  font: 700 1rem/1 inherit;
+}
+
+.skye-dog-key-group {
+  display: grid;
+  justify-items: center;
+  gap: 3px;
+  min-width: 108px;
+}
+
+.skye-dog-key-group > kbd {
+  margin-left: 37px;
+}
+
+.skye-dog-key-group div {
+  display: flex;
+  gap: 3px;
+}
+
+.skye-dog-space-key {
+  min-width: 76px !important;
+  padding: 0 10px;
+  font-size: 0.78rem !important;
+}
+
+.skye-dog-sun {
+  position: absolute;
+  top: 52px;
+  right: 16%;
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  background: #f7d77f;
+  box-shadow: 0 0 0 18px rgba(247, 215, 127, 0.18);
+}
+
+.skye-dog-cloud {
+  position: absolute;
+  width: 108px;
+  height: 24px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.skye-dog-cloud::before,
+.skye-dog-cloud::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  border-radius: 50%;
+  background: inherit;
+}
+
+.skye-dog-cloud::before {
+  left: 18px;
+  width: 34px;
+  height: 34px;
+}
+
+.skye-dog-cloud::after {
+  right: 18px;
+  width: 46px;
+  height: 46px;
+}
+
+.skye-dog-cloud-one {
+  top: 112px;
+  left: 12%;
+}
+
+.skye-dog-cloud-two {
+  top: 188px;
+  right: 11%;
+  transform: scale(0.68);
+}
+
+.skye-dog-hill {
+  position: absolute;
+  bottom: -100px;
+  width: 125%;
+  height: 280px;
+  border-radius: 50% 50% 0 0;
+}
+
+.skye-dog-hill-back {
+  left: -24%;
+  background: #a8c28b;
+  transform: rotate(-7deg);
+}
+
+.skye-dog-hill-front {
+  right: -32%;
+  bottom: -140px;
+  background: #80a36d;
+  transform: rotate(8deg);
+}
+
+.skye-dog-character {
+  position: absolute;
+  z-index: 1;
+  right: 31%;
+  bottom: 128px;
+  width: 140px;
+  height: 220px;
+  animation: skye-dog-bob 3.4s ease-in-out infinite;
+}
+
+.skye-dog-head {
+  position: absolute;
+  z-index: 2;
+  top: 32px;
+  left: 16px;
+  width: 108px;
+  height: 94px;
+  border-radius: 48% 48% 45% 45%;
+  background: #c47b46;
+  border: 5px solid #723f2d;
+}
+
+.skye-dog-ear {
+  position: absolute;
+  z-index: 1;
+  top: 22px;
+  width: 40px;
+  height: 72px;
+  border-radius: 60% 20% 60% 20%;
+  background: #8e4f36;
+  border: 5px solid #723f2d;
+}
+
+.skye-dog-ear-left {
+  left: 10px;
+  transform: rotate(-28deg);
+}
+
+.skye-dog-ear-right {
+  right: 10px;
+  transform: scaleX(-1) rotate(-28deg);
+}
+
+.skye-dog-eye {
+  position: absolute;
+  top: 32px;
+  width: 11px;
+  height: 15px;
+  border-radius: 50%;
+  background: #243229;
+}
+
+.skye-dog-eye-left { left: 27px; }
+.skye-dog-eye-right { right: 27px; }
+
+.skye-dog-nose {
+  position: absolute;
+  left: 44px;
+  bottom: 21px;
+  width: 18px;
+  height: 12px;
+  border-radius: 50%;
+  background: #39241f;
+}
+
+.skye-dog-body {
+  position: absolute;
+  bottom: 0;
+  left: 34px;
+  width: 76px;
+  height: 108px;
+  border-radius: 46% 46% 22% 22%;
+  background: #c47b46;
+  border: 5px solid #723f2d;
+}
+
+.skye-dog-tail {
+  position: absolute;
+  right: 3px;
+  bottom: 62px;
+  width: 56px;
+  height: 20px;
+  border: 10px solid #8e4f36;
+  border-left: 0;
+  border-radius: 0 40px 40px 0;
+  transform: rotate(-32deg);
+}
+
+.skye-dog-label {
+  position: absolute;
+  z-index: 2;
+  right: 22px;
+  bottom: 24px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(35, 66, 51, 0.82);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@keyframes skye-dog-bob {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
+}
+
 .shop-demo-shell {
   background: rgba(255, 255, 255, 0.8);
   border: 1px solid var(--line);
@@ -787,11 +1111,20 @@ button {
 
 @media (max-width: 900px) {
   .api-grid,
-  .shop-demo-grid {
+  .shop-demo-grid,
+  .skye-dog-shell {
     grid-template-columns: 1fr;
   }
 
   .shop-demo-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .skye-dog-shell {
+    min-height: 0;
+  }
+
+  .skye-dog-controls {
     grid-template-columns: 1fr;
   }
 }
@@ -824,6 +1157,30 @@ button {
 
   .resume-shell {
     padding: 20px 18px;
+  }
+
+  .skye-dog-shell {
+    gap: 24px;
+    padding: 26px 18px 18px;
+  }
+
+  .skye-dog-controls {
+    padding: 34px 0 8px;
+  }
+
+  .skye-dog-controls-list {
+    grid-template-columns: 1fr;
+  }
+
+  .skye-dog-visual {
+    aspect-ratio: 16 / 10;
+  }
+
+  .skye-dog-character {
+    right: 28%;
+    bottom: 92px;
+    transform: scale(0.84);
+    transform-origin: bottom center;
   }
 }
 
