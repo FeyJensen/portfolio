@@ -41,13 +41,15 @@ function normalizeProduct(item) {
 }
 
 function getPool() {
-  if (!process.env.DATABASE_URL) {
+  const databaseUrl = String(process.env.DATABASE_URL || '').trim().replace(/^['"]|['"]$/g, '');
+
+  if (!databaseUrl) {
     return null;
   }
 
   return new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: process.env.DATABASE_URL.includes('localhost') ? false : { rejectUnauthorized: false },
+    connectionString: databaseUrl,
+    ssl: databaseUrl.includes('localhost') ? false : { rejectUnauthorized: false },
   });
 }
 
