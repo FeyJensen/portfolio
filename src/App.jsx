@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import HomePage from './pages/HomePage';
 import ResumePage from './pages/ResumePage';
@@ -8,6 +8,10 @@ import ShopDemoPage from './pages/ShopDemoPage';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [currentPage]);
 
   return (
     <div className="page-shell">
