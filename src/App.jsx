@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import HomePage from './pages/HomePage';
 import ResumePage from './pages/ResumePage';
+import ReactShowcasePage from './pages/ReactShowcasePage';
 import SkyeDogPage from './pages/SkyeDogPage';
 import ShopDemoPage from './pages/ShopDemoPage';
 
@@ -39,6 +40,9 @@ export default function App() {
           <button type="button" className="nav-button" onClick={() => setCurrentPage('skye-dog')}>
             Skye Dog
           </button>
+          <button type="button" className="nav-button" onClick={() => setCurrentPage('react-showcase')}>
+            React Lab
+          </button>
         </nav>
       </header>
 
@@ -48,6 +52,8 @@ export default function App() {
         <ShopDemoPage />
       ) : currentPage === 'skye-dog' ? (
         <SkyeDogPage />
+      ) : currentPage === 'react-showcase' ? (
+        <ReactShowcasePage />
       ) : (
         <HomePage />
       )}

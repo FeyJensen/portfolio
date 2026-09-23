@@ -496,91 +496,6 @@ button {
   margin: 8px 0;
 }
 
-.api-page {
-  padding-top: 28px;
-}
-
-.api-shell {
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid var(--line);
-  border-radius: 28px;
-  padding: 32px;
-  box-shadow: var(--shadow);
-}
-
-.api-header {
-  margin-bottom: 28px;
-}
-
-.api-header h1 {
-  margin: 14px 0 12px;
-  font-size: clamp(2.5rem, 4vw, 4rem);
-  line-height: 1.06;
-  letter-spacing: -0.06em;
-}
-
-.api-header p {
-  max-width: 720px;
-  color: var(--muted);
-  line-height: 1.75;
-  font-size: 1.08rem;
-}
-
-.api-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: 24px;
-}
-
-.api-card {
-  background: rgba(255, 255, 255, 0.75);
-  border: 1px solid var(--line);
-  border-radius: 24px;
-  padding: 24px;
-}
-
-.accent-card {
-  background: linear-gradient(180deg, #1d2026 0%, #2d333d 100%);
-  color: white;
-}
-
-.api-card h2 {
-  margin: 0 0 18px;
-  font-size: 1.8rem;
-  letter-spacing: -0.05em;
-}
-
-.api-list {
-  margin: 0;
-  padding-left: 18px;
-  display: grid;
-  gap: 12px;
-  color: var(--text);
-  line-height: 1.7;
-}
-
-.accent-card p,
-.accent-card .tag-row span {
-  color: rgba(255, 255, 255, 0.82);
-}
-
-.tag-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 18px;
-}
-
-.tag-row span {
-  display: inline-flex;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 999px;
-  padding: 7px 12px;
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-
 .shop-demo-page {
   padding-top: 28px;
 }
@@ -927,6 +842,519 @@ button {
   50% { transform: translateY(-8px) rotate(1deg); }
 }
 
+.react-lab-page {
+  --lab-ink: #172b2b;
+  --lab-muted: #657473;
+  --lab-paper: #f8f5ec;
+  --lab-accent: #ff6b57;
+  --lab-accent-soft: rgba(255, 107, 87, 0.16);
+  --lab-secondary: #8edec3;
+  padding: 72px 0 20px;
+}
+
+.react-lab-teal {
+  --lab-accent: #0f9d9d;
+  --lab-accent-soft: rgba(15, 157, 157, 0.18);
+  --lab-secondary: #f5b942;
+}
+
+.react-lab-gold {
+  --lab-accent: #7c4dff;
+  --lab-accent-soft: rgba(124, 77, 255, 0.18);
+  --lab-secondary: #ff9f43;
+}
+
+.react-lab-hero {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 48px;
+  align-items: center;
+  min-height: 500px;
+  padding: 24px 28px 58px;
+  border-bottom: 1px solid rgba(23, 43, 43, 0.12);
+}
+
+.react-lab-intro {
+  position: relative;
+  z-index: 1;
+}
+
+.react-lab-eyebrow {
+  background: var(--lab-accent-soft);
+  color: var(--lab-accent);
+}
+
+.react-lab-intro h1 {
+  max-width: 580px;
+  margin: 18px 0 18px;
+  color: var(--lab-ink);
+  font-size: clamp(3rem, 6vw, 6.4rem);
+  line-height: 0.91;
+  letter-spacing: -0.08em;
+}
+
+.react-lab-intro > p {
+  max-width: 500px;
+  margin: 0;
+  color: var(--lab-muted);
+  font-size: 1.06rem;
+  line-height: 1.7;
+}
+
+.react-lab-live-status {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 28px;
+  color: var(--lab-ink);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.react-lab-status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--lab-accent);
+  box-shadow: 0 0 0 5px var(--lab-accent-soft);
+}
+
+.react-lab-status-value {
+  margin-left: auto;
+  color: var(--lab-muted);
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.react-lab-craft-board {
+  position: relative;
+  display: flex;
+  width: min(100%, 560px);
+  min-height: 360px;
+  flex-direction: column;
+  justify-content: space-between;
+  justify-self: end;
+  overflow: hidden;
+  border: 1px solid rgba(23, 43, 43, 0.12);
+  border-radius: 28px;
+  padding: 26px;
+  background: var(--lab-ink);
+  box-shadow: 0 28px 70px rgba(46, 77, 69, 0.16);
+}
+
+.react-lab-craft-board::before {
+  position: absolute;
+  top: -90px;
+  right: -70px;
+  width: 260px;
+  height: 260px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 50%;
+  content: '';
+}
+
+.react-lab-craft-board-header,
+.react-lab-craft-board-footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(255, 255, 255, 0.58);
+  font: 0.7rem 'SFMono-Regular', Consolas, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.react-lab-craft-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--lab-secondary);
+  box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.08);
+}
+
+.react-lab-craft-board-title {
+  position: relative;
+  z-index: 1;
+  max-width: 360px;
+  color: white;
+  font-size: clamp(2.4rem, 5vw, 4.8rem);
+  font-weight: 700;
+  letter-spacing: -0.08em;
+  line-height: 0.94;
+}
+
+.react-lab-craft-board-lines {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 10px;
+  width: 72%;
+}
+
+.react-lab-craft-board-lines span {
+  display: block;
+  height: 7px;
+  border-radius: 99px;
+  background: var(--lab-accent);
+}
+
+.react-lab-craft-board-lines span:nth-child(2) {
+  width: 76%;
+  background: var(--lab-secondary);
+}
+
+.react-lab-craft-board-lines span:nth-child(3) {
+  width: 48%;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.react-lab-craft-board-footer {
+  gap: 12px;
+  justify-content: flex-start;
+}
+
+.react-lab-workbench {
+  padding: 52px 28px 0;
+}
+
+.react-lab-mode-tabs {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(23, 43, 43, 0.12);
+}
+
+.react-lab-mode-tabs button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+  border: 0;
+  border-radius: 999px;
+  padding: 11px 16px;
+  background: transparent;
+  color: var(--lab-muted);
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.react-lab-mode-tabs button span {
+  color: var(--lab-accent);
+  font: 0.72rem 'SFMono-Regular', Consolas, monospace;
+}
+
+.react-lab-mode-tabs button:hover {
+  color: var(--lab-ink);
+  transform: translateY(-2px);
+}
+
+.react-lab-mode-tabs button.is-selected {
+  background: var(--lab-ink);
+  color: white;
+}
+
+.react-lab-demo-grid {
+  display: grid;
+  grid-template-columns: 0.7fr 1.3fr;
+  gap: 42px;
+  padding-top: 42px;
+}
+
+.react-lab-story-panel {
+  align-self: center;
+  padding-bottom: 20px;
+}
+
+.react-lab-panel-kicker,
+.react-lab-card-index {
+  color: var(--lab-accent);
+  font: 700 0.7rem/1 'SFMono-Regular', Consolas, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.react-lab-story-panel h2 {
+  margin: 16px 0 14px;
+  color: var(--lab-ink);
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.07em;
+}
+
+.react-lab-story-panel > p {
+  max-width: 360px;
+  margin: 0;
+  color: var(--lab-muted);
+  line-height: 1.7;
+}
+
+.react-lab-hint {
+  color: var(--lab-muted);
+  font-size: 0.74rem;
+}
+
+.react-lab-feature-grid {
+  container-type: inline-size;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.react-lab-feature-grid-stack {
+  grid-template-columns: 1fr;
+}
+
+.react-lab-feature-grid-stack .react-lab-feature-card-wide {
+  grid-column: auto;
+}
+
+.react-lab-card-hint {
+  grid-column: 1 / -1;
+  justify-self: end;
+  margin-bottom: -4px;
+}
+
+.react-lab-feature-card {
+  position: relative;
+  display: flex;
+  min-width: 220px;
+  min-height: 230px;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(23, 43, 43, 0.1);
+  border-radius: 20px;
+  padding: 22px;
+  background: var(--lab-paper);
+  color: var(--lab-ink);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.react-lab-feature-card::after {
+  position: absolute;
+  right: -36px;
+  bottom: -46px;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: var(--lab-accent-soft);
+  content: '';
+  pointer-events: none;
+  transition: transform 0.5s ease;
+}
+
+.react-lab-feature-card:hover {
+  border-color: var(--lab-accent);
+  box-shadow: 0 24px 38px rgba(23, 43, 43, 0.12);
+  transform: translateY(-8px) rotate(0.5deg);
+}
+
+.react-lab-feature-card:hover::after {
+  transform: scale(2.4);
+}
+
+.react-lab-card-topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.react-lab-card-arrow {
+  color: var(--lab-accent);
+  font-size: 1.4rem;
+  transition: transform 0.35s ease;
+}
+
+.react-lab-feature-card:hover .react-lab-card-arrow {
+  transform: translate(4px, -4px) rotate(8deg);
+}
+
+.react-lab-metric-ring {
+  display: flex;
+  width: 106px;
+  height: 106px;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0 18px;
+  border: 10px solid var(--lab-accent-soft);
+  border-top-color: var(--lab-accent);
+  border-right-color: var(--lab-accent);
+  border-radius: 50%;
+  transform: rotate(-18deg);
+  transition: transform 0.5s ease;
+}
+
+.react-lab-feature-card:hover .react-lab-metric-ring {
+  transform: rotate(24deg) scale(1.08);
+}
+
+.react-lab-metric-ring span {
+  transform: rotate(18deg);
+  font: 700 1.55rem 'SFMono-Regular', Consolas, monospace;
+}
+
+.react-lab-metric-ring small {
+  align-self: flex-start;
+  margin-top: 30px;
+  transform: rotate(18deg);
+  font-size: 0.7rem;
+}
+
+.react-lab-feature-card h3 {
+  position: relative;
+  z-index: 1;
+  margin: auto 0 7px;
+  font-size: 1.18rem;
+  letter-spacing: -0.04em;
+}
+
+.react-lab-feature-card p {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--lab-muted);
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+.react-lab-feature-card-chip {
+  background: var(--lab-ink);
+  color: white;
+}
+
+.react-lab-feature-card-chip .react-lab-card-index,
+.react-lab-feature-card-chip .react-lab-card-arrow {
+  color: var(--lab-secondary);
+}
+
+.react-lab-chip-row {
+  display: flex;
+  gap: 7px;
+  margin: 30px 0 20px;
+}
+
+.react-lab-chip-row button {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  padding: 8px 11px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  font-size: 0.73rem;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.react-lab-chip-row button:hover,
+.react-lab-chip-row button.is-selected {
+  background: var(--lab-secondary);
+  color: var(--lab-ink);
+  transform: translateY(-2px);
+}
+
+.react-lab-feature-card-wide {
+  grid-column: 1 / -1;
+  min-height: 130px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(115deg, #f2d2bf 0%, #e4edcf 100%);
+}
+
+.react-lab-feature-card-wide h3 {
+  margin-top: 16px;
+  font-size: 1.55rem;
+}
+
+.react-lab-counter {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  gap: 8px;
+  border-left: 2px solid var(--lab-accent);
+  padding-left: 12px;
+}
+
+.react-lab-counter-heading {
+  display: grid;
+  gap: 7px;
+}
+
+.react-lab-effect-label {
+  color: var(--lab-accent);
+  font: 700 0.7rem 'SFMono-Regular', Consolas, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.react-lab-counter strong {
+  overflow-wrap: anywhere;
+  color: var(--lab-ink);
+  font-size: 0.76rem;
+}
+
+.react-lab-counter-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.react-lab-counter-controls button {
+  display: grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  border: 1px solid var(--lab-accent);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--lab-accent);
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.react-lab-counter-controls button:hover {
+  background: var(--lab-accent);
+  color: white;
+}
+
+.react-lab-counter-controls > span {
+  min-width: 30px;
+  color: var(--lab-ink);
+  font: 700 1.35rem/1 'SFMono-Regular', Consolas, monospace;
+  text-align: center;
+}
+
+@container (max-width: 560px) {
+  .react-lab-feature-card-wide {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .react-lab-feature-card-wide > div:first-child {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .react-lab-feature-card-wide h3 {
+    margin-bottom: 0;
+  }
+
+  .react-lab-counter {
+    min-width: 0;
+    padding-left: 12px;
+  }
+}
+
 .shop-demo-shell {
   background: rgba(255, 255, 255, 0.8);
   border: 1px solid var(--line);
@@ -1128,7 +1556,6 @@ button {
 }
 
 @media (max-width: 900px) {
-  .api-grid,
   .shop-demo-grid,
   .skye-dog-shell {
     grid-template-columns: 1fr;
@@ -1144,6 +1571,15 @@ button {
 
   .skye-dog-controls {
     grid-template-columns: 1fr;
+  }
+
+  .react-lab-hero,
+  .react-lab-demo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .react-lab-craft-board {
+    justify-self: center;
   }
 }
 
@@ -1188,6 +1624,37 @@ button {
 
   .skye-dog-controls-list {
     grid-template-columns: 1fr;
+  }
+
+  .react-lab-page {
+    padding-top: 38px;
+  }
+
+  .react-lab-hero,
+  .react-lab-workbench {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .react-lab-hero {
+    gap: 36px;
+    padding-bottom: 40px;
+  }
+
+  .react-lab-craft-board {
+    width: min(100%, 420px);
+  }
+
+  .react-lab-feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .react-lab-feature-card-wide {
+    grid-column: auto;
+  }
+
+  .react-lab-feature-card {
+    min-width: min(100%, 220px);
   }
 
   .skye-dog-visual {

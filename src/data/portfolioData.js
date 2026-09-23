@@ -106,15 +106,6 @@ export const resumeSkills = [
   'Bilingual (English/Spanish)',
 ];
 
-export const apiCapabilities = [
-  'REST API design and implementation',
-  'Authentication and secure access patterns',
-  'Third-party service integrations',
-  'Data flow architecture and backend logic',
-  'API documentation and developer onboarding',
-  'Scalable, testable application workflows',
-];
-
 export const initialShopListings = [
   {
     id: 1,
@@ -141,3 +132,4 @@ export const initialShopListings = [
     description: 'Premium stitched journal with lined pages for notes, sketches, and planning.',
   },
 ];
+
