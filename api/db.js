@@ -1,4 +1,6 @@
 import pg from 'pg';
+import { randomBytes, scryptSync, timingSafeEqual } from 'node:crypto';
+import { attachDatabasePool } from '@vercel/functions';
 
 const { Pool } = pg;
 
@@ -40,17 +42,32 @@ function normalizeProduct(item) {
   };
 }
 
+// Neon's pooled (-pooler) connection string already fans out to many clients,
+// so keep a single small local pool per instance and reuse it across calls.
+let cachedPool = null;
+
 function getPool() {
+  if (cachedPool) {
+    return cachedPool;
+  }
+
   const databaseUrl = String(process.env.DATABASE_URL || '').trim().replace(/^['"]|['"]$/g, '');
 
   if (!databaseUrl) {
     return null;
   }
 
-  return new Pool({
+  cachedPool = new Pool({
     connectionString: databaseUrl,
     ssl: databaseUrl.includes('localhost') ? false : { rejectUnauthorized: false },
+    max: 1,
+    idleTimeoutMillis: 10_000,
   });
+
+  // Ensures the pool is drained when the Vercel Fluid Compute instance suspends.
+  attachDatabasePool(cachedPool);
+
+  return cachedPool;
 }
 
 async function ensureTable() {
@@ -209,4 +226,183 @@ export async function deleteProduct(id) {
   }
 
   return normalizeProduct(result.rows[0]);
+}
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const fallbackAuthAccounts = new Map();
+
+function hashPassword(password) {
+  const salt = randomBytes(16).toString('hex');
+  const derivedKey = scryptSync(password, salt, 64).toString('hex');
+  return `${salt}:${derivedKey}`;
+}
+
+function verifyPassword(password, storedHash) {
+  const [salt, derivedKey] = String(storedHash || '').split(':');
+
+  if (!salt || !derivedKey) {
+    return false;
+  }
+
+  const candidateKey = scryptSync(password, salt, 64).toString('hex');
+  const candidateBuffer = Buffer.from(candidateKey, 'hex');
+  const storedBuffer = Buffer.from(derivedKey, 'hex');
+
+  return candidateBuffer.length === storedBuffer.length && timingSafeEqual(candidateBuffer, storedBuffer);
+}
+
+function parseCredentials(input = {}) {
+  const email = String(input.email || '').trim().toLowerCase();
+  const password = String(input.password || '');
+
+  if (!EMAIL_PATTERN.test(email)) {
+    throw new Error('A valid email address is required.');
+  }
+
+  if (password.length < 4) {
+    throw new Error('Password must be at least 4 characters.');
+  }
+
+  return { email, password };
+}
+
+async function ensureAuthTable(pool) {
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS auth_accounts (
+      id SERIAL PRIMARY KEY,
+      email TEXT NOT NULL UNIQUE,
+      password_hash TEXT NOT NULL,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    );
+  `);
+}
+
+export async function createAuthAccount(input = {}) {
+  const { email, password } = parseCredentials(input);
+  const passwordHash = hashPassword(password);
+
+  if (!process.env.DATABASE_URL) {
+    if (fallbackAuthAccounts.has(email)) {
+      throw new Error('An account with that email already exists.');
+    }
+
+    fallbackAuthAccounts.set(email, { email, passwordHash });
+    return { email };
+  }
+
+  const pool = getPool();
+  await ensureAuthTable(pool);
+
+  const existing = await pool.query('SELECT id FROM auth_accounts WHERE email = $1', [email]);
+
+  if (existing.rowCount > 0) {
+    throw new Error('An account with that email already exists.');
+  }
+
+  await pool.query(
+    'INSERT INTO auth_accounts (email, password_hash) VALUES ($1, $2)',
+    [email, passwordHash],
+  );
+
+  return { email };
+}
+
+export async function verifyAuthLogin(input = {}) {
+  const { email, password } = parseCredentials(input);
+
+  if (!process.env.DATABASE_URL) {
+    const account = fallbackAuthAccounts.get(email);
+
+    if (!account || !verifyPassword(password, account.passwordHash)) {
+      throw new Error('Invalid email or password.');
+    }
+
+    return { email };
+  }
+
+  const pool = getPool();
+  await ensureAuthTable(pool);
+
+  const result = await pool.query('SELECT password_hash FROM auth_accounts WHERE email = $1', [email]);
+
+  if (result.rowCount === 0 || !verifyPassword(password, result.rows[0].password_hash)) {
+    throw new Error('Invalid email or password.');
+  }
+
+  return { email };
+}
+
+const SESSION_TTL_MS = 60 * 60 * 1000;
+const fallbackSessions = new Map();
+
+async function ensureSessionTable(pool) {
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS auth_sessions (
+      id TEXT PRIMARY KEY,
+      email TEXT NOT NULL,
+      expires_at TIMESTAMPTZ NOT NULL
+    );
+  `);
+}
+
+export async function createSession(email) {
+  const sessionId = randomBytes(32).toString('hex');
+  const expiresAt = Date.now() + SESSION_TTL_MS;
+
+  if (!process.env.DATABASE_URL) {
+    fallbackSessions.set(sessionId, { email, expiresAt });
+    return { sessionId };
+  }
+
+  const pool = getPool();
+  await ensureSessionTable(pool);
+
+  await pool.query(
+    'INSERT INTO auth_sessions (id, email, expires_at) VALUES ($1, $2, to_timestamp($3 / 1000.0))',
+    [sessionId, email, expiresAt],
+  );
+
+  return { sessionId };
+}
+
+export async function getSessionEmail(sessionId) {
+  if (!sessionId) {
+    return null;
+  }
+
+  if (!process.env.DATABASE_URL) {
+    const session = fallbackSessions.get(sessionId);
+
+    if (!session || session.expiresAt < Date.now()) {
+      fallbackSessions.delete(sessionId);
+      return null;
+    }
+
+    return session.email;
+  }
+
+  const pool = getPool();
+  await ensureSessionTable(pool);
+
+  const result = await pool.query(
+    'SELECT email FROM auth_sessions WHERE id = $1 AND expires_at > now()',
+    [sessionId],
+  );
+
+  return result.rowCount > 0 ? result.rows[0].email : null;
+}
+
+export async function deleteSession(sessionId) {
+  if (!sessionId) {
+    return;
+  }
+
+  if (!process.env.DATABASE_URL) {
+    fallbackSessions.delete(sessionId);
+    return;
+  }
+
+  const pool = getPool();
+  await ensureSessionTable(pool);
+  await pool.query('DELETE FROM auth_sessions WHERE id = $1', [sessionId]);
 }

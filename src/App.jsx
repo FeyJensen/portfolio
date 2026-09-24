@@ -5,6 +5,7 @@ import ResumePage from './pages/ResumePage';
 import ReactShowcasePage from './pages/ReactShowcasePage';
 import SkyeDogPage from './pages/SkyeDogPage';
 import ShopDemoPage from './pages/ShopDemoPage';
+import AuthDemoPage from './pages/AuthDemoPage';
 
 function NavDropdown({ onSelect, currentPage }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,6 +26,7 @@ function NavDropdown({ onSelect, currentPage }) {
     { label: 'Resume', value: 'resume' },
     { label: 'Shop Demo', value: 'shop' },
     { label: 'Skye Dog', value: 'skye-dog' },
+    { label: 'Auth Demo', value: 'auth-demo' },
     { label: 'React Lab', value: 'react-showcase' },
   ];
 
@@ -106,6 +108,8 @@ export default function App() {
         <ShopDemoPage />
       ) : currentPage === 'skye-dog' ? (
         <SkyeDogPage />
+      ) : currentPage === 'auth-demo' ? (
+        <AuthDemoPage />
       ) : currentPage === 'react-showcase' ? (
         <ReactShowcasePage />
       ) : (

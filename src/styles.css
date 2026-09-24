@@ -702,6 +702,144 @@ button {
   font-size: 0.78rem !important;
 }
 
+.auth-demo-page {
+  padding-top: 28px;
+  display: flex;
+  justify-content: center;
+}
+
+.auth-demo-shell {
+  max-width: 520px;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: 46px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.auth-demo-shell h1 {
+  margin: 18px 0 14px;
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  letter-spacing: -0.04em;
+}
+
+.auth-demo-shell p {
+  margin: 0 auto;
+  max-width: 420px;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.auth-demo-form {
+  display: grid;
+  gap: 10px;
+  margin-top: 28px;
+  text-align: left;
+}
+
+.auth-demo-tabs {
+  display: flex;
+  gap: 8px;
+  margin-top: 28px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel-soft);
+}
+
+.auth-demo-tab {
+  flex: 1;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.auth-demo-tab.is-active {
+  background: var(--panel);
+  color: var(--text);
+  box-shadow: 0 4px 14px rgba(26, 27, 31, 0.08);
+}
+
+.auth-demo-notice {
+  margin: 0;
+  color: #2f7a4a;
+  font-size: 0.88rem;
+}
+
+.auth-demo-form label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.auth-demo-form input {
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.auth-demo-form input:focus {
+  outline: 2px solid var(--brand);
+  outline-offset: 1px;
+}
+
+.auth-demo-form .primary-btn {
+  margin-top: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.auth-demo-form .primary-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.auth-demo-error {
+  margin: 0;
+  color: #b4372f;
+  font-size: 0.88rem;
+}
+
+.auth-demo-reveal {
+  margin-top: 28px;
+}
+
+.auth-demo-success {
+  margin: 0 0 16px;
+  font-weight: 600;
+  color: #234233;
+}
+
+.auth-demo-reveal img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.auth-demo-logout {
+  margin-top: 18px;
+  padding: 10px 18px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel-soft);
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.auth-demo-logout:hover {
+  background: var(--panel);
+}
+
 .skye-dog-sun {
   position: absolute;
   top: 52px;

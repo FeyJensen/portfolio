@@ -12,6 +12,7 @@
   "dependencies": {
     "@neon/config": "^1.7.2",
     "@neon/env": "^1.4.3",
+    "@vercel/functions": "^2.2.13",
     "dotenv": "^16.4.5",
     "express": "^4.21.2",
     "pg": "^8.13.0",
