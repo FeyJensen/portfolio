@@ -7,6 +7,20 @@ import SkyeDogPage from './pages/SkyeDogPage';
 import ShopDemoPage from './pages/ShopDemoPage';
 import AuthDemoPage from './pages/AuthDemoPage';
 
+const pageRoutes = {
+  home: '/',
+  resume: '/resume',
+  shop: '/projects/shop-demo',
+  videogamedemo: '/projects/videogamedemo',
+  'auth-demo': '/projects/auth-demo',
+  'react-showcase': '/projects/react-lab',
+};
+
+function pageFromPath(pathname) {
+  const route = Object.entries(pageRoutes).find(([, path]) => path === pathname);
+  return route ? route[0] : 'home';
+}
+
 function NavDropdown({ onSelect, currentPage }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -25,7 +39,7 @@ function NavDropdown({ onSelect, currentPage }) {
   const projectItems = [
     { label: 'Resume', value: 'resume' },
     { label: 'Shop Demo', value: 'shop' },
-    { label: 'Skye Dog', value: 'skye-dog' },
+    { label: 'Video Game Demo', value: 'videogamedemo' },
     { label: 'Auth Demo', value: 'auth-demo' },
     { label: 'React Lab', value: 'react-showcase' },
   ];
@@ -63,7 +77,14 @@ function NavDropdown({ onSelect, currentPage }) {
 }
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState('home');
+  const [currentPage, setCurrentPage] = useState(() => pageFromPath(window.location.pathname));
+
+  useEffect(() => {
+    const handlePopState = () => setCurrentPage(pageFromPath(window.location.pathname));
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
@@ -71,6 +92,7 @@ export default function App() {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
+    window.history.pushState({}, '', pageRoutes[page]);
   };
 
   return (
@@ -106,7 +128,7 @@ export default function App() {
         <ResumePage />
       ) : currentPage === 'shop' ? (
         <ShopDemoPage />
-      ) : currentPage === 'skye-dog' ? (
+      ) : currentPage === 'videogamedemo' ? (
         <SkyeDogPage />
       ) : currentPage === 'auth-demo' ? (
         <AuthDemoPage />
