@@ -5,8 +5,9 @@ export default function HomePage() {
     <>
       <main>
         <section className="hero">
+          <img className="hero-background" src="/assets/photos/hero.jpg" alt="" />
           <div className="hero-copy">
-            <span className="eyebrow">Full-Stack Web Designer & Developer</span>
+            <span className="eyebrow">Full-stack web designer & developer</span>
             <h1>Designing and building websites that move businesses forward.</h1>
             <p>
               I create modern, high-converting digital experiences that blend strong
@@ -24,14 +25,6 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="hero-card">
-            <div className="photo-frame">
-              <img src="/assets/photos/headshot.png" alt="Fey Jensen headshot" />
-              <div className="floating-badge">
-                <span>Available for projects</span>
-              </div>
-            </div>
-          </div>
         </section>
 
         <section className="stats" aria-label="Business summary">
