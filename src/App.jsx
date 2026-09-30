@@ -6,6 +6,7 @@ import ReactShowcasePage from './pages/ReactShowcasePage';
 import SkyeDogPage from './pages/SkyeDogPage';
 import ShopDemoPage from './pages/ShopDemoPage';
 import AuthDemoPage from './pages/AuthDemoPage';
+import ClientWorkPage from './pages/ClientWorkPage';
 
 const pageRoutes = {
   home: '/',
@@ -14,6 +15,7 @@ const pageRoutes = {
   videogamedemo: '/projects/videogamedemo',
   'auth-demo': '/projects/auth-demo',
   'react-showcase': '/projects/react-lab',
+  'client-work': '/client-work',
 };
 
 function pageFromPath(pathname) {
@@ -42,6 +44,7 @@ function NavDropdown({ onSelect, currentPage }) {
     { label: 'Video Game Demo', value: 'videogamedemo' },
     { label: 'Auth Demo', value: 'auth-demo' },
     { label: 'React Lab', value: 'react-showcase' },
+    { label: 'Client Work', value: 'client-work' },
   ];
 
   return (
@@ -134,6 +137,8 @@ export default function App() {
         <AuthDemoPage />
       ) : currentPage === 'react-showcase' ? (
         <ReactShowcasePage />
+      ) : currentPage === 'client-work' ? (
+        <ClientWorkPage />
       ) : (
         <HomePage />
       )}

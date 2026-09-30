@@ -181,6 +181,118 @@ button {
   color: var(--text);
 }
 
+.client-work-page {
+  width: min(1080px, 100%);
+  margin: 64px auto 0;
+  padding: 0 0 48px;
+}
+
+.client-work-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0 0 36px;
+}
+
+.client-work-kicker,
+.client-project-category {
+  color: #557363;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.client-work-heading h1 {
+  margin: 10px 0 8px;
+  color: #203b30;
+  font-size: 3rem;
+  line-height: 1.08;
+}
+
+.client-work-heading p {
+  max-width: 520px;
+  margin: 0;
+  color: #60746a;
+  line-height: 1.6;
+}
+
+.client-work-count {
+  padding-bottom: 5px;
+  color: #60746a;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.client-project {
+  overflow: hidden;
+  border: 1px solid rgba(32, 59, 48, 0.16);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.client-project-details {
+  padding: 28px 32px 26px;
+}
+
+.client-project-title-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.client-project-number {
+  color: #b66d43;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.client-project-category {
+  color: #6e7b70;
+  font-size: 0.7rem;
+}
+
+.client-project-summary {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.client-project-summary h2 {
+  margin: 0;
+  color: #203b30;
+  font-size: 1.8rem;
+  line-height: 1.2;
+}
+
+.client-project-summary p {
+  max-width: 620px;
+  margin: 9px 0 0;
+  color: #60746a;
+  line-height: 1.6;
+}
+
+.client-project-summary a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 5px;
+  background: #244c3b;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.client-project-summary a:hover {
+  background: #183b2c;
+}
+
 .hero {
   position: relative;
   display: flex;
@@ -1822,6 +1934,34 @@ button {
 @media (max-width: 640px) {
   .page-shell {
     width: min(1200px, calc(100% - 20px));
+  }
+
+  .client-work-page {
+    margin-top: 42px;
+  }
+
+  .client-work-heading {
+    align-items: flex-start;
+    padding-bottom: 26px;
+  }
+
+  .client-work-heading h1 {
+    font-size: 2.4rem;
+  }
+
+  .client-work-count {
+    padding-top: 34px;
+    font-size: 0.8rem;
+  }
+
+  .client-project-details {
+    padding: 22px 18px;
+  }
+
+  .client-project-summary {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 18px;
   }
 
   .topbar {
