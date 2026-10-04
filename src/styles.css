@@ -2160,6 +2160,10 @@ button {
     grid-template-columns: 1fr;
   }
 
+  .stats-star-row {
+    gap: 6px;
+  }
+
   .footer {
     padding: 22px 18px;
   }
