@@ -18,6 +18,16 @@ const pageRoutes = {
   'client-work': '/client-work',
 };
 
+const starImages = [
+  '/assets/photos/blackStar.png',
+  '/assets/photos/darkStar.png',
+  '/assets/photos/PastelPurpleStar.png',
+  '/assets/photos/PeachStar.png',
+  '/assets/photos/PinkStar.png',
+  '/assets/photos/PurpleStar.png',
+  '/assets/photos/WhiteStar.png',
+];
+
 function pageFromPath(pathname) {
   const route = Object.entries(pageRoutes).find(([, path]) => path === pathname);
   return route ? route[0] : 'home';
@@ -74,6 +84,75 @@ function NavDropdown({ onSelect, currentPage }) {
             </button>
           ))}
         </div>
+      )}
+    </div>
+  );
+}
+
+function ClickStarBursts() {
+  const [bursts, setBursts] = useState([]);
+  const nextBurstId = useRef(0);
+
+  useEffect(() => {
+    const timers = new Set();
+
+    function handleClick(event) {
+      const id = nextBurstId.current++;
+      const stars = starImages.map((src, index) => {
+        const angle = (index / starImages.length) * Math.PI * 2 + (id % 2) * 0.12;
+        const distance = 78 + ((index + id) % 3) * 16;
+        const size = 30 + ((index + id) % 3) * 6;
+        const duration = 700;
+
+        return {
+          src,
+          x: Math.cos(angle) * distance * 1.25,
+          y: Math.sin(angle) * distance * 0.85,
+          rotation: Math.round((angle * 180) / Math.PI + 260 + ((index + id) % 3) * 100),
+          size,
+          duration,
+          delay: 0,
+        };
+      });
+
+      setBursts((current) => [...current, { id, x: event.clientX, y: event.clientY, stars }]);
+
+      let timerId;
+      timerId = window.setTimeout(() => {
+        setBursts((current) => current.filter((burst) => burst.id !== id));
+        timers.delete(timerId);
+      }, Math.max(...stars.map((star) => star.duration + star.delay)) + 80);
+      timers.add(timerId);
+    }
+
+    document.addEventListener('click', handleClick);
+    return () => {
+      document.removeEventListener('click', handleClick);
+      timers.forEach((timerId) => window.clearTimeout(timerId));
+    };
+  }, []);
+
+  return (
+    <div className="click-star-layer" aria-hidden="true">
+      {bursts.flatMap((burst) =>
+        burst.stars.map((star, index) => (
+          <img
+            key={`${burst.id}-${index}`}
+            className="click-star"
+            src={star.src}
+            alt=""
+            style={{
+              left: `${burst.x}px`,
+              top: `${burst.y}px`,
+              '--burst-x': `${star.x}px`,
+              '--burst-y': `${star.y}px`,
+              '--burst-rotation': `${star.rotation}deg`,
+              '--burst-size': `${star.size}px`,
+              '--burst-duration': `${star.duration}ms`,
+              '--burst-delay': `${star.delay}ms`,
+            }}
+          />
+        )),
       )}
     </div>
   );
@@ -142,6 +221,7 @@ export default function App() {
       ) : (
         <HomePage />
       )}
+      <ClickStarBursts />
     </div>
   );
 }

@@ -1,26 +1,3 @@
-export const services = [
-  {
-    title: 'Full-stack website builds',
-    description:
-      'From concept to launch, I craft custom websites that are visually compelling, technically reliable, and ready to grow with you.',
-  },
-  {
-    title: 'Landing pages & funnels',
-    description:
-      'I design conversion-focused landing pages that guide visitors toward a clear next step, whether that is booking, buying, or contacting you.',
-  },
-  {
-    title: 'UI/UX design systems',
-    description:
-      'I shape intuitive user experiences with clean interfaces, thoughtful flows, and design systems that keep your brand consistent across every screen.',
-  },
-  {
-    title: 'Website optimization & maintenance',
-    description:
-      'I refine existing sites for speed, clarity, and performance, helping your brand stay modern, user-friendly, and easy to manage over time.',
-  },
-];
-
 export const stats = [
   { value: '2+', label: 'Years building digital experiences' },
   { value: '50+', label: 'Projects designed and developed' },

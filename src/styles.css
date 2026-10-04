@@ -38,6 +38,52 @@ button {
   font: inherit;
 }
 
+.click-star-layer {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.click-star {
+  position: absolute;
+  width: var(--burst-size);
+  height: var(--burst-size);
+  max-width: none;
+  object-fit: contain;
+  opacity: 0;
+  animation: click-star-burst var(--burst-duration) ease-out var(--burst-delay) both;
+}
+
+@keyframes click-star-burst {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.15) rotate(0deg);
+  }
+
+  18% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.15) rotate(20deg);
+  }
+
+  72% {
+    opacity: 1;
+    transform: translate(
+      calc(-50% + var(--burst-x)),
+      calc(-50% + var(--burst-y))
+    ) scale(1) rotate(130deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(
+      calc(-50% + var(--burst-x)),
+      calc(-50% + var(--burst-y))
+    ) scale(0.8) rotate(var(--burst-rotation));
+  }
+}
+
 .page-shell {
   width: min(1200px, calc(100% - 32px));
   margin: 0 auto;
@@ -523,16 +569,43 @@ button {
 }
 
 .services-grid {
+  position: relative;
+  isolation: isolate;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0px;
+  padding: 0px;
+}
+
+.services-grid::before {
+  position: absolute;
+  z-index: -1;
+  inset-block: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background: url('/assets/photos/darkPurpleStripe.png') center / cover no-repeat;
+  content: '';
 }
 
 .service-card {
-  background: rgba(255, 255, 255, 0.75);
+  grid-column: 1;
+  justify-self: center;
+  align-self: center;
+  width: min(100%, 420px);
+  height: fit-content;
+  background: #ffffff;
   border: 1px solid var(--line);
   border-radius: 22px;
-  padding: 22px 18px;
+  padding: 16px;
+}
+
+.services-photo {
+  width: min(100%, 400px);
+  height: auto;
+  justify-self: center;
+  align-self: center;
+  transform: rotate(10deg);
 }
 
 .icon-circle {
@@ -547,10 +620,30 @@ button {
   margin-bottom: 18px;
 }
 
-.service-card h3 {
-  margin: 0 0 12px;
-  font-size: 1.3rem;
-  letter-spacing: -0.04em;
+.service-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.service-list li {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  align-items: start;
+  gap: 10px;
+  color: var(--text);
+  font-size: 1.02rem;
+  line-height: 1.5;
+}
+
+.service-list li::before {
+  width: 18px;
+  aspect-ratio: 1;
+  margin-top: 2px;
+  background: url('/assets/photos/darkStar.png') center / contain no-repeat;
+  content: '';
 }
 
 .service-card p,
@@ -1963,5 +2056,15 @@ button {
     width: min(100%, 437px);
     height: 437px;
     margin-right: 4px;
+  }
+}
+
+@media (max-width: 640px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .services-photo {
+    width: min(78vw, 320px);
   }
 }

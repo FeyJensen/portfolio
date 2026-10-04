@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { highlights, services, stats } from '../data/portfolioData';
+import { highlights, stats } from '../data/portfolioData';
+import polaroidGirl from '/assets/photos/PolaroidPhoneGirl.png';
 
 const portraits = [
   '/assets/photos/fey1.png',
@@ -102,13 +103,22 @@ export default function HomePage() {
           </div>
 
           <div className="services-grid">
-            {services.map((service) => (
-              <article key={service.title} className="service-card">
+              <article className="service-card">
                 <div className="icon-circle">✎</div>
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
+                <ul className="service-list">
+                  <li>Full-stack website builds</li>
+                  <li>Landing pages &amp; funnels</li>
+                  <li>UI/UX design systems</li>
+                  <li>Website optimization &amp; maintenance</li>
+                </ul>
               </article>
-            ))}
+              <img
+                className="services-photo"
+                src={polaroidGirl}
+                alt="Polaroid of a girl holding a phone"
+                width="400"
+              />
+  
           </div>
         </section>
 
