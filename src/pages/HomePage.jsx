@@ -1,11 +1,54 @@
+import { useEffect, useRef, useState } from 'react';
 import { highlights, services, stats } from '../data/portfolioData';
 
+const portraits = [
+  '/assets/photos/fey1.png',
+  '/assets/photos/fey2.png',
+  '/assets/photos/fey3.png',
+];
+
+const summaryStars = [
+  'blackStar.png',
+  'darkStar.png',
+  'PastelPurpleStar.png',
+  'PeachStar.png',
+  'PinkStar.png',
+  'PurpleStar.png',
+  'WhiteStar.png'
+];
+
 export default function HomePage() {
+  const heroRef = useRef(null);
+  const [activePortrait, setActivePortrait] = useState(0);
+
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let intervalId = null;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && intervalId === null) {
+        intervalId = window.setInterval(() => {
+          setActivePortrait((current) => (current + 1) % portraits.length);
+        }, 500);
+      } else if (!entry.isIntersecting && intervalId !== null) {
+        window.clearInterval(intervalId);
+        intervalId = null;
+      }
+    }, { threshold: 0.15 });
+
+    observer.observe(hero);
+    return () => {
+      observer.disconnect();
+      if (intervalId !== null) window.clearInterval(intervalId);
+    };
+  }, []);
+
   return (
     <>
       <main>
-        <section className="hero">
-          <img className="hero-background" src="/assets/photos/hero.jpg" alt="" />
+        <section className="hero" ref={heroRef}>
+          <img className="hero-background" src="/assets/photos/PurpleCheckerboard.jpg" alt="" />
           <div className="hero-copy">
             <span className="eyebrow">Full-stack web designer & developer</span>
             <h1>Designing and building websites that move businesses forward.</h1>
@@ -25,6 +68,17 @@ export default function HomePage() {
             </div>
           </div>
 
+          <div className="hero-portrait-rotator" role="group" aria-label="Portraits of Fey">
+            {portraits.map((portrait, index) => (
+              <img
+                key={portrait}
+                className={`hero-portrait${activePortrait === index ? ' is-active' : ''}`}
+                src={portrait}
+                alt="Portrait of Fey"
+                aria-hidden={activePortrait !== index}
+              />
+            ))}
+          </div>
         </section>
 
         <section className="stats" aria-label="Business summary">
@@ -34,6 +88,11 @@ export default function HomePage() {
               <span>{stat.label}</span>
             </div>
           ))}
+          <div className="stats-star-row" aria-hidden="true">
+            {summaryStars.map((star) => (
+              <img key={star} src={`/assets/photos/${star}`} alt="" />
+            ))}
+          </div>
         </section>
 
         <section id="services" className="services section-block">

@@ -1,13 +1,13 @@
 :root {
-  --bg: #eef6ff;
+  --bg: #f8eae7;
   --panel: #ffffff;
-  --panel-soft: #e5f0fb;
-  --text: #10233d;
-  --muted: #58708a;
-  --line: rgba(16, 35, 61, 0.12);
-  --brand: #2589e8;
-  --brand-dark: #1664b8;
-  --shadow: 0 24px 60px rgba(26, 77, 124, 0.14);
+  --panel-soft: #fcdfd9;
+  --text: #4d0866;
+  --muted: #4d0866;
+  --line: #2b0a36;
+  --brand: #f6deff;
+  --brand-dark: #9a49b8;
+  --shadow: 0 24px 60px rgba(43, 10, 54, 0.4); 
 }
 
 * {
@@ -21,7 +21,7 @@ html {
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  background: linear-gradient(180deg, #f6faff 0%, #e8f2fc 100%);
+  background: linear-gradient(180deg, #f6deff 0%, #fffafa 100%);
   color: var(--text);
 }
 
@@ -62,7 +62,7 @@ button {
 .page-shell:has(.hero) .brand-name,
 .page-shell:has(.hero) .nav a,
 .page-shell:has(.hero) .nav-button {
-  color: #ffffff;
+  color: #9a49b8;
   text-shadow: 0 1px 12px rgba(0, 0, 0, 0.42);
 }
 
@@ -295,7 +295,8 @@ button {
 
 .hero {
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
   align-items: center;
   min-height: 650px;
   width: 100vw;
@@ -312,7 +313,6 @@ button {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(90deg, rgba(6, 29, 53, 0.97) 0%, rgba(6, 29, 53, 0.88) 36%, rgba(6, 29, 53, 0.42) 64%, rgba(6, 29, 53, 0.12) 100%);
   content: '';
 }
 
@@ -326,19 +326,49 @@ button {
   object-position: center;
 }
 
+.hero-portrait-rotator {
+  position: relative;
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+  width: clamp(406px, 46.8vw, 640px);
+  height: min(811px, 109.2vh);
+  min-height: 562px;
+  overflow: hidden;
+  border-radius: 6px;
+  transform: translateY(70px);
+}
+
+.hero-portrait {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 38%;
+  opacity: 0;
+  transition: none;
+}
+
+.hero-portrait.is-active {
+  opacity: 1;
+}
+
 .hero-copy {
   position: relative;
   z-index: 1;
-  width: min(1200px, calc(100% - 32px));
-  margin: 0 auto;
-  padding: 72px 64px;
+  grid-column: 1;
+  grid-row: 1;
+  width: 100%;
+  margin: 0;
+  padding: 72px 24px 72px max(32px, calc((100vw - 1200px) / 2 + 36px));
   transform: translateY(44px);
 }
 
 .hero .eyebrow {
   position: relative;
   background: transparent;
-  color: #b9e8ff;
+  color: #fca1ff;
   padding: 0 0 0 58px;
   letter-spacing: 0.14em;
 }
@@ -348,7 +378,7 @@ button {
   width: 38px;
   height: 3px;
   margin-left: -58px;
-  background: #42b8f2;
+  background: #9a49b8;
   content: '';
 }
 
@@ -357,7 +387,7 @@ button {
   align-items: center;
   padding: 8px 12px;
   border-radius: 999px;
-  background: rgba(37, 137, 232, 0.12);
+  background: #f6deff;
   color: var(--brand-dark);
   font-size: 0.73rem;
   font-weight: 700;
@@ -368,7 +398,7 @@ button {
 .hero-copy h1 {
   max-width: 700px;
   margin: 22px 0 18px;
-  color: #ffffff;
+  color: #4d0866;
   font-size: clamp(2.8rem, 5.4vw, 5.2rem);
   line-height: 0.98;
   letter-spacing: -0.06em;
@@ -377,7 +407,7 @@ button {
 .hero-copy p {
   max-width: 630px;
   margin: 0;
-  color: rgba(255, 255, 255, 0.82);
+  color: #9a49b8;
   font-size: 1.08rem;
   line-height: 1.75;
 }
@@ -402,9 +432,9 @@ button {
 }
 
 .primary-btn {
-  background: #42b8f2;
-  color: #06213a;
-  box-shadow: 0 18px 26px rgba(37, 137, 232, 0.24);
+  background: #9a49b8;
+  color: #fcdfd9;
+  box-shadow: 0 18px 26px rgba(43, 10, 54, 0.24);
 }
 
 .secondary-btn {
@@ -414,9 +444,9 @@ button {
 }
 
 .hero .secondary-btn {
-  border-color: rgba(255, 255, 255, 0.48);
+  border-color: #9a49b8;
   background: transparent;
-  color: #ffffff;
+  color: #9a49b8;
 }
 
 .primary-btn:hover,
@@ -426,7 +456,7 @@ button {
 
 .mini-trust {
   margin-top: 20px;
-  color: rgba(255, 255, 255, 0.72);
+  color: #9a49b8;
   font-size: 0.9rem;
 }
 
@@ -445,6 +475,22 @@ button {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.stats-star-row {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: clamp(6px, 1.5vw, 18px);
+  padding: 8px 0 4px;
+}
+
+.stats-star-row img {
+  width: clamp(42px, 7.5vw, 92px);
+  height: auto;
+  flex: 0 1 auto;
+  object-fit: contain;
 }
 
 .stat-item strong {
@@ -495,7 +541,7 @@ button {
   display: grid;
   place-items: center;
   border-radius: 16px;
-  background: rgba(37, 137, 232, 0.1);
+  background: #f6deff;
   color: var(--brand-dark);
   font-size: 1.3rem;
   margin-bottom: 18px;
@@ -554,7 +600,7 @@ button {
 }
 
 .about-panel {
-  background: linear-gradient(180deg, #0b2948 0%, #124c7b 100%);
+  background: linear-gradient(180deg, #4d0866 0%, #9a49b8 100%);
   color: white;
   border-radius: 24px;
   padding: 26px 22px;
@@ -658,9 +704,9 @@ button {
 
 .resume-skill {
   display: inline-flex;
-  background: rgba(37, 137, 232, 0.12);
+  background: #4d0866;
   color: var(--brand-dark);
-  border: 1px solid rgba(37, 137, 232, 0.2);
+  border: 1px solid #9a49b8;
   border-radius: 999px;
   padding: 7px 12px;
   font-size: 0.85rem;
@@ -715,7 +761,7 @@ button {
   gap: 28px;
   align-items: center;
   overflow: hidden;
-  border: 1px solid rgba(21, 83, 130, 0.16);
+  border: 1px solid #2b0a36;
   border-radius: 28px;
   padding: 46px;
   background: #e7f3fc;
@@ -729,7 +775,7 @@ button {
 
 .skye-dog-copy h1 {
   margin: 18px 0 14px;
-  color: #123d62;
+  color: #9a49b8;
   font-size: clamp(3rem, 6vw, 5.8rem);
   line-height: 0.92;
   letter-spacing: -0.08em;
@@ -738,14 +784,14 @@ button {
 .skye-dog-copy p {
   max-width: 440px;
   margin: 0;
-  color: #55718a;
+  color: #4d0866;
   font-size: 1.08rem;
   line-height: 1.75;
 }
 
 .skye-dog-copy .eyebrow {
   background: rgba(37, 137, 232, 0.14);
-  color: #1768ad;
+  color: #9a49b8;
 }
 
 .skye-dog-warning {
@@ -753,16 +799,16 @@ button {
   gap: 3px;
   margin-top: 22px;
   padding: 13px 16px 13px 18px;
-  border-left: 4px solid #2589e8;
+  border-left: 4px solid #9a49b8;
   border-radius: 4px 12px 12px 4px;
-  background: rgba(226, 243, 255, 0.9);
-  color: #184b70;
+  background: rgba(154, 73, 184, 0.1);
+  color: #4d0866;
   font-size: 0.9rem;
   line-height: 1.45;
 }
 
 .skye-dog-warning strong {
-  color: #1768ad;
+  color: #9a49b8;
   font-size: 0.95rem;
 }
 
@@ -771,7 +817,7 @@ button {
   aspect-ratio: 16 / 10;
   overflow: hidden;
   border-radius: 22px;
-  background: #08a4e8;
+  background: #9a49b8;
 }
 
 .skye-dog-visual img {
@@ -790,15 +836,15 @@ button {
 
 .skye-dog-controls-heading h2 {
   margin: 14px 0 0;
-  color: #123d62;
+  color: #4d0866;
   font-size: clamp(1.8rem, 3vw, 2.7rem);
   line-height: 1;
   letter-spacing: -0.06em;
 }
 
 .skye-dog-controls-heading .eyebrow {
-  background: rgba(37, 137, 232, 0.14);
-  color: #1768ad;
+  background: #2b0a36;
+  color: #9a49b8;
 }
 
 .skye-dog-controls-list {
@@ -813,14 +859,14 @@ button {
   gap: 16px;
   min-height: 118px;
   padding: 18px;
-  border: 1px solid rgba(21, 83, 130, 0.14);
+  border: 1px solid #2b0a36;
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.72);
 }
 
 .skye-dog-control h3 {
   margin: 0 0 6px;
-  color: #123d62;
+  color: #4d0866;
   font-size: 1.05rem;
 }
 
@@ -836,11 +882,11 @@ button {
   min-width: 34px;
   height: 34px;
   place-items: center;
-  border: 1px solid rgba(21, 83, 130, 0.2);
+  border: 1px solid #2b0a36;
   border-bottom-width: 3px;
   border-radius: 8px;
   background: #f7fbff;
-  color: #123d62;
+  color: #9a49b8;
   font: 700 1rem/1 inherit;
 }
 
@@ -928,7 +974,7 @@ button {
 .auth-demo-tab.is-active {
   background: var(--panel);
   color: var(--text);
-  box-shadow: 0 4px 14px rgba(26, 27, 31, 0.08);
+  box-shadow: 0 4px 14px 2px #2b0a36;
 }
 
 .auth-demo-notice {
@@ -1002,186 +1048,6 @@ button {
 
 .auth-demo-logout:hover {
   background: var(--panel);
-}
-
-.skye-dog-sun {
-  position: absolute;
-  top: 52px;
-  right: 16%;
-  width: 108px;
-  height: 108px;
-  border-radius: 50%;
-  background: #f7d77f;
-  box-shadow: 0 0 0 18px rgba(247, 215, 127, 0.18);
-}
-
-.skye-dog-cloud {
-  position: absolute;
-  width: 108px;
-  height: 24px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.72);
-}
-
-.skye-dog-cloud::before,
-.skye-dog-cloud::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  border-radius: 50%;
-  background: inherit;
-}
-
-.skye-dog-cloud::before {
-  left: 18px;
-  width: 34px;
-  height: 34px;
-}
-
-.skye-dog-cloud::after {
-  right: 18px;
-  width: 46px;
-  height: 46px;
-}
-
-.skye-dog-cloud-one {
-  top: 112px;
-  left: 12%;
-}
-
-.skye-dog-cloud-two {
-  top: 188px;
-  right: 11%;
-  transform: scale(0.68);
-}
-
-.skye-dog-hill {
-  position: absolute;
-  bottom: -100px;
-  width: 125%;
-  height: 280px;
-  border-radius: 50% 50% 0 0;
-}
-
-.skye-dog-hill-back {
-  left: -24%;
-  background: #a8c28b;
-  transform: rotate(-7deg);
-}
-
-.skye-dog-hill-front {
-  right: -32%;
-  bottom: -140px;
-  background: #80a36d;
-  transform: rotate(8deg);
-}
-
-.skye-dog-character {
-  position: absolute;
-  z-index: 1;
-  right: 31%;
-  bottom: 128px;
-  width: 140px;
-  height: 220px;
-  animation: skye-dog-bob 3.4s ease-in-out infinite;
-}
-
-.skye-dog-head {
-  position: absolute;
-  z-index: 2;
-  top: 32px;
-  left: 16px;
-  width: 108px;
-  height: 94px;
-  border-radius: 48% 48% 45% 45%;
-  background: #c47b46;
-  border: 5px solid #723f2d;
-}
-
-.skye-dog-ear {
-  position: absolute;
-  z-index: 1;
-  top: 22px;
-  width: 40px;
-  height: 72px;
-  border-radius: 60% 20% 60% 20%;
-  background: #8e4f36;
-  border: 5px solid #723f2d;
-}
-
-.skye-dog-ear-left {
-  left: 10px;
-  transform: rotate(-28deg);
-}
-
-.skye-dog-ear-right {
-  right: 10px;
-  transform: scaleX(-1) rotate(-28deg);
-}
-
-.skye-dog-eye {
-  position: absolute;
-  top: 32px;
-  width: 11px;
-  height: 15px;
-  border-radius: 50%;
-  background: #243229;
-}
-
-.skye-dog-eye-left { left: 27px; }
-.skye-dog-eye-right { right: 27px; }
-
-.skye-dog-nose {
-  position: absolute;
-  left: 44px;
-  bottom: 21px;
-  width: 18px;
-  height: 12px;
-  border-radius: 50%;
-  background: #39241f;
-}
-
-.skye-dog-body {
-  position: absolute;
-  bottom: 0;
-  left: 34px;
-  width: 76px;
-  height: 108px;
-  border-radius: 46% 46% 22% 22%;
-  background: #c47b46;
-  border: 5px solid #723f2d;
-}
-
-.skye-dog-tail {
-  position: absolute;
-  right: 3px;
-  bottom: 62px;
-  width: 56px;
-  height: 20px;
-  border: 10px solid #8e4f36;
-  border-left: 0;
-  border-radius: 0 40px 40px 0;
-  transform: rotate(-32deg);
-}
-
-.skye-dog-label {
-  position: absolute;
-  z-index: 2;
-  right: 22px;
-  bottom: 24px;
-  padding: 10px 14px;
-  border-radius: 999px;
-  background: rgba(12, 67, 112, 0.86);
-  color: white;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-@keyframes skye-dog-bob {
-  0%, 100% { transform: translateY(0) rotate(-1deg); }
-  50% { transform: translateY(-8px) rotate(1deg); }
 }
 
 .react-lab-page {
@@ -1468,7 +1334,7 @@ button {
   min-height: 230px;
   flex-direction: column;
   overflow: hidden;
-  border: 1px solid rgba(23, 43, 43, 0.1);
+  border: 1px solid #4d0866;
   border-radius: 20px;
   padding: 22px;
   background: var(--lab-paper);
@@ -2042,13 +1908,6 @@ button {
   .skye-dog-visual {
     aspect-ratio: 16 / 10;
   }
-
-  .skye-dog-character {
-    right: 28%;
-    bottom: 92px;
-    transform: scale(0.84);
-    transform-origin: bottom center;
-  }
 }
 
 @media (max-width: 900px) {
@@ -2058,20 +1917,51 @@ button {
     grid-template-columns: 1fr;
   }
 
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(312px, 1fr);
+  }
+
   .hero-copy {
-    padding: 56px 22px;
+    padding: 56px 18px 56px 28px;
+    transform: none;
+  }
+
+  .hero-portrait-rotator {
+    width: min(100%, 468px);
+    height: 671px;
+    min-height: 0;
   }
 
   .services-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .hero {
-    padding-top: 0;
-  }
-
   .footer {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-shell:has(.hero) .hero {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    padding: 130px 20px 28px;
+    row-gap: 24px;
+  }
+
+  .page-shell:has(.hero) .hero-copy {
+    width: 100%;
+    padding: 0;
+    transform: none;
+  }
+
+  .hero-portrait-rotator {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: end;
+    width: min(100%, 437px);
+    height: 437px;
+    margin-right: 4px;
   }
 }
