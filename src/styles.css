@@ -110,10 +110,11 @@ button {
 
 .page-shell:has(.hero) .topbar {
   position: absolute;
-  top: 16px;
+  top: 0px;
   right: 0;
   left: 0;
   z-index: 10;
+  padding-bottom: 40px;
   border-color: transparent;
   background: transparent;
   backdrop-filter: none;
@@ -122,13 +123,12 @@ button {
 .page-shell:has(.hero) .brand-name,
 .page-shell:has(.hero) .nav a,
 .page-shell:has(.hero) .nav-button {
-  color: #9a49b8;
-  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.42);
+  color: #2b0a36;
 }
 
 .page-shell:has(.hero) .nav a:hover,
 .page-shell:has(.hero) .nav-button:hover {
-  color: #f7c45a;
+ color: #fcdfd9;
 }
 
 .page-shell:has(.hero) .nav-dropdown-menu .nav-button,
@@ -145,7 +145,7 @@ button {
   background: rgba(255, 255, 255, 0.7);
   border: 1px solid var(--line);
   border-radius: 20px;
-  padding: 18px 24px;
+  padding: 1px 24px;
   backdrop-filter: blur(10px);
   position: sticky;
   top: 16px;
@@ -202,6 +202,16 @@ button {
   color: var(--muted);
 }
 
+.nav > a,
+.nav > .nav-button,
+.nav > .nav-dropdown > .nav-dropdown-toggle {
+  display: grid;
+  min-width: 112px;
+  min-height: 92px;
+  place-items: center;
+  background: url('/assets/photos/cloud.png') center / 100% 100% no-repeat;
+}
+
 .nav-dropdown {
   position: relative;
 }
@@ -209,7 +219,16 @@ button {
 .nav-dropdown-toggle {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 0;
+  line-height: 1;
+}
+
+.nav > .nav-dropdown > .nav-dropdown-toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 15px;
 }
 
 .nav-dropdown-menu {
