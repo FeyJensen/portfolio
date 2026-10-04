@@ -18,6 +18,44 @@ const summaryStars = [
   'WhiteStar.png'
 ];
 
+const serviceStars = ['PastelPurpleStar.png', 'PeachStar.png', 'PinkStar.png', 'PurpleStar.png'];
+
+function StarRow({ repetitions = 3 }) {
+  const stars = Array.from({ length: repetitions }, () => summaryStars).flat();
+
+  return (
+    <div
+      className="stats-star-row"
+      aria-hidden="true"
+      style={{ '--star-count': stars.length }}
+    >
+      {stars.map((star, index) => (
+        <img key={`${star}-${index}`} src={`/assets/photos/${star}`} alt="" />
+      ))}
+    </div>
+  );
+}
+
+function ServicesStarCluster({ position = 'bottom-left' }) {
+  return (
+    <div className={`services-star-cluster services-star-cluster--${position}`} aria-hidden="true">
+      {serviceStars.map((star) => (
+        <img key={star} src={`/assets/photos/${star}`} alt="" />
+      ))}
+    </div>
+  );
+}
+
+function HeroStarCluster({ position }) {
+  return (
+    <div className={`hero-star-cluster hero-star-cluster--${position}`} aria-hidden="true">
+      {serviceStars.map((star) => (
+        <img key={star} src={`/assets/photos/${star}`} alt="" />
+      ))}
+    </div>
+  );
+}
+
 export default function HomePage() {
   const heroRef = useRef(null);
   const [activePortrait, setActivePortrait] = useState(0);
@@ -49,10 +87,10 @@ export default function HomePage() {
     <>
       <main>
         <section className="hero" ref={heroRef}>
-          <img className="hero-background" src="/assets/photos/PurpleCheckerboard.jpg" alt="" />
+          <img className="hero-background" src="/assets/photos/purpleCheckerboard.png" alt="" />
           <div className="hero-copy">
             <span className="eyebrow">Full-stack web designer & developer</span>
-            <h1>Designing and building websites that move businesses forward.</h1>
+            <h1>Designing and building websites with personality</h1>
             <p>
               I create modern, high-converting digital experiences that blend strong
               visual design with clean, functional development. From strategy to launch,
@@ -69,31 +107,33 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="hero-portrait-rotator" role="group" aria-label="Portraits of Fey">
-            {portraits.map((portrait, index) => (
-              <img
-                key={portrait}
-                className={`hero-portrait${activePortrait === index ? ' is-active' : ''}`}
-                src={portrait}
-                alt="Portrait of Fey"
-                aria-hidden={activePortrait !== index}
-              />
-            ))}
+          <div className="hero-portrait-stage">
+            <HeroStarCluster position="upper-left" />
+            <HeroStarCluster position="upper-right" />
+            <HeroStarCluster position="lower-left" />
+            <div className="hero-portrait-rotator" role="group" aria-label="Portraits of Fey">
+              {portraits.map((portrait, index) => (
+                <img
+                  key={portrait}
+                  className={`hero-portrait${activePortrait === index ? ' is-active' : ''}`}
+                  src={portrait}
+                  alt="Portrait of Fey"
+                  aria-hidden={activePortrait !== index}
+                />
+              ))}
+            </div>
           </div>
         </section>
 
         <section className="stats" aria-label="Business summary">
+          <StarRow />
           {stats.map((stat) => (
             <div key={stat.label} className="stat-item">
               <strong>{stat.value}</strong>
               <span>{stat.label}</span>
             </div>
           ))}
-          <div className="stats-star-row" aria-hidden="true">
-            {summaryStars.map((star) => (
-              <img key={star} src={`/assets/photos/${star}`} alt="" />
-            ))}
-          </div>
+          <StarRow />
         </section>
 
         <section id="services" className="services section-block">
@@ -104,7 +144,6 @@ export default function HomePage() {
 
           <div className="services-grid">
               <article className="service-card">
-                <div className="icon-circle">✎</div>
                 <ul className="service-list">
                   <li>Full-stack website builds</li>
                   <li>Landing pages &amp; funnels</li>
@@ -112,12 +151,16 @@ export default function HomePage() {
                   <li>Website optimization &amp; maintenance</li>
                 </ul>
               </article>
-              <img
-                className="services-photo"
-                src={polaroidGirl}
-                alt="Polaroid of a girl holding a phone"
-                width="400"
-              />
+              <div className="services-photo-wrap">
+                <ServicesStarCluster />
+                <ServicesStarCluster position="top-right" />
+                <img
+                  className="services-photo"
+                  src={polaroidGirl}
+                  alt="Polaroid of a girl holding a phone"
+                  width="400"
+                />
+              </div>
   
           </div>
         </section>

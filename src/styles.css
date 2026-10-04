@@ -7,6 +7,8 @@
   --line: #2b0a36;
   --brand: #f6deff;
   --brand-dark: #9a49b8;
+  --font-accent: 'Orbitron', sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
   --shadow: 0 24px 60px rgba(43, 10, 54, 0.4); 
 }
 
@@ -23,6 +25,18 @@ body {
   font-family: 'Inter', sans-serif;
   background: linear-gradient(180deg, #f6deff 0%, #fffafa 100%);
   color: var(--text);
+}
+
+h2,
+h3,
+.eyebrow,
+.brand-name,
+.stat-item strong {
+  font-family: var(--font-accent);
+}
+
+h1 {
+  font-family: var(--font-heading);
 }
 
 img {
@@ -372,17 +386,113 @@ button {
   object-position: center;
 }
 
-.hero-portrait-rotator {
+.hero-portrait-stage {
   position: relative;
+  z-index: 2;
   grid-column: 2;
   grid-row: 1;
   justify-self: center;
   width: clamp(406px, 46.8vw, 640px);
   height: min(811px, 109.2vh);
   min-height: 562px;
+  transform: translateY(70px);
+}
+
+.hero-portrait-rotator {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
   overflow: hidden;
   border-radius: 6px;
-  transform: translateY(70px);
+  filter: drop-shadow(4px 0px 0px #fca1ff) 
+          drop-shadow(-4px 0px 0px #fca1ff) 
+          drop-shadow(0px 4px 0px #fca1ff) 
+          drop-shadow(0px -4px 0px #fca1ff)
+          drop-shadow(4px 4px 0px #fca1ff)
+          drop-shadow(-4px 4px 0px #fca1ff)
+          drop-shadow(4px -4px 0px #fca1ff)
+          drop-shadow(-4px -4px 0px #fca1ff);
+}
+
+.hero-star-cluster {
+  position: absolute;
+  z-index: 2;
+  width: 132px;
+  height: 110px;
+  pointer-events: none;
+}
+
+.hero-star-cluster--upper-left {
+  top: 42px;
+  left: 20px;
+  transform: scale(1.3) rotate(-8deg);
+}
+
+.hero-star-cluster--upper-right {
+  top: 80px;
+  right: 0px;
+  transform: scale(0.9) rotate(10deg);
+}
+
+.hero-star-cluster--lower-left {
+  bottom: 72px;
+  left: -70px;
+  transform: scale(1) rotate(14deg);
+}
+
+.hero-star-cluster img {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+}
+
+.hero-star-cluster img:nth-child(1) {
+  top: 28px;
+  left: 0;
+  width: 54px;
+  height: 54px;
+}
+
+.hero-star-cluster img:nth-child(2) {
+  top: 0;
+  left: 49px;
+  width: 39px;
+  height: 39px;
+}
+
+.hero-star-cluster img:nth-child(3) {
+  top: 49px;
+  left: 76px;
+  width: 43px;
+  height: 43px;
+}
+
+.hero-star-cluster img:nth-child(4) {
+  top: 76px;
+  left: 37px;
+  width: 29px;
+  height: 29px;
+}
+
+.hero-star-cluster--upper-right img:nth-child(1) {
+  width: 70px;
+  height: 70px;
+}
+
+.hero-star-cluster--upper-right img:nth-child(2) {
+  width: 51px;
+  height: 51px;
+}
+
+.hero-star-cluster--upper-right img:nth-child(3) {
+  width: 56px;
+  height: 56px;
+}
+
+.hero-star-cluster--upper-right img:nth-child(4) {
+  width: 38px;
+  height: 38px;
 }
 
 .hero-portrait {
@@ -407,8 +517,16 @@ button {
   grid-row: 1;
   width: 100%;
   margin: 0;
-  padding: 72px 24px 72px max(32px, calc((100vw - 1200px) / 2 + 36px));
-  transform: translateY(44px);
+  padding: 16px 4px 16px max(32px, calc((100vw - 1200px) / 2 + 36px));
+}
+
+.hero-copy::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0 auto 0 0;
+  width: 100vw;
+  background: #f6deffeb;
+  content: '';
 }
 
 .hero .eyebrow {
@@ -525,17 +643,16 @@ button {
 
 .stats-star-row {
   grid-column: 1 / -1;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(var(--star-count, 21), minmax(0, 1fr));
   align-items: center;
-  justify-content: space-around;
-  gap: clamp(6px, 1.5vw, 18px);
+  gap: 30px;
   padding: 8px 0 4px;
 }
 
 .stats-star-row img {
-  width: clamp(42px, 7.5vw, 92px);
+  width: 100%;
   height: auto;
-  flex: 0 1 auto;
   object-fit: contain;
 }
 
@@ -600,12 +717,75 @@ button {
   padding: 16px;
 }
 
-.services-photo {
-  width: min(100%, 400px);
-  height: auto;
+.services-photo-wrap {
+  position: relative;
   justify-self: center;
   align-self: center;
+  width: min(100%, 400px);
+}
+
+.services-photo {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 400px);
+  height: auto;
   transform: rotate(10deg);
+}
+
+.services-star-cluster {
+  position: absolute;
+  z-index: 2;
+  left: -54px;
+  bottom: -8px;
+  width: 132px;
+  height: 110px;
+  pointer-events: none;
+}
+
+.services-star-cluster--top-right {
+  top: -24px;
+  right: -52px;
+  bottom: auto;
+  left: auto;
+}
+
+.services-star-cluster img {
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+}
+
+.services-star-cluster img:nth-child(1) {
+  top: 28px;
+  left: 0;
+  width: 54px;
+  height: 54px;
+  transform: rotate(-16deg);
+}
+
+.services-star-cluster img:nth-child(2) {
+  top: 0;
+  left: 49px;
+  width: 39px;
+  height: 39px;
+  transform: rotate(12deg);
+}
+
+.services-star-cluster img:nth-child(3) {
+  top: 49px;
+  left: 76px;
+  width: 43px;
+  height: 43px;
+  transform: rotate(18deg);
+}
+
+.services-star-cluster img:nth-child(4) {
+  top: 76px;
+  left: 37px;
+  width: 29px;
+  height: 29px;
+  transform: rotate(-8deg);
 }
 
 .icon-circle {
@@ -2019,7 +2199,7 @@ button {
     transform: none;
   }
 
-  .hero-portrait-rotator {
+  .hero-portrait-stage {
     width: min(100%, 468px);
     height: 671px;
     min-height: 0;
@@ -2049,13 +2229,35 @@ button {
     transform: none;
   }
 
-  .hero-portrait-rotator {
+  .hero-copy::before {
+    left: -20px;
+  }
+
+  .hero-portrait-stage {
     grid-column: 1;
     grid-row: 2;
     justify-self: end;
     width: min(100%, 437px);
     height: 437px;
     margin-right: 4px;
+  }
+
+  .hero-star-cluster--upper-left {
+    top: 28px;
+    left: -14px;
+    transform: scale(0.62) rotate(-8deg);
+  }
+
+  .hero-star-cluster--upper-right {
+    top: -12px;
+    right: 6px;
+    transform: scale(0.8) rotate(10deg);
+  }
+
+  .hero-star-cluster--lower-left {
+    bottom: 26px;
+    left: -12px;
+    transform: scale(0.58) rotate(14deg);
   }
 }
 
@@ -2064,7 +2266,22 @@ button {
     grid-template-columns: 1fr;
   }
 
-  .services-photo {
+  .services-photo-wrap {
     width: min(78vw, 320px);
+  }
+
+  .services-star-cluster {
+    left: -28px;
+    bottom: -18px;
+    transform: scale(0.8);
+    transform-origin: bottom left;
+  }
+
+  .services-star-cluster--top-right {
+    top: -12px;
+    right: -24px;
+    bottom: auto;
+    left: auto;
+    transform-origin: top right;
   }
 }
