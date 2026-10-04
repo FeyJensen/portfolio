@@ -2137,7 +2137,22 @@ button {
   .nav {
     width: 100%;
     justify-content: space-between;
-    gap: 12px;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .nav > a,
+  .nav > .nav-button,
+  .nav > .nav-dropdown > .nav-dropdown-toggle {
+    min-width: 76px;
+    min-height: 64px;
+    font-size: 0.85rem;
+  }
+
+  .nav-dropdown-menu {
+    right: auto;
+    left: 0;
+    max-width: calc(100vw - 40px);
   }
 
   .stats,
