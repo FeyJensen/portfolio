@@ -21,6 +21,29 @@ const summaryStars = [
 
 const serviceStars = ['PastelPurpleStar.png', 'PeachStar.png', 'PinkStar.png', 'PurpleStar.png'];
 
+const inspirationPhotos = [
+  {
+    src: '/assets/photos/CupcakeGirl.png',
+    alt: 'Blonde girl in a colorful Y2K outfit',
+    caption: 'Playful style',
+  },
+  {
+    src: '/assets/photos/kawaiiGirl.jpg',
+    alt: 'Cozy laptop setup with a cat and purple flowers',
+    caption: 'Cozy creative breaks',
+  },
+  {
+    src: '/assets/photos/purpleCat.png',
+    alt: 'Woman enjoying a cupcake',
+    caption: 'Sweet moments',
+  },
+  {
+    src: '/assets/photos/ComputerCoffee.jpg',
+    alt: 'White cat wearing purple heart-shaped sunglasses',
+    caption: 'Purple daydreams',
+  },
+];
+
 function StarRow({ repetitions = 3 }) {
   const stars = Array.from({ length: repetitions }, () => summaryStars).flat();
 
@@ -193,6 +216,23 @@ export default function HomePage() {
               />
             </div>
 
+          </div>
+        </section>
+
+        <section className="inspiration section-block" aria-labelledby="inspiration-heading">
+          <div className="section-heading inspiration-heading">
+            <span className="eyebrow">A little inspiration</span>
+            <h2 id="inspiration-heading">Little things that spark big ideas.</h2>
+            <p>Color, character, and cozy details bring a little personality to every project.</p>
+          </div>
+
+          <div className="inspiration-grid">
+            {inspirationPhotos.map((photo) => (
+              <figure className="inspiration-card" key={photo.src}>
+                <img src={photo.src} alt={photo.alt} loading="lazy" />
+                <figcaption>{photo.caption}</figcaption>
+              </figure>
+            ))}
           </div>
         </section>
 
