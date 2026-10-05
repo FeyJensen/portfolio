@@ -182,10 +182,7 @@ export default function App() {
       <header className="topbar">
         <button type="button" className="brand-button" onClick={() => setCurrentPage('home')}>
           <div className="brand-wrap">
-            <div className="brand-mark">F</div>
-            <div>
-              <p className="brand-name">Fey Jensen</p>
-            </div>
+            <span className="brand-logo" role="img" aria-label="Fey Jensen" />
           </div>
         </button>
 

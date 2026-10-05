@@ -30,7 +30,6 @@ body {
 h2,
 h3,
 .eyebrow,
-.brand-name,
 .stat-item strong {
   font-family: var(--font-accent);
 }
@@ -162,24 +161,15 @@ button {
 .brand-button {
   all: unset;
   cursor: pointer;
+  padding: 34px;
 }
 
-.brand-mark {
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(135deg, #4d0866 0%, #9a49b8 100%);
-  color: white;
-  font-weight: 800;
-  box-shadow: var(--shadow);
-}
-
-.brand-name {
-  margin: 0;
-  font-weight: 700;
-  letter-spacing: -0.04em;
+.brand-logo {
+  display: block;
+  width: 200px;
+  aspect-ratio: 612 / 205;
+  background-color: #4d0866;
+  mask: url('/assets/photos/FeyJensenLogo.png') center / contain no-repeat;
 }
 
 .nav {
@@ -211,6 +201,7 @@ button {
   min-height: 92px;
   place-items: center;
   background: url('/assets/photos/cloud.png') center / 100% 100% no-repeat;
+  scale: 1.2;
 }
 
 .nav-dropdown {
@@ -538,7 +529,7 @@ button {
   grid-row: 1;
   width: 100%;
   margin: 0;
-  padding: 32px 4px 0px max(32px, calc((100vw - 1200px) / 2 + 36px));
+  padding: 80px 4px 0px max(32px, calc((100vw - 1200px) / 2 + 36px));
 }
 
 .hero-copy::before {
@@ -2254,6 +2245,11 @@ button {
     gap: 12px;
     align-items: flex-start;
     margin-top: 16px;
+  }
+
+  .brand-button {
+    align-self: center;
+    padding: 12px 18px 0 8px;
   }
 
   .page-shell:has(.hero) .hero-copy {
