@@ -546,7 +546,7 @@ button {
   z-index: -1;
   inset: 0 auto 0 0;
   width: 100vw;
-  background: #f6deffeb;
+  background: #f6deff;
   content: '';
 }
 
@@ -2253,6 +2253,7 @@ button {
     flex-direction: column;
     gap: 12px;
     align-items: flex-start;
+    margin-top: 16px;
   }
 
   .page-shell:has(.hero) .hero-copy {
@@ -2386,10 +2387,18 @@ button {
 }
 
 @media (max-width: 640px) {
+  .page-shell:has(.hero) .topbar {
+    position: relative;
+    top: auto;
+    right: auto;
+    left: auto;
+    padding-bottom: 0;
+  }
+
   .page-shell:has(.hero) .hero {
     grid-template-columns: 1fr;
     min-height: 0;
-    padding: 130px 20px 28px;
+    padding: 0 20px 28px;
     row-gap: 24px;
   }
 
