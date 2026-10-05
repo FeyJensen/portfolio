@@ -4,11 +4,6 @@ export const stats = [
   { value: '100%', label: 'Custom, user-focused work from concept to launch' },
 ];
 
-export const highlights = [
-  'Design-first thinking paired with clean, scalable front-end and back-end implementation',
-  'Responsive experiences built to perform beautifully across devices and audiences',
-  'Strategy, branding, and development working together to turn visitors into customers',
-];
 
 export const resumeExperience = [
   {

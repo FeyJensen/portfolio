@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { highlights, stats } from '../data/portfolioData';
+import { stats } from '../data/portfolioData';
 import polaroidGirl from '/assets/photos/PolaroidPhoneGirl.png';
+import purplePurse from '/assets/photos/purplepurse.jpg';
 
 const portraits = [
   '/assets/photos/fey1.png',
@@ -90,7 +91,7 @@ export default function HomePage() {
           <img className="hero-background" src="/assets/photos/purpleCheckerboard.png" alt="" />
           <div className="hero-copy">
             <span className="eyebrow">Full-stack web designer & developer</span>
-            <h1>Designing and building websites with personality</h1>
+            <h1>Websites with personality. Built to perform.</h1>
             <p>
               I create modern, high-converting digital experiences that blend strong
               visual design with clean, functional development. From strategy to launch,
@@ -143,74 +144,70 @@ export default function HomePage() {
           </div>
 
           <div className="services-grid">
-              <article className="service-card">
-                <ul className="service-list">
-                  <li>Full-stack website builds</li>
-                  <li>Landing pages &amp; funnels</li>
-                  <li>UI/UX design systems</li>
-                  <li>Website optimization &amp; maintenance</li>
-                </ul>
-              </article>
-              <div className="services-photo-wrap">
-                <ServicesStarCluster />
-                <ServicesStarCluster position="top-right" />
-                <img
-                  className="services-photo"
-                  src={polaroidGirl}
-                  alt="Polaroid of a girl holding a phone"
-                  width="400"
-                />
-              </div>
-  
+            <article className="service-card">
+              <ul className="service-list">
+                <li>Full-stack website builds</li>
+                <li>Landing pages &amp; funnels</li>
+                <li>UI/UX design systems</li>
+                <li>Website optimization &amp; maintenance</li>
+              </ul>
+            </article>
+            <div className="services-photo-wrap">
+              <ServicesStarCluster />
+              <ServicesStarCluster position="top-right" />
+              <img
+                className="services-photo"
+                src={polaroidGirl}
+                alt="Polaroid of a girl holding a phone"
+                width="400"
+              />
+            </div>
+
           </div>
         </section>
 
         <section id="about" className="about section-block">
-          <div className="section-heading left">
-            <span className="eyebrow">Why choose me</span>
-            <h2>Web design with clarity and conversion in mind.</h2>
-          </div>
-
           <div className="about-grid">
-            <div className="about-copy">
-              <p>
-                I help turn ideas into digital experiences that feel premium,
-                work smoothly, and support real growth. My process connects design,
-                user experience, and functional development so your website does more than
-                look good — it performs.
-              </p>
-              <ul>
-                {highlights.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
+            <div className="about-copy-column">
+              <div className="section-heading left">
+                <span className="eyebrow">Why choose me</span>
+              </div>
+              <div className="about-copy">       
+                <h2>Web design with clarity and conversion in mind.</h2>
+                <p>
+                  I help turn ideas into digital experiences that feel customized,
+                  work smoothly, and support your business. My process connects personal design,
+                  user experience, and functional development so your website does more than
+                  look good, it performs.
+                </p>
+              </div>
             </div>
 
-            <div className="about-panel">
-              <p className="panel-label">Working style</p>
-              <h3>Strategy, design, and development in one process.</h3>
-              <p>
-                Every project is shaped around your audience, your message, and your goals,
-                creating a site that is both beautiful and built to convert.
-              </p>
+            <div className="about-photo-frame">
+              <img
+                src={purplePurse}
+                alt="A purple purse, purple iPhone and purple sunglasses"
+              />
             </div>
           </div>
         </section>
       </main>
 
       <footer id="contact" className="footer">
-        <div>
-          <span className="eyebrow">Let's build something great</span>
-          <h2>Ready for a website that looks sharp and works hard?</h2>
-        </div>
+        <div className="footer-inner">
+          <div>
+            <span className="eyebrow">Let's build something great</span>
+            <h2>Ready for a website that looks sharp and works hard?</h2>
+          </div>
 
-        <div className="footer-actions">
-          <a href="mailto:feyviolin@gmail.com" className="primary-btn">
-            feyviolin@gmail.com
-          </a>
-          <a href="https://github.com/FeyJensen" target="_blank" rel="noreferrer" className="secondary-btn">
-            GitHub
-          </a>
+          <div className="footer-actions">
+            <a href="mailto:feyviolin@gmail.com" className="primary-btn">
+              feyviolin@gmail.com
+            </a>
+            <a href="https://github.com/FeyJensen" target="_blank" rel="noreferrer" className="secondary-btn">
+              GitHub
+            </a>
+          </div>
         </div>
       </footer>
     </>
