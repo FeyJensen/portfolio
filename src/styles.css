@@ -660,6 +660,34 @@ button {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  opacity: 0;
+  transform: translateX(36px);
+  transition: opacity 500ms ease, transform 1s cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.stats.is-visible .stat-item {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.stats.is-visible .stat-item:nth-child(2) {
+  transition-delay: 0ms;
+}
+
+.stats.is-visible .stat-item:nth-child(3) {
+  transition-delay: 140ms;
+}
+
+.stats.is-visible .stat-item:nth-child(4) {
+  transition-delay: 280ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stat-item {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 .stats-star-row {

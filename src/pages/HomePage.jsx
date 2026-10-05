@@ -59,7 +59,9 @@ function HeroStarCluster({ position }) {
 
 export default function HomePage() {
   const heroRef = useRef(null);
+  const statsRef = useRef(null);
   const [activePortrait, setActivePortrait] = useState(0);
+  const [statsVisible, setStatsVisible] = useState(false);
 
   useEffect(() => {
     const hero = heroRef.current;
@@ -82,6 +84,30 @@ export default function HomePage() {
       observer.disconnect();
       if (intervalId !== null) window.clearInterval(intervalId);
     };
+  }, []);
+
+  useEffect(() => {
+    const statsSection = statsRef.current;
+
+    if (!statsSection) return;
+
+    if (
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      !('IntersectionObserver' in window)
+    ) {
+      setStatsVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setStatsVisible(true);
+        observer.unobserve(statsSection);
+      }
+    }, { threshold: 0.15 });
+
+    observer.observe(statsSection);
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -126,7 +152,11 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="stats" aria-label="Business summary">
+        <section
+          className={`stats${statsVisible ? ' is-visible' : ''}`}
+          aria-label="Business summary"
+          ref={statsRef}
+        >
           <StarRow />
           {stats.map((stat) => (
             <div key={stat.label} className="stat-item">
