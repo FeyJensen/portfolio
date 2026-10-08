@@ -1,5 +1,12 @@
 const projects = [
   {
+    name: 'Harmony Adult Care Home',
+    category: 'Website design & development',
+    description:
+      'A warm, welcoming website for Harmony Adult Care Home, centered on care that feels like home.',
+    url: 'https://harmony-adult-care-home-02.vercel.app/',
+  },
+  {
     name: 'Bonanza Cleaning',
     category: 'Website design & development',
     description:
