@@ -3,6 +3,8 @@ import { stats } from '../data/portfolioData';
 import polaroidGirl from '/assets/photos/PolaroidPhoneGirl.png';
 import purplePurse from '/assets/photos/purplepurse.jpg';
 
+const web3FormsAccessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+
 const summaryStars = [
   'blackStar.png',
   'darkStar.png',
@@ -67,6 +69,49 @@ function ServicesStarCluster({ position = 'bottom-left' }) {
 export default function HomePage() {
   const statsRef = useRef(null);
   const [statsVisible, setStatsVisible] = useState(false);
+  const [contactStatus, setContactStatus] = useState('');
+  const [isSubmittingContact, setIsSubmittingContact] = useState(false);
+
+  async function handleContactSubmit(event) {
+    event.preventDefault();
+    setIsSubmittingContact(true);
+    setContactStatus('Sending your message…');
+
+    try {
+      if (!web3FormsAccessKey) {
+        throw new Error('Contact form is not configured yet. Please try again later.');
+      }
+
+      const form = event.currentTarget;
+      const formData = new FormData(form);
+      formData.append('access_key', web3FormsAccessKey);
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      });
+      const result = await response.json();
+
+      if (!response.ok || result?.success !== true) {
+        throw new Error(
+          typeof result?.message === 'string' && result.message
+            ? result.message
+            : 'Unable to send your message. Please try again.',
+        );
+      }
+
+      form.reset();
+      setContactStatus('Thanks! Your message has been sent.');
+    } catch (error) {
+      setContactStatus(
+        error instanceof Error && error.message
+          ? error.message
+          : 'Unable to send your message. Please try again.',
+      );
+    } finally {
+      setIsSubmittingContact(false);
+    }
+  }
 
   useEffect(() => {
     const statsSection = statsRef.current;
@@ -214,19 +259,86 @@ export default function HomePage() {
         </section>
       </main>
 
-      <footer id="contact" className="footer">
-        <div className="footer-inner">
-          <div>
-            <span className="eyebrow">Let's build something great</span>
-            <h2>Ready for a website that looks sharp and works hard?</h2>
+      <footer id="contact" className="contact-section" aria-labelledby="contact-heading">
+        <div className="contact-inner">
+          <div className="contact-visual">
+            <div className="contact-copy">
+              <span className="eyebrow">We're here to talk</span>
+              <h2 id="contact-heading">Let's make something worth talking about.</h2>
+              <p>
+                Have an idea, a project, or a question? Tell me a little about what
+                you're looking for, and we'll take it from there.
+              </p>
+            </div>
           </div>
 
-          <div className="footer-actions">
-            <a href="mailto:feyviolin@gmail.com" className="primary-btn">
-              feyviolin@gmail.com
-            </a>
-            <a href="https://github.com/FeyJensen" target="_blank" rel="noreferrer" className="secondary-btn">
-              GitHub
+          <div className="contact-form-card">
+            <h3 className="contact-form-heading">Start a conversation</h3>
+            <p className="contact-form-intro">
+              Share a few details and I'll be in touch.
+            </p>
+            <form className="contact-form" onSubmit={handleContactSubmit}>
+              <div className="contact-form-field">
+                <label htmlFor="contact-name">Your name</label>
+                <input
+                  id="contact-name"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  maxLength={100}
+                  required
+                />
+              </div>
+              <div className="contact-form-row">
+                <div className="contact-form-field">
+                  <label htmlFor="contact-email">Email address</label>
+                  <input
+                    id="contact-email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    placeholder="you@example.com"
+                    maxLength={254}
+                    required
+                  />
+                </div>
+                <div className="contact-form-field">
+                  <label htmlFor="contact-phone">Phone (optional)</label>
+                  <input
+                    id="contact-phone"
+                    name="phone"
+                    type="tel"
+                    autoComplete="tel"
+                    placeholder="(000) 000-0000"
+                    maxLength={32}
+                  />
+                </div>
+              </div>
+              <div className="contact-form-field">
+                <label htmlFor="contact-message">How can I help?</label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  rows={4}
+                  placeholder="Tell me what you're looking for..."
+                  maxLength={2000}
+                  required
+                />
+              </div>
+              <button type="submit" className="primary-btn" disabled={isSubmittingContact}>
+                {isSubmittingContact ? 'Sending…' : 'Send your message'}
+              </button>
+            </form>
+            <p className="contact-form-note" role="status" aria-live="polite">
+              {contactStatus || 'Your message will be sent directly to my inbox.'}
+            </p>
+            <a
+              href="https://github.com/FeyJensen"
+              target="_blank"
+              rel="noreferrer"
+              className="contact-github-link"
+            >
+              Or visit my GitHub
             </a>
           </div>
         </div>

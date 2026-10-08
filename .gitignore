@@ -4,11 +4,10 @@ dist
 .DS_Store
 .env
 .env.*
-!.env.example
 .neon
 .vercel
 .env*
+!.env.example
 .agents/
 .agents/**
 skills-lock.json
-

@@ -61,6 +61,19 @@ npm run dev
 
 When `DATABASE_URL` is present, the app uses the database for product CRUD operations. If it is missing, the app falls back to demo data so the site still runs locally.
 
+## Contact form setup
+
+Add your Web3Forms access key to `.env.local`:
+
+```env
+VITE_WEB3FORMS_ACCESS_KEY=your_web3forms_access_key
+```
+
+Restart the Vite dev server after changing the key. For deployment, set
+`VITE_WEB3FORMS_ACCESS_KEY` in the hosting provider's environment variables and
+redeploy. Vite exposes `VITE_` variables in client-side code, so this must be a
+Web3Forms access key intended for website use, not a private server secret.
+
 ## Vercel + Neon setup
 
 For deployment on Vercel:
