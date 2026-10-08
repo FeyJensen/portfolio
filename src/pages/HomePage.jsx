@@ -3,12 +3,6 @@ import { stats } from '../data/portfolioData';
 import polaroidGirl from '/assets/photos/PolaroidPhoneGirl.png';
 import purplePurse from '/assets/photos/purplepurse.jpg';
 
-const portraits = [
-  '/assets/photos/fey1.png',
-  '/assets/photos/fey2.png',
-  '/assets/photos/fey3.png',
-];
-
 const summaryStars = [
   'blackStar.png',
   'darkStar.png',
@@ -70,44 +64,9 @@ function ServicesStarCluster({ position = 'bottom-left' }) {
   );
 }
 
-function HeroStarCluster({ position }) {
-  return (
-    <div className={`hero-star-cluster hero-star-cluster--${position}`} aria-hidden="true">
-      {serviceStars.map((star) => (
-        <img key={star} src={`/assets/photos/${star}`} alt="" />
-      ))}
-    </div>
-  );
-}
-
 export default function HomePage() {
-  const heroRef = useRef(null);
   const statsRef = useRef(null);
-  const [activePortrait, setActivePortrait] = useState(0);
   const [statsVisible, setStatsVisible] = useState(false);
-
-  useEffect(() => {
-    const hero = heroRef.current;
-    if (!hero || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    let intervalId = null;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && intervalId === null) {
-        intervalId = window.setInterval(() => {
-          setActivePortrait((current) => (current + 1) % portraits.length);
-        }, 500);
-      } else if (!entry.isIntersecting && intervalId !== null) {
-        window.clearInterval(intervalId);
-        intervalId = null;
-      }
-    }, { threshold: 0.15 });
-
-    observer.observe(hero);
-    return () => {
-      observer.disconnect();
-      if (intervalId !== null) window.clearInterval(intervalId);
-    };
-  }, []);
 
   useEffect(() => {
     const statsSection = statsRef.current;
@@ -136,41 +95,33 @@ export default function HomePage() {
   return (
     <>
       <main>
-        <section className="hero" ref={heroRef}>
-          <img className="hero-background" src="/assets/photos/purpleCheckerboard.png" alt="" />
-          <div className="hero-copy">
-            <span className="eyebrow">Full-stack web designer & developer</span>
-            <h1>Websites with personality. Built to perform.</h1>
-            <p>
-              I create modern, high-converting digital experiences that blend strong
-              visual design with clean, functional development. From strategy to launch,
-              I help brands look polished and perform with purpose.
-            </p>
+        <section className="hero">
+          <div className="hero-card">
+            <div className="hero-copy">
+              <span className="eyebrow">Full-stack web designer & developer</span>
+              <h1>Websites with personality. Built to perform.</h1>
+              <p>
+                I create modern, high-converting digital experiences that blend strong
+                visual design with clean, functional development. From strategy to launch,
+                I help brands look polished and perform with purpose.
+              </p>
 
-            <div className="cta-row">
-              <a href="#contact" className="primary-btn">Book a consultation</a>
-              <a href="#services" className="secondary-btn">View services</a>
+              <div className="cta-row">
+                <a href="#contact" className="primary-btn">Book a consultation</a>
+                <a href="#services" className="secondary-btn">View services</a>
+              </div>
+
+              <div className="mini-trust">
+                <span>Design • Development • Growth</span>
+              </div>
             </div>
 
-            <div className="mini-trust">
-              <span>Design • Development • Growth</span>
-            </div>
-          </div>
-
-          <div className="hero-portrait-stage">
-            <HeroStarCluster position="upper-left" />
-            <HeroStarCluster position="upper-right" />
-            <HeroStarCluster position="lower-left" />
-            <div className="hero-portrait-rotator" role="group" aria-label="Portraits of Fey">
-              {portraits.map((portrait, index) => (
-                <img
-                  key={portrait}
-                  className={`hero-portrait${activePortrait === index ? ' is-active' : ''}`}
-                  src={portrait}
-                  alt="Portrait of Fey"
-                  aria-hidden={activePortrait !== index}
-                />
-              ))}
+            <div className="hero-portrait-stage">
+              <img
+                className="hero-portrait"
+                src="/assets/photos/PortraitWavyBorder.png"
+                alt="Portrait of Fey in a wavy purple frame"
+              />
             </div>
           </div>
         </section>
