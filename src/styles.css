@@ -882,7 +882,7 @@ button {
 }
 
 .contact-section {
-  margin-top: 72px;
+  margin-top: 48px;
   width: 100vw;
   margin-left: calc(50% - 50vw);
   background: #f6ecff url('/assets/photos/PurpleStarBackground.png') center / cover no-repeat;
@@ -901,12 +901,12 @@ button {
 .contact-visual {
   position: relative;
   display: flex;
-  min-height: 434px;
+  min-height: 350px;
   align-items: flex-start;
   overflow: hidden;
   isolation: isolate;
-  margin: clamp(24px, 3vw, 40px);
-  padding: clamp(28px, 3.5vw, 44px) clamp(36px, 5vw, 64px);
+  margin: clamp(18px, 2vw, 28px);
+  padding: clamp(24px, 3vw, 36px) clamp(28px, 4vw, 48px);
   background: #4d0866;
 }
 
@@ -916,14 +916,14 @@ button {
 }
 
 .contact-copy .eyebrow {
-  color: #fca1ff;
+  color: #9a49b8;
   font-size: 0.78rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
 .contact-copy h2 {
-  margin: 11px 0 14px;
+  margin: 8px 0 10px;
   font-family: Georgia, 'Times New Roman', serif;
   font-size: clamp(2.6rem, 4.7vw, 4.5rem);
   font-weight: 400;
@@ -944,13 +944,13 @@ button {
   flex-direction: column;
   align-items: stretch;
   gap: 0;
-  margin: clamp(24px, 3vw, 40px);
-  padding: clamp(30px, 4vw, 50px);
+  margin: clamp(18px, 2vw, 28px);
+  padding: clamp(22px, 2.8vw, 34px);
   background: #fffaff;
 }
 
 .contact-form-heading {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
   color: var(--text);
   font-family: Georgia, 'Times New Roman', serif;
   font-size: clamp(2rem, 3vw, 2.8rem);
@@ -959,7 +959,7 @@ button {
 }
 
 .contact-form-intro {
-  margin: 0 0 22px;
+  margin: 0 0 14px;
   color: var(--muted);
   line-height: 1.7;
 }
@@ -967,13 +967,13 @@ button {
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 17px;
+  gap: 12px;
 }
 
 .contact-form-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 17px;
+  gap: 12px;
 }
 
 .contact-form-field {
@@ -995,7 +995,7 @@ button {
   border: 0;
   border-bottom: 1px solid rgba(77, 8, 102, 0.3);
   border-radius: 0;
-  padding: 8px 0;
+  padding: 2px 0;
   background: transparent;
   color: var(--text);
   font: inherit;
@@ -1007,7 +1007,7 @@ button {
 }
 
 .contact-form-field textarea {
-  min-height: 70px;
+  min-height: 32px;
   resize: vertical;
 }
 
@@ -1021,7 +1021,7 @@ button {
 .contact-form .primary-btn {
   align-self: flex-start;
   min-width: 220px;
-  min-height: 36px;
+  min-height: 34px;
   border: 0;
   cursor: pointer;
   background: var(--text);
@@ -1039,7 +1039,7 @@ button {
 }
 
 .contact-form-note {
-  margin: 13px 0 0;
+  margin: 10px 0 0;
   color: var(--muted);
   font-size: 0.78rem;
   line-height: 1.5;
@@ -1047,7 +1047,7 @@ button {
 
 .contact-github-link {
   align-self: flex-start;
-  margin-top: 7px;
+  margin-top: 5px;
   color: var(--text);
   font-size: 0.88rem;
   font-weight: 600;
@@ -2376,14 +2376,17 @@ button {
 
   .contact-inner {
     grid-template-columns: 1fr;
+    gap: 0;
   }
 
   .contact-visual {
-    min-height: 364px;
+    min-height: 300px;
+    margin: 14px;
   }
 
   .contact-form-card {
-    width: 100%;
+    width: auto;
+    margin: 14px;
   }
 }
 
