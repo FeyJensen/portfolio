@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { stats } from '../data/portfolioData';
-import polaroidGirl from '/assets/photos/PolaroidPhoneGirl.png';
-import purplePurse from '/assets/photos/purplepurse.jpg';
+import polaroidGirl from '/assets/photos/PolaroidPhoneGirl.webp';
+import purplePurse from '/assets/photos/purplepurse.webp';
 
 const web3FormsAccessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
 
@@ -19,24 +19,24 @@ const serviceStars = ['PastelPurpleStar.png', 'PeachStar.png', 'PinkStar.png', '
 
 const inspirationPhotos = [
   {
-    src: '/assets/photos/CupcakeGirl.png',
-    alt: 'Blonde girl in a colorful Y2K outfit',
-    caption: 'Playful style',
-  },
-  {
-    src: '/assets/photos/kawaiiGirl.jpg',
-    alt: 'Cozy laptop setup with a cat and purple flowers',
-    caption: 'Cozy creative breaks',
-  },
-  {
-    src: '/assets/photos/purpleCat.png',
-    alt: 'Woman enjoying a cupcake',
+    src: '/assets/photos/CupcakeGirl.webp',
+    alt: 'Woman in a mauve velvet top licking frosting from her finger while holding a cupcake',
     caption: 'Sweet moments',
   },
   {
-    src: '/assets/photos/ComputerCoffee.jpg',
-    alt: 'White cat wearing purple heart-shaped sunglasses',
+    src: '/assets/photos/kawaiiGirl.webp',
+    alt: 'Blonde girl in a colorful Y2K outfit with striped arm warmers and a heart necklace',
+    caption: 'Playful style',
+  },
+  {
+    src: '/assets/photos/purpleCat.webp',
+    alt: 'Fluffy white cat wearing purple heart-shaped sunglasses and a satin bow',
     caption: 'Purple daydreams',
+  },
+  {
+    src: '/assets/photos/ComputerCoffee.webp',
+    alt: 'Cozy lavender living room with a laptop, a white cat, a drink and purple tulips',
+    caption: 'Cozy creative breaks',
   },
 ];
 
@@ -164,7 +164,10 @@ export default function HomePage() {
             <div className="hero-portrait-stage">
               <img
                 className="hero-portrait"
-                src="/assets/photos/PortraitWavyBorder.png"
+                src="/assets/photos/PortraitWavyBorder.webp"
+                width="1400"
+                height="1410"
+                fetchpriority="high"
                 alt="Portrait of Fey in a wavy purple frame"
               />
             </div>
@@ -209,6 +212,7 @@ export default function HomePage() {
                 src={polaroidGirl}
                 alt="Polaroid of a girl holding a phone"
                 width="400"
+                loading="lazy"
               />
             </div>
 
@@ -253,6 +257,7 @@ export default function HomePage() {
               <img
                 src={purplePurse}
                 alt="A purple purse, purple iPhone and purple sunglasses"
+                loading="lazy"
               />
             </div>
           </div>

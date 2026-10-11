@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "concurrently \"npm run api\" \"vite\"",
     "api": "node server.js",
-    "build": "vite build",
+    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-server && node scripts/prerender.js",
     "preview": "vite preview"
   },
   "dependencies": {

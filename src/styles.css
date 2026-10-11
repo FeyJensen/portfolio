@@ -1,3 +1,27 @@
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('/fonts/inter-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Orbitron';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url('/fonts/orbitron-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/space-grotesk-latin.woff2') format('woff2');
+}
+
 :root {
   --bg: #f8eae7;
   --panel: #ffffff;
@@ -177,7 +201,7 @@ button {
   display: block;
   width: min(210px, calc(100vw - 48px));
   aspect-ratio: 4297 / 1723;
-  background: url('/assets/photos/FeyJensenLogo.png') center / contain no-repeat;
+  background: url('/assets/photos/FeyJensenLogo.webp') center / contain no-repeat;
 }
 
 .nav {
@@ -220,7 +244,7 @@ button {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: url('/assets/photos/cloud.png') center / 100% 100% no-repeat;
+  background: url('/assets/photos/cloud.webp') center / 100% 100% no-repeat;
   filter: drop-shadow(1.5px 0 0 #fca1ff) drop-shadow(-1.5px 0 0 #fca1ff)
     drop-shadow(0 1.5px 0 #fca1ff) drop-shadow(0 -1.5px 0 #fca1ff);
 }
@@ -265,6 +289,7 @@ button {
 }
 
 .nav-dropdown-menu .nav-button {
+  display: block;
   width: 100%;
   padding: 10px 12px;
   border-radius: 10px;
@@ -402,7 +427,7 @@ button {
   overflow: hidden;
   border-radius: 0;
   padding: 132px 24px 44px;
-  background: url('/assets/photos/purpleCheckerboard.png') center / cover no-repeat;
+  background: url('/assets/photos/purpleCheckerboard.webp') center / cover no-repeat;
   isolation: isolate;
 }
 
@@ -916,7 +941,7 @@ button {
   margin-top: 48px;
   width: 100vw;
   margin-left: calc(50% - 50vw);
-  background: #f6ecff url('/assets/photos/PurpleStarBackground.png') center / cover no-repeat;
+  background: #f6ecff url('/assets/photos/PurpleStarBackground.webp') center / cover no-repeat;
   padding: clamp(28px, 4vw, 56px) 0;
 }
 
@@ -1105,7 +1130,7 @@ button {
   width: 180px;
   aspect-ratio: 4297 / 1723;
   margin-bottom: 8px;
-  background: url('/assets/photos/FeyJensenLogoLight.png') left center / contain no-repeat;
+  background: url('/assets/photos/FeyJensenLogoLight.webp') left center / contain no-repeat;
 }
 
 .site-footer-brand p {

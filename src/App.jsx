@@ -1,20 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 
+import { canonicalUrl, pageFromPath, pageMeta, pageRoutes } from './routes';
+
 import HomePage from './pages/HomePage';
 import ResumePage from './pages/ResumePage';
 import SkyeDogPage from './pages/SkyeDogPage';
 import ShopDemoPage from './pages/ShopDemoPage';
 import AuthDemoPage from './pages/AuthDemoPage';
 import ClientWorkPage from './pages/ClientWorkPage';
-
-const pageRoutes = {
-  home: '/',
-  resume: '/resume',
-  shop: '/projects/shop-demo',
-  videogamedemo: '/projects/videogamedemo',
-  'auth-demo': '/projects/auth-demo',
-  'client-work': '/client-work',
-};
 
 const starImages = [
   '/assets/photos/blackStar.png',
@@ -26,12 +19,11 @@ const starImages = [
   '/assets/photos/WhiteStar.png',
 ];
 
-function pageFromPath(pathname) {
-  const route = Object.entries(pageRoutes).find(([, path]) => path === pathname);
-  return route ? route[0] : 'home';
+function isPlainLeftClick(event) {
+  return !(event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey);
 }
 
-function NavDropdown({ onSelect, currentPage }) {
+function NavDropdown({ onNavigate, currentPage }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -68,17 +60,17 @@ function NavDropdown({ onSelect, currentPage }) {
       {isOpen && (
         <div className="nav-dropdown-menu" role="menu" aria-label="Project navigation">
           {projectItems.map((item) => (
-            <button
+            <a
               key={item.value}
-              type="button"
+              href={pageRoutes[item.value]}
               className={`nav-button ${currentPage === item.value ? 'is-selected' : ''}`}
-              onClick={() => {
-                onSelect(item.value);
+              onClick={(event) => {
+                onNavigate(event, item.value);
                 setIsOpen(false);
               }}
             >
               {item.label}
-            </button>
+            </a>
           ))}
         </div>
       )}
@@ -155,8 +147,8 @@ function ClickStarBursts() {
   );
 }
 
-export default function App() {
-  const [currentPage, setCurrentPage] = useState(() => pageFromPath(window.location.pathname));
+export default function App({ initialPath = '/' }) {
+  const [currentPage, setCurrentPage] = useState(() => pageFromPath(initialPath));
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -168,6 +160,21 @@ export default function App() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+
+    const meta = pageMeta[currentPage];
+    const setMeta = (selector, attr, value) => {
+      document.head.querySelector(selector)?.setAttribute(attr, value);
+    };
+    const url = canonicalUrl(currentPage);
+
+    document.title = meta.title;
+    setMeta('meta[name="description"]', 'content', meta.description);
+    setMeta('link[rel="canonical"]', 'href', url);
+    setMeta('meta[property="og:url"]', 'content', url);
+    setMeta('meta[property="og:title"]', 'content', meta.title);
+    setMeta('meta[property="og:description"]', 'content', meta.description);
+    setMeta('meta[name="twitter:title"]', 'content', meta.title);
+    setMeta('meta[name="twitter:description"]', 'content', meta.description);
   }, [currentPage]);
 
   const handlePageChange = (page) => {
@@ -176,17 +183,20 @@ export default function App() {
     window.history.pushState({}, '', pageRoutes[page]);
   };
 
+  const handleNavigate = (event, page) => {
+    if (!isPlainLeftClick(event)) return;
+    event.preventDefault();
+    handlePageChange(page);
+  };
+
   return (
     <div className="page-shell">
       <header className="topbar">
-        <button type="button" className="brand-button" onClick={() => {
-          setCurrentPage('home');
-          setMenuOpen(false);
-        }}>
+        <a href={pageRoutes.home} className="brand-button" onClick={(event) => handleNavigate(event, 'home')}>
           <div className="brand-wrap">
             <span className="brand-logo" role="img" aria-label="Fey Jensen" />
           </div>
-        </button>
+        </a>
 
         <button
           type="button"
@@ -215,12 +225,12 @@ export default function App() {
               <a href="#contact">Contact</a>
             </>
           ) : (
-            <button type="button" className="nav-button" onClick={() => handlePageChange('home')}>
+            <a href={pageRoutes.home} className="nav-button" onClick={(event) => handleNavigate(event, 'home')}>
               Home
-            </button>
+            </a>
           )}
 
-          <NavDropdown onSelect={handlePageChange} currentPage={currentPage} />
+          <NavDropdown onNavigate={handleNavigate} currentPage={currentPage} />
         </nav>
       </header>
 

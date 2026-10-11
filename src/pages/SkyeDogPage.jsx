@@ -26,7 +26,7 @@ export default function SkyeDogPage() {
         </div>
 
         <div className="skye-dog-visual">
-          <img src="/assets/photos/Skye-DogMenu.png" alt="Skye Dog game main menu" />
+          <img src="/assets/photos/Skye-DogMenu.webp" alt="Skye Dog game main menu" />
         </div>
       </section>
 

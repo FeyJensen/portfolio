@@ -11,3 +11,4 @@ dist
 .agents/
 .agents/**
 skills-lock.json
+dist-server

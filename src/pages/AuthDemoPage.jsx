@@ -190,7 +190,7 @@ export default function AuthDemoPage() {
         ) : (
           <div className="auth-demo-reveal">
             <p className="auth-demo-success">Thanks! Here&apos;s Skye.</p>
-            <img src="/assets/photos/Skye.png" alt="Skye the dog" />
+            <img src="/assets/photos/Skye.webp" alt="Skye the dog" />
             <button type="button" className="auth-demo-logout" onClick={handleLogout}>
               Log out
             </button>
