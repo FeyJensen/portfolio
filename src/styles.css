@@ -159,15 +159,14 @@ button {
 .brand-button {
   all: unset;
   cursor: pointer;
-  padding: 34px;
+  padding: 12px;
 }
 
 .brand-logo {
   display: block;
-  width: min(200px, max(0px, calc(100vw - 140px)));
-  aspect-ratio: 612 / 205;
-  background-color: #4d0866;
-  mask: url('/assets/photos/FeyJensenLogo.png') center / contain no-repeat;
+  width: min(210px, calc(100vw - 48px));
+  aspect-ratio: 4297 / 1723;
+  background: url('/assets/photos/FeyJensenLogo.png') center / contain no-repeat;
 }
 
 .nav {

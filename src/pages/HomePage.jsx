@@ -332,14 +332,7 @@ export default function HomePage() {
             <p className="contact-form-note" role="status" aria-live="polite">
               {contactStatus || 'Your message will be sent directly to my inbox.'}
             </p>
-            <a
-              href="https://github.com/FeyJensen"
-              target="_blank"
-              rel="noreferrer"
-              className="contact-github-link"
-            >
-              Or visit my GitHub
-            </a>
+      
           </div>
         </div>
       </footer>
