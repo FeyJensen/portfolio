@@ -23,7 +23,7 @@ html {
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  background: #f6ecff;
+  background: #fff6ff;
   color: var(--text);
 }
 
@@ -115,24 +115,36 @@ button {
   left: 0;
   z-index: 10;
   border-color: transparent;
-  background: #f6ecff;
+  background: #fff6ff;
   backdrop-filter: none;
 }
 
-.page-shell:has(.hero) .brand-name,
-.page-shell:has(.hero) .nav a,
-.page-shell:has(.hero) .nav-button {
+.page-shell:not(:has(.hero)) {
+  padding-top: 0;
+}
+
+.page-shell:not(:has(.hero)) .topbar {
+  top: 0;
+  margin-inline: calc(50% - 50vw);
+  margin-bottom: 24px;
+  border-color: transparent;
+  backdrop-filter: none;
+}
+
+.page-shell .brand-name,
+.page-shell .nav a,
+.page-shell .nav-button {
   color: #2b0a36;
 }
 
-.page-shell:has(.hero) .nav a:hover,
-.page-shell:has(.hero) .nav-button:hover {
+.page-shell .nav a:hover,
+.page-shell .nav-button:hover {
  color: #fcdfd9;
 }
 
-.page-shell:has(.hero) .nav-dropdown-menu .nav-button,
-.page-shell:has(.hero) .nav-dropdown-menu .nav-button:hover,
-.page-shell:has(.hero) .nav-dropdown-menu .nav-button.is-selected {
+.page-shell .nav-dropdown-menu .nav-button,
+.page-shell .nav-dropdown-menu .nav-button:hover,
+.page-shell .nav-dropdown-menu .nav-button.is-selected {
   color: var(--text);
   text-shadow: none;
 }
@@ -141,13 +153,12 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #f6ecff;
-  border: 1px solid var(--line);
+  background: #fff6ff;
   padding: 1px 24px;
   backdrop-filter: blur(10px);
   position: sticky;
   top: 16px;
-  z-index: 10;
+  z-index: 10; 
 }
 
 .brand-wrap {
@@ -197,12 +208,29 @@ button {
   min-width: 112px;
   min-height: 92px;
   place-items: center;
-  background: url('/assets/photos/cloud.png') center / 100% 100% no-repeat;
+  position: relative;
+  isolation: isolate;
   scale: 1.2;
+}
+
+.nav > a::before,
+.nav > .nav-button::before,
+.nav > .nav-dropdown > .nav-dropdown-toggle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url('/assets/photos/cloud.png') center / 100% 100% no-repeat;
+  filter: drop-shadow(1.5px 0 0 #fca1ff) drop-shadow(-1.5px 0 0 #fca1ff)
+    drop-shadow(0 1.5px 0 #fca1ff) drop-shadow(0 -1.5px 0 #fca1ff);
 }
 
 .nav-dropdown {
   position: relative;
+}
+
+.nav-toggle {
+  display: none;
 }
 
 .nav-dropdown-toggle {
@@ -889,6 +917,7 @@ button {
   width: 100vw;
   margin-left: calc(50% - 50vw);
   background: #f6ecff url('/assets/photos/PurpleStarBackground.png') center / cover no-repeat;
+  padding: clamp(28px, 4vw, 56px) 0;
 }
 
 .contact-inner {
@@ -898,7 +927,7 @@ button {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: stretch;
-  gap: clamp(20px, 3.5vw, 45px);
+  gap: 0;
 }
 
 .contact-visual {
@@ -909,6 +938,7 @@ button {
   overflow: hidden;
   isolation: isolate;
   margin: clamp(18px, 2vw, 28px);
+  margin-right: clamp(6px, 1vw, 12px);
   padding: clamp(24px, 3vw, 36px) clamp(28px, 4vw, 48px);
   background: #4d0866;
 }
@@ -948,6 +978,7 @@ button {
   align-items: stretch;
   gap: 0;
   margin: clamp(18px, 2vw, 28px);
+  margin-left: clamp(6px, 1vw, 12px);
   padding: clamp(22px, 2.8vw, 34px);
   background: #fffaff;
 }
@@ -1070,12 +1101,11 @@ button {
 }
 
 .site-footer-name {
-  display: inline-block;
+  display: block;
+  width: 180px;
+  aspect-ratio: 4297 / 1723;
   margin-bottom: 8px;
-  color: #ffffff;
-  font-family: var(--font-heading);
-  font-size: 1.25rem;
-  font-weight: 700;
+  background: url('/assets/photos/FeyJensenLogoLight.png') left center / contain no-repeat;
 }
 
 .site-footer-brand p {
@@ -1262,11 +1292,10 @@ button {
   gap: 28px;
   align-items: center;
   overflow: hidden;
-  border: 1px solid #2b0a36;
   border-radius: 28px;
   padding: 46px;
-  background: #e7f3fc;
-  box-shadow: var(--shadow);
+  background: #fff6ff;
+  box-shadow: 0 8px 24px rgba(154, 73, 184, 0.1);
 }
 
 .skye-dog-copy {
@@ -1819,37 +1848,110 @@ button {
   }
 
   .topbar {
-    flex-direction: column;
-    gap: 12px;
-    align-items: flex-start;
-    margin-top: 16px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 0;
   }
 
   .brand-button {
-    align-self: center;
-    padding: 12px 18px 0 8px;
+    grid-column: 2;
+    padding: 12px 8px;
+  }
+
+  .brand-logo {
+    width: 160px;
+  }
+
+  .nav-toggle {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
   }
 
   .nav {
+    grid-column: 1 / -1;
+  }
+
+  .nav-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .nav-toggle span {
+    display: block;
+    height: 3px;
+    border-radius: 2px;
+    background: #2b0a36;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .nav-toggle[aria-expanded='true'] span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .nav-toggle[aria-expanded='true'] span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .nav-toggle[aria-expanded='true'] span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .nav {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    flex-basis: 100%;
     width: 100%;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 4px;
+    gap: 0;
+    padding-bottom: 12px;
+  }
+
+  .nav.is-open {
+    display: flex;
   }
 
   .nav > a,
   .nav > .nav-button,
   .nav > .nav-dropdown > .nav-dropdown-toggle {
-    min-width: 76px;
-    min-height: 64px;
-    font-size: 0.85rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    padding: 12px 8px;
+    scale: 1;
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .nav > a::before,
+  .nav > .nav-button::before,
+  .nav > .nav-dropdown > .nav-dropdown-toggle::before {
+    display: none;
+  }
+
+  .nav-dropdown {
+    width: 100%;
   }
 
   .nav-dropdown-menu {
-    right: 0;
-    left: auto;
-    width: min(240px, calc(100vw - 32px));
+    position: static;
+    width: 100%;
     min-width: 0;
+    margin-top: 4px;
+    box-shadow: none;
   }
 
   .stats,

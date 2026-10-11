@@ -157,6 +157,7 @@ function ClickStarBursts() {
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState(() => pageFromPath(window.location.pathname));
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handlePopState = () => setCurrentPage(pageFromPath(window.location.pathname));
@@ -171,19 +172,42 @@ export default function App() {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
+    setMenuOpen(false);
     window.history.pushState({}, '', pageRoutes[page]);
   };
 
   return (
     <div className="page-shell">
       <header className="topbar">
-        <button type="button" className="brand-button" onClick={() => setCurrentPage('home')}>
+        <button type="button" className="brand-button" onClick={() => {
+          setCurrentPage('home');
+          setMenuOpen(false);
+        }}>
           <div className="brand-wrap">
             <span className="brand-logo" role="img" aria-label="Fey Jensen" />
           </div>
         </button>
 
-        <nav className="nav">
+        <button
+          type="button"
+          className="nav-toggle"
+          aria-label="Menu"
+          aria-expanded={menuOpen}
+          aria-controls="site-nav"
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+
+        <nav
+          id="site-nav"
+          className={`nav ${menuOpen ? 'is-open' : ''}`}
+          onClick={(event) => {
+            if (event.target.closest('a')) setMenuOpen(false);
+          }}
+        >
           {currentPage === 'home' ? (
             <>
               <a href="#services">Services</a>

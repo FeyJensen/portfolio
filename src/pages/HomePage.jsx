@@ -340,7 +340,7 @@ export default function HomePage() {
       <footer className="site-footer">
         <div className="site-footer-inner">
           <div className="site-footer-brand">
-            <span className="site-footer-name">Fey Jensen</span>
+            <span className="site-footer-name" role="img" aria-label="Fey Jensen" />
             <p>
               Thoughtful design and full-stack development for brands ready to
               stand out online.
