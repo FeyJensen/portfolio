@@ -1232,6 +1232,12 @@ button {
   line-height: 1.7;
 }
 
+.resume-location a {
+  color: var(--brand-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .resume-section {
   margin-top: 28px;
   border-top: 1px solid var(--line);
@@ -1252,21 +1258,12 @@ button {
   line-height: 1.7;
 }
 
-.resume-skill-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+.resume-skill-group {
+  margin: 8px 0;
 }
 
-.resume-skill {
-  display: inline-flex;
-  background: #4d0866;
+.resume-skill-group strong {
   color: var(--brand-dark);
-  border: 1px solid #9a49b8;
-  border-radius: 999px;
-  padding: 7px 12px;
-  font-size: 0.85rem;
-  font-weight: 600;
 }
 
 .resume-job {

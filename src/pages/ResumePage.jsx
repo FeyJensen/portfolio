@@ -1,4 +1,4 @@
-import { resumeExperience, resumeSkills } from '../data/portfolioData';
+import { resumeExperience, resumeProjects, resumeSkills } from '../data/portfolioData';
 
 export default function ResumePage() {
   return (
@@ -7,29 +7,42 @@ export default function ResumePage() {
         <header className="resume-header">
           <div>
             <h1>Maria "Fey" Jensen</h1>
-            <p className="resume-location">Clackamas, OR | 503-901-9256 | FeyViolin@gmail.com | github.com/FeyJensen</p>
+            <p className="resume-location">
+              Portland, OR | 503-901-9256 | <a href="mailto:FeyViolin@gmail.com">FeyViolin@gmail.com</a> |{' '}
+              <a href="https://www.FeyJensen.com">www.FeyJensen.com</a> |{' '}
+              <a href="https://drive.google.com/drive/folders/1MOYHVhkJRhElFp0lalS2YnjZdmehzPmW?usp=drive_link">Graphic Design Portfolio</a>
+            </p>
           </div>
         </header>
 
         <section className="resume-section">
           <h2>Professional Summary</h2>
           <p>
-            Software Engineer with experience developing and maintaining production applications across full-stack environments.
-            Skilled in JavaScript, TypeScript, C#, React, REST APIs, and automated testing, with hands-on experience with AWS,
-            Terraform, Auth0, Keycloak, CI/CD pipelines, and AI-assisted development using Claude Code. Experienced in API
-            integration, authentication, cloud-based application development, and deploying and validating applications across
-            multiple environments. Strong collaborator with experience working in Agile/Scrum teams, leading development efforts,
-            and contributing to code reviews and technical solutions.
+            Software engineer and web developer in Portland, Oregon, with experience maintaining production applications
+            across full-stack environments. Experienced with JavaScript, TypeScript, C#, React, REST APIs, and automated
+            testing, with hands-on experience in AWS, Terraform, Auth0, Keycloak, and CI/CD pipelines. Previous roles focused
+            on API integration, authentication, and automated testing.
           </p>
         </section>
 
         <section className="resume-section">
           <h2>Technical Skills</h2>
-          <div className="resume-skill-list">
-            {resumeSkills.map((skill) => (
-              <span key={skill} className="resume-skill">{skill}</span>
+          <div className="resume-skill-groups">
+            {resumeSkills.map(({ category, items }) => (
+              <p key={category} className="resume-skill-group">
+                <strong>{category}:</strong> {items.join(', ')}
+              </p>
             ))}
           </div>
+        </section>
+
+        <section className="resume-section">
+          <h2>Projects</h2>
+          <ul>
+            {resumeProjects.map((project) => (
+              <li key={project}>{project}</li>
+            ))}
+          </ul>
         </section>
 
         <section className="resume-section">
