@@ -1,7 +1,21 @@
 export const SITE_URL = 'https://www.feyjensen.com';
 
+const blogPostCategory = 'Web Design & Development';
+const blogPostTags = [
+  'Small Business',
+  'Website Redesign',
+  'SEO',
+  'Web Development',
+  'Website Maintenance',
+  'Digital Marketing',
+  '2027 Business Planning',
+];
+const blogPostFocusKeyword = 'Small business website redesign';
+
 export const pageRoutes = {
   home: '/',
+  blog: '/blog/',
+  'blog-post-website-redesign': '/blog/small-business-website-redesign/',
   resume: '/resume',
   shop: '/projects/shop-demo',
   videogamedemo: '/projects/videogamedemo',
@@ -14,6 +28,45 @@ export const pageMeta = {
     title: 'Fey Jensen | Web Designer & Full-Stack Developer',
     description:
       'Fey Jensen creates polished websites and digital experiences for businesses that want to stand out. Full-stack web design and development in Clackamas, Oregon.',
+  },
+  blog: {
+    title: 'Blog | Web Design & Small Business Growth | Fey Jensen',
+    description:
+      'Practical articles on web design, website performance, SEO and building an online presence that supports small business growth.',
+  },
+  'blog-post-website-redesign': {
+    title: '7 Signs Your Small Business Needs a Website Redesign in 2027',
+    description:
+      'Is your website holding your business back? Discover 7 signs you need a website redesign and how to improve your small business website before 2027.',
+    ogTitle: 'Is Your Small Business Website Ready for 2027?',
+    ogDescription:
+      "From outdated branding to slow loading speeds, discover seven signs it's time to upgrade your website and set your small business up for success in 2027.",
+    category: blogPostCategory,
+    tags: blogPostTags,
+    focusKeyword: blogPostFocusKeyword,
+    articleSchema: {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: '7 Signs Your Small Business Needs a Website Redesign Before 2027',
+      description:
+        'Is your website holding your business back? Discover 7 signs you need a website redesign and how to improve your small business website before 2027.',
+      articleSection: blogPostCategory,
+      keywords: [blogPostFocusKeyword, ...blogPostTags],
+      datePublished: '2026-11-20',
+      dateModified: '2026-11-20',
+      author: {
+        '@type': 'Person',
+        name: 'Fey Jensen',
+        url: 'https://www.feyjensen.com/',
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Fey Jensen Web Dev',
+        url: 'https://www.feyjensen.com/',
+      },
+      mainEntityOfPage:
+        'https://www.feyjensen.com/blog/small-business-website-redesign/',
+    },
   },
   resume: {
     title: 'Resume | Fey Jensen, Software Engineer',
@@ -44,8 +97,14 @@ export const pageMeta = {
 
 export function pageFromPath(pathname) {
   const normalized = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname;
-  const route = Object.entries(pageRoutes).find(([, path]) => path === normalized);
-  return route ? route[0] : 'home';
+  const route = Object.entries(pageRoutes).find(
+    ([, path]) => (path.length > 1 ? path.replace(/\/+$/, '') : path) === normalized,
+  );
+  if (route) return route[0];
+
+  const legacyArticlePath =
+    '/blog/7-signs-your-small-business-needs-a-website-redesign-before-2027';
+  return normalized === legacyArticlePath ? 'blog-post-website-redesign' : 'home';
 }
 
 export function canonicalUrl(page) {

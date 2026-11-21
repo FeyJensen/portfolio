@@ -26,16 +26,25 @@ for (const [page, route] of Object.entries(pageRoutes)) {
   const url = canonicalUrl(page);
   const title = escapeAttr(meta.title);
   const description = escapeAttr(meta.description);
+  const socialTitle = escapeAttr(meta.ogTitle ?? meta.title);
+  const socialDescription = escapeAttr(meta.ogDescription ?? meta.description);
 
   let html = template;
   html = replaceTag(html, /<title>.*?<\/title>/s, `<title>${title}</title>`);
   html = replaceTag(html, /(<meta name="description" content=")[^"]*(")/, `$1${description}$2`);
   html = replaceTag(html, /(<link rel="canonical" href=")[^"]*(")/, `$1${url}$2`);
   html = replaceTag(html, /(<meta property="og:url" content=")[^"]*(")/, `$1${url}$2`);
-  html = replaceTag(html, /(<meta property="og:title" content=")[^"]*(")/, `$1${title}$2`);
-  html = replaceTag(html, /(<meta property="og:description" content=")[^"]*(")/, `$1${description}$2`);
-  html = replaceTag(html, /(<meta name="twitter:title" content=")[^"]*(")/, `$1${title}$2`);
-  html = replaceTag(html, /(<meta name="twitter:description" content=")[^"]*(")/, `$1${description}$2`);
+  html = replaceTag(html, /(<meta property="og:title" content=")[^"]*(")/, `$1${socialTitle}$2`);
+  html = replaceTag(html, /(<meta property="og:description" content=")[^"]*(")/, `$1${socialDescription}$2`);
+  html = replaceTag(html, /(<meta name="twitter:title" content=")[^"]*(")/, `$1${socialTitle}$2`);
+  html = replaceTag(html, /(<meta name="twitter:description" content=")[^"]*(")/, `$1${socialDescription}$2`);
+  if (meta.articleSchema) {
+    html = replaceTag(
+      html,
+      /<\/head>/,
+      `<script type="application/ld+json">${JSON.stringify(meta.articleSchema)}</script>\n  </head>`,
+    );
+  }
   html = replaceTag(html, /<div id="root"><\/div>/, () => `<div id="root">${render(route)}</div>`);
 
   const outDir = route === '/' ? distDir : path.join(distDir, route);

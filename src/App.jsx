@@ -8,6 +8,8 @@ import SkyeDogPage from './pages/SkyeDogPage';
 import ShopDemoPage from './pages/ShopDemoPage';
 import AuthDemoPage from './pages/AuthDemoPage';
 import ClientWorkPage from './pages/ClientWorkPage';
+import { BlogPage, BlogPostPage } from './pages/BlogPage';
+import SiteFooter from './components/SiteFooter';
 
 const starImages = [
   '/assets/photos/blackStar.png',
@@ -159,22 +161,31 @@ export default function App({ initialPath = '/' }) {
   }, []);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    const hashTarget = window.location.hash.slice(1);
+    const target = hashTarget ? document.getElementById(hashTarget) : null;
+
+    if (target) {
+      target.scrollIntoView({ behavior: 'instant', block: 'start' });
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    }
 
     const meta = pageMeta[currentPage];
     const setMeta = (selector, attr, value) => {
       document.head.querySelector(selector)?.setAttribute(attr, value);
     };
     const url = canonicalUrl(currentPage);
+    const socialTitle = meta.ogTitle ?? meta.title;
+    const socialDescription = meta.ogDescription ?? meta.description;
 
     document.title = meta.title;
     setMeta('meta[name="description"]', 'content', meta.description);
     setMeta('link[rel="canonical"]', 'href', url);
     setMeta('meta[property="og:url"]', 'content', url);
-    setMeta('meta[property="og:title"]', 'content', meta.title);
-    setMeta('meta[property="og:description"]', 'content', meta.description);
-    setMeta('meta[name="twitter:title"]', 'content', meta.title);
-    setMeta('meta[name="twitter:description"]', 'content', meta.description);
+    setMeta('meta[property="og:title"]', 'content', socialTitle);
+    setMeta('meta[property="og:description"]', 'content', socialDescription);
+    setMeta('meta[name="twitter:title"]', 'content', socialTitle);
+    setMeta('meta[name="twitter:description"]', 'content', socialDescription);
   }, [currentPage]);
 
   const handlePageChange = (page) => {
@@ -189,8 +200,25 @@ export default function App({ initialPath = '/' }) {
     handlePageChange(page);
   };
 
+  const handleContactNavigate = (event) => {
+    if (!isPlainLeftClick(event)) return;
+    event.preventDefault();
+    setMenuOpen(false);
+    window.history.pushState({}, '', `${pageRoutes.home}#contact`);
+    setCurrentPage('home');
+  };
+
   return (
     <div className="page-shell">
+      <div className="utility-bar">
+        <span>Independent web studio · Oregon</span>
+        <div className="utility-links">
+          <a href="mailto:FeyViolin@gmail.com">Email</a>
+          <a href="https://github.com/FeyJensen" target="_blank" rel="noreferrer">
+            GitHub
+          </a>
+        </div>
+      </div>
       <header className="topbar">
         <a href={pageRoutes.home} className="brand-button" onClick={(event) => handleNavigate(event, 'home')}>
           <div className="brand-wrap">
@@ -230,11 +258,22 @@ export default function App({ initialPath = '/' }) {
             </a>
           )}
 
+          <a
+            href={pageRoutes.blog}
+            className={`nav-button ${currentPage === 'blog' ? 'is-selected' : ''}`}
+            onClick={(event) => handleNavigate(event, 'blog')}
+          >
+            Blog
+          </a>
           <NavDropdown onNavigate={handleNavigate} currentPage={currentPage} />
         </nav>
       </header>
 
-      {currentPage === 'resume' ? (
+      {currentPage === 'blog' ? (
+        <BlogPage onNavigate={handleNavigate} />
+      ) : currentPage === 'blog-post-website-redesign' ? (
+        <BlogPostPage onContactNavigate={handleContactNavigate} />
+      ) : currentPage === 'resume' ? (
         <ResumePage />
       ) : currentPage === 'shop' ? (
         <ShopDemoPage />
@@ -247,6 +286,7 @@ export default function App({ initialPath = '/' }) {
       ) : (
         <HomePage />
       )}
+      {['home', 'blog', 'blog-post-website-redesign'].includes(currentPage) && <SiteFooter />}
       <ClickStarBursts />
     </div>
   );

@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/blog/7-signs-your-small-business-needs-a-website-redesign-before-2027/",
+      "destination": "/blog/small-business-website-redesign/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]

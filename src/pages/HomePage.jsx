@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { stats } from '../data/portfolioData';
 import polaroidGirl from '/assets/photos/PolaroidPhoneGirl.webp';
-import purplePurse from '/assets/photos/purplepurse.webp';
+import portrait from '/assets/photos/about-photo.jpg';
 
 const web3FormsAccessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
 
@@ -139,16 +139,16 @@ export default function HomePage() {
 
   return (
     <>
-      <main>
+      <main className="home-page">
         <section className="hero">
           <div className="hero-card">
             <div className="hero-copy">
-              <span className="eyebrow">Full-stack web designer & developer</span>
-              <h1>Websites with personality. Built to perform.</h1>
+              <span className="eyebrow">Design-led. Built to perform.</span>
+              <h1>Thoughtful websites for brands with something to say.</h1>
               <p>
-                I create modern, high-converting digital experiences that blend strong
-                visual design with clean, functional development. From strategy to launch,
-                I help brands look polished and perform with purpose.
+                I combine expressive design with dependable development to build
+                websites that feel unmistakably yours and make the next step easy
+                for your customers.
               </p>
 
               <div className="cta-row">
@@ -157,7 +157,9 @@ export default function HomePage() {
               </div>
 
               <div className="mini-trust">
-                <span>Design • Development • Growth</span>
+                <span>Strategy</span>
+                <span>Design</span>
+                <span>Development</span>
               </div>
             </div>
 
@@ -191,17 +193,45 @@ export default function HomePage() {
 
         <section id="services" className="services section-block">
           <div className="section-heading">
-            <span className="eyebrow">What I do</span>
-            <h2>Full-stack solutions built to elevate your brand.</h2>
+            <span className="eyebrow">Ways we can work together</span>
+            <h2>ONE STUDIO. EVERY PART OF YOUR WEBSITE.</h2>
+            <p>
+              From the first idea to the final line of code, I create a connected
+              experience that is easy to use, easy to grow, and true to your brand.
+            </p>
           </div>
 
           <div className="services-grid">
             <article className="service-card">
               <ul className="service-list">
-                <li>Full-stack website builds</li>
-                <li>Landing pages &amp; funnels</li>
-                <li>UI/UX design systems</li>
-                <li>Website optimization &amp; maintenance</li>
+                <li>
+                  <span>01</span>
+                  <div>
+                    <strong>Full-stack website builds</strong>
+                    <p>Custom, responsive websites shaped around your business goals.</p>
+                  </div>
+                </li>
+                <li>
+                  <span>02</span>
+                  <div>
+                    <strong>Landing pages &amp; funnels</strong>
+                    <p>Focused experiences designed to guide visitors toward action.</p>
+                  </div>
+                </li>
+                <li>
+                  <span>03</span>
+                  <div>
+                    <strong>UI/UX design systems</strong>
+                    <p>Cohesive visual foundations that keep every touchpoint consistent.</p>
+                  </div>
+                </li>
+                <li>
+                  <span>04</span>
+                  <div>
+                    <strong>Optimization &amp; care</strong>
+                    <p>Ongoing improvements for speed, accessibility, and confidence.</p>
+                  </div>
+                </li>
               </ul>
             </article>
             <div className="services-photo-wrap">
@@ -222,7 +252,7 @@ export default function HomePage() {
         <section className="inspiration section-block" aria-labelledby="inspiration-heading">
           <div className="section-heading inspiration-heading">
             <span className="eyebrow">A little inspiration</span>
-            <h2 id="inspiration-heading">Little things that spark big ideas.</h2>
+            <h2 id="inspiration-heading">LITTLE THINGS THAT SPARK<br></br> BIG IDEAS.</h2>
             <p>Color, character, and cozy details bring a little personality to every project.</p>
           </div>
 
@@ -242,21 +272,25 @@ export default function HomePage() {
               <div className="section-heading left">
                 <span className="eyebrow">Why choose me</span>
               </div>
-              <div className="about-copy">       
-                <h2>Web design with clarity and conversion in mind.</h2>
+              <div className="about-copy">
+                <h2>WEB DESIGN WITH CLARITY AND CONVERSION IN MIND.</h2>
                 <p>
                   I help turn ideas into digital experiences that feel customized,
                   work smoothly, and support your business. My process connects personal design,
                   user experience, and functional development so your website does more than
                   look good, it performs.
                 </p>
+                <p className="about-note">
+                  You get direct collaboration, a considered process, and a site
+                  built to keep working after launch.
+                </p>
               </div>
             </div>
 
             <div className="about-photo-frame">
               <img
-                src={purplePurse}
-                alt="A purple purse, purple iPhone and purple sunglasses"
+                src={portrait}
+                alt="Fey smiling in a Santa hat and red holiday sweater"
                 loading="lazy"
               />
             </div>
@@ -341,41 +375,6 @@ export default function HomePage() {
         </div>
       </section>
       </main>
-
-      <footer className="site-footer">
-        <div className="site-footer-inner">
-          <div className="site-footer-brand">
-            <span className="site-footer-name" role="img" aria-label="Fey Jensen" />
-            <p>
-              Thoughtful design and full-stack development for brands ready to
-              stand out online.
-            </p>
-          </div>
-
-          <div className="site-footer-contact">
-            <h2>Contact me</h2>
-            <a href="mailto:FeyViolin@gmail.com">FeyViolin@gmail.com</a>
-            <span>Clackamas, Oregon</span>
-            <a href="tel:+15039019256">+1 (503) 901-9256</a>
-          </div>
-
-          <div className="site-footer-social">
-            <h2>Follow me</h2>
-            <a
-              className="site-footer-social-link"
-              href="https://github.com/FeyJensen"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="GitHub profile (opens in a new tab)"
-            >
-              GitHub
-            </a>
-          </div>
-        </div>
-        <div className="site-footer-bottom">
-          <span>© {new Date().getFullYear()} Fey Jensen. All rights reserved.</span>
-        </div>
-      </footer>
     </>
   );
 }
