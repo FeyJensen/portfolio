@@ -152,12 +152,21 @@ function ClickStarBursts() {
 export default function App({ initialPath = '/' }) {
   const [currentPage, setCurrentPage] = useState(() => pageFromPath(initialPath));
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
     const handlePopState = () => setCurrentPage(pageFromPath(window.location.pathname));
 
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => setShowScrollTop(window.scrollY > 400);
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
@@ -206,6 +215,14 @@ export default function App({ initialPath = '/' }) {
     setMenuOpen(false);
     window.history.pushState({}, '', `${pageRoutes.home}#contact`);
     setCurrentPage('home');
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+    });
   };
 
   return (
@@ -287,6 +304,17 @@ export default function App({ initialPath = '/' }) {
         <HomePage />
       )}
       {['home', 'blog', 'blog-post-website-redesign'].includes(currentPage) && <SiteFooter />}
+      <button
+        type="button"
+        className={`scroll-to-top ${showScrollTop ? 'is-visible' : ''}`}
+        onClick={scrollToTop}
+        aria-label="Scroll to top"
+        tabIndex={showScrollTop ? 0 : -1}
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 18V6M6.5 11.5 12 6l5.5 5.5" />
+        </svg>
+      </button>
       <ClickStarBursts />
     </div>
   );

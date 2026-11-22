@@ -75,6 +75,67 @@ button {
   pointer-events: none;
 }
 
+.scroll-to-top {
+  position: fixed;
+  z-index: 900;
+  right: 24px;
+  bottom: calc(24px + env(safe-area-inset-bottom));
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid var(--blackcurrant);
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--blackcurrant);
+  box-shadow: 0 8px 24px rgba(73, 42, 84, 0.16);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.scroll-to-top.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.scroll-to-top svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.scroll-to-top:hover,
+.scroll-to-top:focus-visible {
+  background: var(--petal);
+  color: var(--blackcurrant);
+}
+
+.scroll-to-top:focus-visible {
+  outline: 3px solid var(--lilac);
+  outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .scroll-to-top {
+    right: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+}
+
 .click-star {
   position: absolute;
   width: var(--burst-size);
