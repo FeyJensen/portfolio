@@ -25,9 +25,9 @@ export const pageRoutes = {
 
 export const pageMeta = {
   home: {
-    title: 'Fey Jensen | Web Designer & Full-Stack Developer',
+    title: 'Fey Jensen | Web Developer & Web Designer in Portland, OR',
     description:
-      'Fey Jensen creates polished websites and digital experiences for businesses that want to stand out. Full-stack web design and development in Clackamas, Oregon.',
+      'Portland web developer, web designer, custom websites, and small business web design without sounding overly keyword-heavy.'
   },
   blog: {
     title: 'Blog | Web Design & Small Business Growth | Fey Jensen',
