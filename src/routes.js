@@ -25,11 +25,22 @@ const blogPostTags = [
   '2027 Business Planning',
 ];
 const blogPostFocusKeyword = 'Small business website redesign';
+const websiteUpdatesDescription =
+  'Get your small business website ready for 2027 with 5 simple updates to improve SEO, mobile design, website performance, and customer conversions.';
+const websiteUpdatesKeywords = [
+  'small business website updates',
+  'small business website',
+  'website maintenance tips',
+  'small business SEO',
+  'mobile-friendly website',
+  'website accessibility',
+];
 
 export const pageRoutes = {
   home: '/',
   blog: '/blog/',
   'blog-post-website-redesign': '/blog/small-business-website-redesign/',
+  'blog-post-website-updates-2027': '/blog/small-business-website-updates-2027/',
   resume: '/resume',
   shop: '/projects/shop-demo',
   videogamedemo: '/projects/videogamedemo',
@@ -41,7 +52,7 @@ export const pageMeta = {
   home: {
     title: 'Fey Jensen | Web Developer & Web Designer in Portland, OR',
     description:
-      'Portland web developer, web designer, custom websites, and small business web design without sounding overly keyword-heavy.'
+      'Fey Jensen designs and develops custom websites for small businesses in Portland, Oregon and beyond.',
   },
   blog: {
     title: 'Blog | Web Design & Small Business Growth | Fey Jensen',
@@ -82,6 +93,40 @@ export const pageMeta = {
       },
       mainEntityOfPage:
         'https://www.feyjensen.com/blog/small-business-website-redesign/',
+    },
+  },
+  'blog-post-website-updates-2027': {
+    title: '5 Small Business Website Updates to Make Before 2027',
+    description: websiteUpdatesDescription,
+    socialImage: {
+      url: `${SITE_URL}/assets/photos/small-business-website-updates-2027.jpg`,
+      width: 1152,
+      height: 768,
+      alt: 'A desk with a keyboard, notebook, tea, and plants',
+    },
+    category: blogPostCategory,
+    tags: websiteUpdatesKeywords.slice(1),
+    focusKeyword: websiteUpdatesKeywords[0],
+    articleSchema: {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: '5 Website Updates Every Small Business Should Make Before 2027',
+      description: websiteUpdatesDescription,
+      articleSection: blogPostCategory,
+      keywords: websiteUpdatesKeywords,
+      datePublished: '2026-11-22',
+      dateModified: '2026-11-22',
+      author: {
+        '@type': 'Person',
+        name: 'Fey Jensen',
+        url: `${SITE_URL}/`,
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Fey Jensen Web Dev',
+        url: `${SITE_URL}/`,
+      },
+      mainEntityOfPage: `${SITE_URL}/blog/small-business-website-updates-2027/`,
     },
   },
   resume: {

@@ -672,7 +672,7 @@ button {
   inset: 0;
   background:
     linear-gradient(var(--hero-overlay), var(--hero-overlay)),
-    url('/assets/photos/blog-post-hero.jpg') center 78% / cover no-repeat;
+    var(--blog-post-image, url('/assets/photos/blog-post-hero.jpg')) center 78% / cover no-repeat;
   content: '';
 }
 
@@ -3765,7 +3765,7 @@ body {
 }
 
 .blog-card-art {
-  background: url('/assets/photos/blog-post-hero.jpg') center / cover no-repeat;
+  background: var(--blog-post-image, url('/assets/photos/blog-post-hero.jpg')) center / cover no-repeat;
 }
 
 .blog-card-art::before {

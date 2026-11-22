@@ -9,6 +9,7 @@ import ShopDemoPage from './pages/ShopDemoPage';
 import AuthDemoPage from './pages/AuthDemoPage';
 import ClientWorkPage from './pages/ClientWorkPage';
 import { BlogPage, BlogPostPage } from './pages/BlogPage';
+import { blogPosts } from './posts';
 import SiteFooter from './components/SiteFooter';
 
 const starImages = [
@@ -150,6 +151,7 @@ function ClickStarBursts() {
 
 export default function App({ initialPath = '/' }) {
   const [currentPage, setCurrentPage] = useState(() => pageFromPath(initialPath));
+  const currentPost = blogPosts.find((post) => post.page === currentPage);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -201,6 +203,19 @@ export default function App({ initialPath = '/' }) {
     setMeta('meta[name="twitter:description"]', 'content', socialDescription);
     setMeta('meta[name="twitter:image"]', 'content', socialImage.url);
     setMeta('meta[name="twitter:image:alt"]', 'content', socialImage.alt);
+
+    let articleSchema = document.getElementById('article-schema');
+    if (meta.articleSchema) {
+      if (!articleSchema) {
+        articleSchema = document.createElement('script');
+        articleSchema.id = 'article-schema';
+        articleSchema.type = 'application/ld+json';
+        document.head.appendChild(articleSchema);
+      }
+      articleSchema.textContent = JSON.stringify(meta.articleSchema);
+    } else {
+      articleSchema?.remove();
+    }
   }, [currentPage]);
 
   const handlePageChange = (page) => {
@@ -294,8 +309,8 @@ export default function App({ initialPath = '/' }) {
 
       {currentPage === 'blog' ? (
         <BlogPage onNavigate={handleNavigate} />
-      ) : currentPage === 'blog-post-website-redesign' ? (
-        <BlogPostPage onContactNavigate={handleContactNavigate} />
+      ) : currentPost ? (
+        <BlogPostPage post={currentPost} onContactNavigate={handleContactNavigate} onNavigate={handleNavigate} />
       ) : currentPage === 'resume' ? (
         <ResumePage />
       ) : currentPage === 'shop' ? (
@@ -309,7 +324,7 @@ export default function App({ initialPath = '/' }) {
       ) : (
         <HomePage />
       )}
-      {['home', 'blog', 'blog-post-website-redesign'].includes(currentPage) && <SiteFooter />}
+      {(currentPage === 'home' || currentPage === 'blog' || currentPost) && <SiteFooter />}
       <button
         type="button"
         className={`scroll-to-top ${showScrollTop ? 'is-visible' : ''}`}

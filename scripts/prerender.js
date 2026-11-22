@@ -51,7 +51,7 @@ for (const [page, route] of Object.entries(pageRoutes)) {
     html = replaceTag(
       html,
       /<\/head>/,
-      `<script type="application/ld+json">${JSON.stringify(meta.articleSchema)}</script>\n  </head>`,
+      `<script id="article-schema" type="application/ld+json">${JSON.stringify(meta.articleSchema).replace(/</g, '\\u003c')}</script>\n  </head>`,
     );
   }
   html = replaceTag(html, /<div id="root"><\/div>/, () => `<div id="root">${render(route)}</div>`);
@@ -62,9 +62,8 @@ for (const [page, route] of Object.entries(pageRoutes)) {
   console.log(`prerendered ${route}`);
 }
 
-const lastmod = new Date().toISOString().slice(0, 10);
 const urls = Object.keys(pageRoutes)
-  .map((page) => `  <url>\n    <loc>${canonicalUrl(page)}</loc>\n    <lastmod>${lastmod}</lastmod>\n  </url>`)
+  .map((page) => `  <url>\n    <loc>${canonicalUrl(page)}</loc>\n  </url>`)
   .join('\n');
 await writeFile(
   path.join(distDir, 'sitemap.xml'),
