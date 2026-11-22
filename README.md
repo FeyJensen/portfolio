@@ -35,6 +35,19 @@ http://localhost:5173/
 
 The app runs both the frontend and the API together locally. The API listens on port 3001 by default.
 
+## Adding a blog post
+
+1. Add a route and its metadata to `pageRoutes` and `pageMeta` in `src/routes.js`.
+   Include `category`, `tags`, and an `articleSchema` with a `headline` and
+   `datePublished`, as in the existing post.
+2. Create a component in `src/posts/` for the article body. Export a post object
+   with the route key as `page`, a `readingTime`, a `deck`, and the component as
+   `Content`. Optionally add an `image` path for the card and article header.
+   The component can receive `onContactNavigate` for a contact link and
+   `onNavigate` for links to other site pages.
+3. Add the post object to `blogPosts` in `src/posts/index.js`. The blog index,
+   article layout, navigation, and prerendered page will use the new entry.
+
 ## Database setup
 
 This app supports a real PostgreSQL connection through `DATABASE_URL`.
