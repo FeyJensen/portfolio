@@ -194,7 +194,7 @@ export default function HomePage() {
         <section id="services" className="services section-block">
           <div className="section-heading">
             <span className="eyebrow">Ways we can work together</span>
-            <h2>ONE STUDIO. EVERY PART OF YOUR WEBSITE.</h2>
+            <h2>One Studio. Every Part of Your Website.</h2>
             <p>
               From the first idea to the final line of code, I create a connected
               experience that is easy to use, easy to grow, and true to your brand.
@@ -252,14 +252,16 @@ export default function HomePage() {
         <section className="inspiration section-block" aria-labelledby="inspiration-heading">
           <div className="section-heading inspiration-heading">
             <span className="eyebrow">A little inspiration</span>
-            <h2 id="inspiration-heading">LITTLE THINGS THAT SPARK<br></br> BIG IDEAS.</h2>
+            <h2 id="inspiration-heading">Little Things that Spark<br></br> BIG IDEAS.</h2>
             <p>Color, character, and cozy details bring a little personality to every project.</p>
           </div>
 
           <div className="inspiration-grid">
             {inspirationPhotos.map((photo) => (
               <figure className="inspiration-card" key={photo.src}>
-                <img src={photo.src} alt={photo.alt} loading="lazy" />
+                <div className="inspiration-photo">
+                  <img src={photo.src} alt={photo.alt} loading="lazy" />
+                </div>
                 <figcaption>{photo.caption}</figcaption>
               </figure>
             ))}
@@ -273,7 +275,7 @@ export default function HomePage() {
                 <span className="eyebrow">Why choose me</span>
               </div>
               <div className="about-copy">
-                <h2>WEB DESIGN WITH CLARITY AND CONVERSION IN MIND.</h2>
+                <h2>Web Design with Clarity and Conversion in Mind.</h2>
                 <p>
                   I help turn ideas into digital experiences that feel customized,
                   work smoothly, and support your business. My process connects personal design,
@@ -301,7 +303,7 @@ export default function HomePage() {
           <div className="contact-visual">
             <div className="contact-copy">
               <span className="eyebrow">We're here to talk</span>
-              <h2 id="contact-heading">Let's make something worth talking about.</h2>
+              <h2 id="contact-heading">Let's Make Something Worth Talking About.</h2>
               <p>
                 Have an idea, a project, or a question? Tell me a little about what
                 you're looking for, and we'll take it from there.
@@ -310,7 +312,7 @@ export default function HomePage() {
           </div>
 
           <div className="contact-form-card">
-            <h3 className="contact-form-heading">Start a conversation</h3>
+            <h3 className="contact-form-heading">Start a Conversation</h3>
             <p className="contact-form-intro">
               Share a few details and I'll be in touch.
             </p>

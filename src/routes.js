@@ -1,7 +1,7 @@
 export const SITE_URL = 'https://www.feyjensen.com';
 
 export const defaultSocialImage = {
-  url: `${SITE_URL}/assets/photos/og-home-hero-v2.png`,
+  url: `${SITE_URL}/assets/photos/og-home-light.png`,
   width: 1200,
   height: 630,
   alt: 'Thoughtful websites for brands with something to say, over a photo of a creative workspace',

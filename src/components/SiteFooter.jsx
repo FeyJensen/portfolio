@@ -3,7 +3,7 @@ export default function SiteFooter() {
     <footer className="site-footer">
       <div className="site-footer-inner">
         <div className="site-footer-brand">
-          <span className="site-footer-name" role="img" aria-label="Fey Jensen" />
+          <span className="site-footer-name" role="img" aria-label="Fey Jensen Web Developer" />
           <p>
             Thoughtful design and full-stack development for brands ready to
             stand out online.

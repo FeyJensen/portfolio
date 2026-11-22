@@ -127,14 +127,13 @@ function ClickStarBursts() {
     <div className="click-star-layer" aria-hidden="true">
       {bursts.flatMap((burst) =>
         burst.stars.map((star, index) => (
-          <img
+          <span
             key={`${burst.id}-${index}`}
             className="click-star"
-            src={star.src}
-            alt=""
             style={{
               left: `${burst.x}px`,
               top: `${burst.y}px`,
+              '--star-image': `url("${star.src}")`,
               '--burst-x': `${star.x}px`,
               '--burst-y': `${star.y}px`,
               '--burst-rotation': `${star.rotation}deg`,
@@ -246,7 +245,7 @@ export default function App({ initialPath = '/' }) {
       <header className="topbar">
         <a href={pageRoutes.home} className="brand-button" onClick={(event) => handleNavigate(event, 'home')}>
           <div className="brand-wrap">
-            <span className="brand-logo" role="img" aria-label="Fey Jensen" />
+            <span className="brand-logo" role="img" aria-label="Fey Jensen Web Developer" />
           </div>
         </a>
 

@@ -15,11 +15,7 @@ const post = {
 function BlogCard({ onNavigate }) {
   return (
     <article className="blog-card">
-      <div className="blog-card-art" aria-hidden="true">
-        <span>2027</span>
-        <img src="/assets/photos/PinkStar.png" alt="" />
-        <img src="/assets/photos/PurpleStar.png" alt="" />
-      </div>
+      <div className="blog-card-art" aria-hidden="true" />
       <div className="blog-card-copy">
         <div className="blog-meta">
           <span>{post.category}</span>
@@ -51,7 +47,7 @@ export function BlogPage({ onNavigate }) {
     <main className="blog-page">
       <header className="blog-index-header">
         <span className="eyebrow">The Fey Jensen blog</span>
-        <h1>Practical ideas for a website that works harder.</h1>
+        <h1>PRACTICAL WEB IDEAS FOR SMALL BUSINESSES.</h1>
         <p>
           Straightforward guidance on web design, performance, SEO, and creating
           a digital presence that supports your next stage of growth.
