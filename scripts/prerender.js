@@ -7,7 +7,7 @@ const distDir = path.join(root, 'dist');
 const serverDir = path.join(root, 'dist-server');
 
 const { render } = await import(pathToFileURL(path.join(serverDir, 'entry-server.js')).href);
-const { SITE_URL, canonicalUrl, pageMeta, pageRoutes } = await import(
+const { SITE_URL, canonicalUrl, defaultSocialImage, pageMeta, pageRoutes } = await import(
   pathToFileURL(path.join(root, 'src', 'routes.js')).href
 );
 
@@ -28,6 +28,9 @@ for (const [page, route] of Object.entries(pageRoutes)) {
   const description = escapeAttr(meta.description);
   const socialTitle = escapeAttr(meta.ogTitle ?? meta.title);
   const socialDescription = escapeAttr(meta.ogDescription ?? meta.description);
+  const socialImage = meta.socialImage ?? defaultSocialImage;
+  const socialImageUrl = escapeAttr(socialImage.url);
+  const socialImageAlt = escapeAttr(socialImage.alt);
 
   let html = template;
   html = replaceTag(html, /<title>.*?<\/title>/s, `<title>${title}</title>`);
@@ -36,8 +39,14 @@ for (const [page, route] of Object.entries(pageRoutes)) {
   html = replaceTag(html, /(<meta property="og:url" content=")[^"]*(")/, `$1${url}$2`);
   html = replaceTag(html, /(<meta property="og:title" content=")[^"]*(")/, `$1${socialTitle}$2`);
   html = replaceTag(html, /(<meta property="og:description" content=")[^"]*(")/, `$1${socialDescription}$2`);
+  html = replaceTag(html, /(<meta property="og:image" content=")[^"]*(")/, `$1${socialImageUrl}$2`);
+  html = replaceTag(html, /(<meta property="og:image:width" content=")[^"]*(")/, `$1${socialImage.width}$2`);
+  html = replaceTag(html, /(<meta property="og:image:height" content=")[^"]*(")/, `$1${socialImage.height}$2`);
+  html = replaceTag(html, /(<meta property="og:image:alt" content=")[^"]*(")/, `$1${socialImageAlt}$2`);
   html = replaceTag(html, /(<meta name="twitter:title" content=")[^"]*(")/, `$1${socialTitle}$2`);
   html = replaceTag(html, /(<meta name="twitter:description" content=")[^"]*(")/, `$1${socialDescription}$2`);
+  html = replaceTag(html, /(<meta name="twitter:image" content=")[^"]*(")/, `$1${socialImageUrl}$2`);
+  html = replaceTag(html, /(<meta name="twitter:image:alt" content=")[^"]*(")/, `$1${socialImageAlt}$2`);
   if (meta.articleSchema) {
     html = replaceTag(
       html,

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { canonicalUrl, pageFromPath, pageMeta, pageRoutes } from './routes';
+import { canonicalUrl, defaultSocialImage, pageFromPath, pageMeta, pageRoutes } from './routes';
 
 import HomePage from './pages/HomePage';
 import ResumePage from './pages/ResumePage';
@@ -186,6 +186,7 @@ export default function App({ initialPath = '/' }) {
     const url = canonicalUrl(currentPage);
     const socialTitle = meta.ogTitle ?? meta.title;
     const socialDescription = meta.ogDescription ?? meta.description;
+    const socialImage = meta.socialImage ?? defaultSocialImage;
 
     document.title = meta.title;
     setMeta('meta[name="description"]', 'content', meta.description);
@@ -193,8 +194,14 @@ export default function App({ initialPath = '/' }) {
     setMeta('meta[property="og:url"]', 'content', url);
     setMeta('meta[property="og:title"]', 'content', socialTitle);
     setMeta('meta[property="og:description"]', 'content', socialDescription);
+    setMeta('meta[property="og:image"]', 'content', socialImage.url);
+    setMeta('meta[property="og:image:width"]', 'content', socialImage.width);
+    setMeta('meta[property="og:image:height"]', 'content', socialImage.height);
+    setMeta('meta[property="og:image:alt"]', 'content', socialImage.alt);
     setMeta('meta[name="twitter:title"]', 'content', socialTitle);
     setMeta('meta[name="twitter:description"]', 'content', socialDescription);
+    setMeta('meta[name="twitter:image"]', 'content', socialImage.url);
+    setMeta('meta[name="twitter:image:alt"]', 'content', socialImage.alt);
   }, [currentPage]);
 
   const handlePageChange = (page) => {

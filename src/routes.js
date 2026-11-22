@@ -1,5 +1,19 @@
 export const SITE_URL = 'https://www.feyjensen.com';
 
+export const defaultSocialImage = {
+  url: `${SITE_URL}/assets/photos/og-home-hero-v2.png`,
+  width: 1200,
+  height: 630,
+  alt: 'Thoughtful websites for brands with something to say, over a photo of a creative workspace',
+};
+
+const blogSocialImage = {
+  url: `${SITE_URL}/assets/photos/blog-post-hero.jpg`,
+  width: 1152,
+  height: 768,
+  alt: 'A person writing in a planner at a desk with coffee and stationery',
+};
+
 const blogPostCategory = 'Web Design & Development';
 const blogPostTags = [
   'Small Business',
@@ -33,6 +47,7 @@ export const pageMeta = {
     title: 'Blog | Web Design & Small Business Growth | Fey Jensen',
     description:
       'Practical articles on web design, website performance, SEO and building an online presence that supports small business growth.',
+    socialImage: blogSocialImage,
   },
   'blog-post-website-redesign': {
     title: '7 Signs Your Small Business Needs a Website Redesign in 2027',
@@ -41,6 +56,7 @@ export const pageMeta = {
     ogTitle: 'Is Your Small Business Website Ready for 2027?',
     ogDescription:
       "From outdated branding to slow loading speeds, discover seven signs it's time to upgrade your website and set your small business up for success in 2027.",
+    socialImage: blogSocialImage,
     category: blogPostCategory,
     tags: blogPostTags,
     focusKeyword: blogPostFocusKeyword,
