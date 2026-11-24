@@ -14,7 +14,48 @@ test('registered blog posts appear in the index and render at their routes', asy
     ]);
     const render = (path) => renderToStaticMarkup(React.createElement(App, { initialPath: path }));
 
+    const home = render('/');
+    assert.match(home, /Websites starting at \$350\./);
+    assert.match(home, /href="\/pricing\/"/);
+    assert.match(home, /href="https:\/\/www\.linkedin\.com\/in\/fey-jensen-7bb826120\/"/);
+    assert.match(home, /href="https:\/\/www\.instagram\.com\/feyviolin"/);
+
+    const pricingPage = render('/pricing/');
+    assert.match(pricingPage, /Website design that fits your next step/);
+    assert.match(pricingPage, /\$350/);
+    assert.match(pricingPage, /\$550/);
+    assert.match(pricingPage, /\$750/);
+    assert.match(pricingPage, /Up to 5 pages/);
+    assert.match(pricingPage, /foundational on-page SEO/i);
+    assert.match(pricingPage, /href="\/#contact"/);
+    assert.match(pricingPage, /class="site-footer/);
+    assert.equal(pageMeta.pricing.title, 'Website Design Pricing for Small Businesses | Fey Jensen');
+
     const existingIndex = render('/blog/');
+    for (const post of blogPosts) {
+      const relatedMarkup = render(pageRoutes[post.page]).match(
+        /<section class="related-content"[\s\S]*?<\/section>/,
+      )?.[0];
+      assert.ok(relatedMarkup, `Related content should render for ${post.page}`);
+      for (const relatedPost of blogPosts.filter(({ page }) => page !== post.page)) {
+        assert.ok(
+          relatedMarkup.includes(`href="${pageRoutes[relatedPost.page]}"`),
+          `${post.page} should link to ${relatedPost.page}`,
+        );
+      }
+      assert.ok(!relatedMarkup.includes(`href="${pageRoutes[post.page]}"`));
+    }
+
+    assert.match(existingIndex, /href="\/blog\/small-business-homepage-attract-more-clients\/"/);
+    const homepagePost = render('/blog/small-business-homepage-attract-more-clients/');
+    assert.match(homepagePost, /5 Things Every Small Business Homepage Needs to Attract More Clients/);
+    assert.match(homepagePost, /November 24, 2026/);
+    assert.match(homepagePost, /1\. A Clear Headline/);
+    assert.match(homepagePost, /5\. A Strong Call to Action \(CTA\)/);
+    assert.match(homepagePost, /small-business-homepage\.jpg/);
+    assert.match(homepagePost, /7 Signs Your Small Business Needs a Website Redesign Before 2027/);
+    assert.equal(pageMeta['blog-post-small-business-homepage'].articleSchema.keywords.length, 6);
+
     assert.match(existingIndex, /href="\/blog\/small-business-website-redesign\/"/);
     const existingPost = render('/blog/small-business-website-redesign/');
     assert.match(existingPost, /November 20, 2026/);

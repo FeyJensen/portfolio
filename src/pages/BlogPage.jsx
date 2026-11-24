@@ -57,6 +57,7 @@ export function BlogPage({ onNavigate }) {
 
 export function BlogPostPage({ post, onContactNavigate, onNavigate }) {
   const meta = pageMeta[post.page];
+  const relatedPosts = blogPosts.filter((relatedPost) => relatedPost.page !== post.page);
   const publishedDate = meta.articleSchema.datePublished;
   const formattedDate = new Intl.DateTimeFormat('en-US', {
     month: 'long',
@@ -91,6 +92,35 @@ export function BlogPostPage({ post, onContactNavigate, onNavigate }) {
           </ul>
         </div>
       </article>
+      <section className="related-content" aria-labelledby="related-content-heading">
+        <h2 id="related-content-heading">Related Content</h2>
+        <div className="related-content-grid">
+          {relatedPosts.map((relatedPost) => {
+            const relatedMeta = pageMeta[relatedPost.page];
+            return (
+              <article className="related-content-card" key={relatedPost.page}>
+                <a
+                  className="related-content-link"
+                  href={pageRoutes[relatedPost.page]}
+                  onClick={(event) => onNavigate(event, relatedPost.page)}
+                >
+                  <div
+                    className="related-content-art"
+                    aria-hidden="true"
+                    style={{
+                      '--related-content-image': `url("${relatedPost.image || '/assets/photos/blog-post-hero.jpg'}")`,
+                    }}
+                  />
+                  <div className="related-content-copy">
+                    <span className="related-content-category">{relatedMeta.category}</span>
+                    <h3>{relatedMeta.articleSchema.headline}</h3>
+                  </div>
+                </a>
+              </article>
+            );
+          })}
+        </div>
+      </section>
     </main>
   );
 }

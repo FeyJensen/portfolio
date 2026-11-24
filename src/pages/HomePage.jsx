@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { stats } from '../data/portfolioData';
+import { pricingPackages } from '../data/pricing';
+import { pageRoutes } from '../routes';
 import polaroidGirl from '/assets/photos/PolaroidPhoneGirl.webp';
 import portrait from '/assets/photos/about-photo.jpg';
 
@@ -66,7 +68,7 @@ function ServicesStarCluster({ position = 'bottom-left' }) {
   );
 }
 
-export default function HomePage() {
+export default function HomePage({ onNavigate }) {
   const statsRef = useRef(null);
   const [statsVisible, setStatsVisible] = useState(false);
   const [contactStatus, setContactStatus] = useState('');
@@ -249,6 +251,24 @@ export default function HomePage() {
           </div>
         </section>
 
+        <section className="pricing-teaser section-block" aria-labelledby="pricing-teaser-heading">
+          <span className="eyebrow">Small-business-friendly pricing</span>
+          <h2 id="pricing-teaser-heading">
+            Websites Starting at ${pricingPackages[0].price}.
+          </h2>
+          <p>
+            Explore simple website packages with thoughtful design, clear
+            project scopes, and foundational SEO.
+          </p>
+          <a
+            className="primary-btn"
+            href={pageRoutes.pricing}
+            onClick={(event) => onNavigate(event, 'pricing')}
+          >
+            View pricing
+          </a>
+        </section>
+
         <section className="inspiration section-block" aria-labelledby="inspiration-heading">
           <div className="section-heading inspiration-heading">
             <span className="eyebrow">A little inspiration</span>
@@ -286,6 +306,22 @@ export default function HomePage() {
                   You get direct collaboration, a considered process, and a site
                   built to keep working after launch.
                 </p>
+                <nav className="about-social-links" aria-label="Social profiles">
+                  <a
+                    href="https://www.linkedin.com/in/fey-jensen-7bb826120/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    LinkedIn
+                  </a>
+                  <a
+                    href="https://www.instagram.com/feyviolin"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Instagram
+                  </a>
+                </nav>
               </div>
             </div>
 

@@ -28,6 +28,24 @@ export default function SiteFooter() {
           >
             GitHub
           </a>
+          <a
+            className="site-footer-social-link"
+            href="https://www.linkedin.com/in/fey-jensen-7bb826120/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="LinkedIn profile (opens in a new tab)"
+          >
+            LinkedIn
+          </a>
+          <a
+            className="site-footer-social-link"
+            href="https://www.instagram.com/feyviolin"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Instagram profile (opens in a new tab)"
+          >
+            Instagram
+          </a>
         </div>
       </div>
       <div className="site-footer-bottom">

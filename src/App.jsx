@@ -8,6 +8,7 @@ import SkyeDogPage from './pages/SkyeDogPage';
 import ShopDemoPage from './pages/ShopDemoPage';
 import AuthDemoPage from './pages/AuthDemoPage';
 import ClientWorkPage from './pages/ClientWorkPage';
+import PricingPage from './pages/PricingPage';
 import { BlogPage, BlogPostPage } from './pages/BlogPage';
 import { blogPosts } from './posts';
 import SiteFooter from './components/SiteFooter';
@@ -297,6 +298,13 @@ export default function App({ initialPath = '/' }) {
           )}
 
           <a
+            href={pageRoutes.pricing}
+            className={`nav-button ${currentPage === 'pricing' ? 'is-selected' : ''}`}
+            onClick={(event) => handleNavigate(event, 'pricing')}
+          >
+            Pricing
+          </a>
+          <a
             href={pageRoutes.blog}
             className={`nav-button ${currentPage === 'blog' ? 'is-selected' : ''}`}
             onClick={(event) => handleNavigate(event, 'blog')}
@@ -307,7 +315,9 @@ export default function App({ initialPath = '/' }) {
         </nav>
       </header>
 
-      {currentPage === 'blog' ? (
+      {currentPage === 'pricing' ? (
+        <PricingPage onContactNavigate={handleContactNavigate} />
+      ) : currentPage === 'blog' ? (
         <BlogPage onNavigate={handleNavigate} />
       ) : currentPost ? (
         <BlogPostPage post={currentPost} onContactNavigate={handleContactNavigate} onNavigate={handleNavigate} />
@@ -322,9 +332,9 @@ export default function App({ initialPath = '/' }) {
       ) : currentPage === 'client-work' ? (
         <ClientWorkPage />
       ) : (
-        <HomePage />
+        <HomePage onNavigate={handleNavigate} />
       )}
-      {(currentPage === 'home' || currentPage === 'blog' || currentPost) && <SiteFooter />}
+      {(currentPage === 'home' || currentPage === 'pricing' || currentPage === 'blog' || currentPost) && <SiteFooter />}
       <button
         type="button"
         className={`scroll-to-top ${showScrollTop ? 'is-visible' : ''}`}

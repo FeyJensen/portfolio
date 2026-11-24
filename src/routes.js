@@ -35,10 +35,22 @@ const websiteUpdatesKeywords = [
   'mobile-friendly website',
   'website accessibility',
 ];
+const smallBusinessHomepageDescription =
+  'Learn the five things every small business homepage needs to attract more clients, from a clear headline and professional branding to testimonials and strong calls to action.';
+const smallBusinessHomepageKeywords = [
+  'small business homepage',
+  'small business website',
+  'homepage design',
+  'small business web design',
+  'website calls to action',
+  'website testimonials',
+];
 
 export const pageRoutes = {
   home: '/',
+  pricing: '/pricing/',
   blog: '/blog/',
+  'blog-post-small-business-homepage': '/blog/small-business-homepage-attract-more-clients/',
   'blog-post-website-redesign': '/blog/small-business-website-redesign/',
   'blog-post-website-updates-2027': '/blog/small-business-website-updates-2027/',
   resume: '/resume',
@@ -54,11 +66,50 @@ export const pageMeta = {
     description:
       'Fey Jensen designs and develops custom websites for small businesses in Portland, Oregon and beyond.',
   },
+  pricing: {
+    title: 'Website Design Pricing for Small Businesses | Fey Jensen',
+    description:
+      'Explore affordable small-business website design packages from Fey Jensen, starting at $350, with clear scope, foundational SEO, and custom styling.',
+  },
   blog: {
     title: 'Blog | Web Design & Small Business Growth | Fey Jensen',
     description:
       'Practical articles on web design, website performance, SEO and building an online presence that supports small business growth.',
     socialImage: blogSocialImage,
+  },
+  'blog-post-small-business-homepage': {
+    title: '5 Things Every Small Business Homepage Needs to Attract More Clients',
+    description: smallBusinessHomepageDescription,
+    socialImage: {
+      url: `${SITE_URL}/assets/photos/small-business-homepage.jpg`,
+      width: 1152,
+      height: 768,
+      alt: 'A small business owner putting an open sign in her shop window',
+    },
+    category: blogPostCategory,
+    tags: smallBusinessHomepageKeywords,
+    focusKeyword: smallBusinessHomepageKeywords[0],
+    articleSchema: {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: '5 Things Every Small Business Homepage Needs to Attract More Clients',
+      description: smallBusinessHomepageDescription,
+      articleSection: blogPostCategory,
+      keywords: smallBusinessHomepageKeywords,
+      datePublished: '2026-11-24',
+      dateModified: '2026-11-24',
+      author: {
+        '@type': 'Person',
+        name: 'Fey Jensen',
+        url: `${SITE_URL}/`,
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Fey Jensen Web Dev',
+        url: `${SITE_URL}/`,
+      },
+      mainEntityOfPage: `${SITE_URL}/blog/small-business-homepage-attract-more-clients/`,
+    },
   },
   'blog-post-website-redesign': {
     title: '7 Signs Your Small Business Needs a Website Redesign in 2027',
