@@ -4168,9 +4168,136 @@ body {
   padding-block: clamp(40px, 4vw, 56px);
 }
 
+.home-page .home-blog-section {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  padding: clamp(56px, 7vw, 84px) max(24px, calc((100vw - 1180px) / 2));
+  background: var(--paper);
+}
+
+.home-blog-inner {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+
+.home-blog-heading {
+  max-width: 760px;
+}
+
+.home-blog-heading p {
+  max-width: 640px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.home-blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.home-blog-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--white);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.home-blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(31, 27, 26, 0.12);
+}
+
+.home-blog-card-link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.home-blog-card-link:focus-visible {
+  outline: 3px solid var(--plum);
+  outline-offset: -3px;
+}
+
+.home-blog-card-art {
+  flex: 0 0 auto;
+  aspect-ratio: 1.55;
+  background: var(--home-blog-image) center / cover no-repeat;
+}
+
+.home-blog-card-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 22px;
+}
+
+.home-blog-card-category {
+  color: var(--plum);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.home-blog-card h3 {
+  margin: 12px 0;
+  color: var(--blackcurrant);
+  font-family: var(--font-heading);
+  font-size: clamp(1.3rem, 2vw, 1.65rem);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.home-blog-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.home-blog-read-link {
+  display: inline-flex;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 20px;
+  color: var(--plum);
+  font-weight: 700;
+}
+
+.home-blog-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.home-blog-actions .secondary-btn:hover {
+  background: var(--petal);
+}
+
 @media (max-width: 640px) {
   .home-page .services,
-  .home-page .inspiration {
+  .home-page .inspiration,
+  .home-page .home-blog-section {
     padding-block: 36px;
+  }
+}
+
+@media (max-width: 900px) {
+  .home-blog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .home-blog-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-blog-card-copy {
+    height: auto;
   }
 }

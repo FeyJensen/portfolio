@@ -1,4 +1,4 @@
-import { blogPosts } from '../posts';
+import { blogPosts, getNewestBlogPosts } from '../posts';
 import { pageMeta, pageRoutes } from '../routes';
 
 function BlogCard({ post, onNavigate }) {
@@ -47,7 +47,7 @@ export function BlogPage({ onNavigate }) {
       </header>
 
       <div className="blog-card-grid">
-        {blogPosts.map((post) => (
+        {getNewestBlogPosts().map((post) => (
           <BlogCard key={post.page} post={post} onNavigate={onNavigate} />
         ))}
       </div>

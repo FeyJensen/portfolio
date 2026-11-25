@@ -45,6 +45,16 @@ const smallBusinessHomepageKeywords = [
   'website calls to action',
   'website testimonials',
 ];
+const yearEndWebsiteAuditDescription =
+  'Get your small business website ready for 2027 with this year-end website audit checklist covering SEO, accessibility, content, analytics, and more.';
+const yearEndWebsiteAuditTags = [
+  'Website Maintenance',
+  'Small Business Websites',
+  'Website Optimization',
+  'Website Accessibility',
+  'Small Business SEO',
+  'Website Audits',
+];
 
 export const pageRoutes = {
   home: '/',
@@ -53,6 +63,7 @@ export const pageRoutes = {
   'blog-post-small-business-homepage': '/blog/small-business-homepage-attract-more-clients/',
   'blog-post-website-redesign': '/blog/small-business-website-redesign/',
   'blog-post-website-updates-2027': '/blog/small-business-website-updates-2027/',
+  'blog-post-year-end-website-audit': '/blog/year-end-website-audit-checklist/',
   resume: '/resume',
   shop: '/projects/shop-demo',
   videogamedemo: '/projects/videogamedemo',
@@ -178,6 +189,44 @@ export const pageMeta = {
         url: `${SITE_URL}/`,
       },
       mainEntityOfPage: `${SITE_URL}/blog/small-business-website-updates-2027/`,
+    },
+  },
+  'blog-post-year-end-website-audit': {
+    title: 'The Ultimate Year-End Website Audit Checklist for 2027',
+    description: yearEndWebsiteAuditDescription,
+    socialImage: {
+      url: `${SITE_URL}/assets/photos/year-end-website-audit.jpg`,
+      width: 1151,
+      height: 768,
+      alt: 'A small business owner standing in the doorway of a blue storefront',
+    },
+    category: 'Website Maintenance & SEO',
+    tags: yearEndWebsiteAuditTags,
+    focusKeyword: 'Website audit checklist',
+    articleSchema: {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: 'The Ultimate Year-End Website Audit Checklist',
+      description: yearEndWebsiteAuditDescription,
+      articleSection: 'Website Maintenance & SEO',
+      keywords: [
+        'Website audit checklist',
+        'Small business website maintenance',
+        ...yearEndWebsiteAuditTags,
+      ],
+      datePublished: '2026-11-25',
+      dateModified: '2026-11-25',
+      author: {
+        '@type': 'Person',
+        name: 'Fey Jensen',
+        url: `${SITE_URL}/`,
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Fey Jensen Web Dev',
+        url: `${SITE_URL}/`,
+      },
+      mainEntityOfPage: `${SITE_URL}/blog/year-end-website-audit-checklist/`,
     },
   },
   resume: {

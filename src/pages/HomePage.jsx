@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { stats } from '../data/portfolioData';
 import { pricingPackages } from '../data/pricing';
-import { pageRoutes } from '../routes';
+import { getNewestBlogPosts } from '../posts';
+import { pageMeta, pageRoutes } from '../routes';
 import polaroidGirl from '/assets/photos/PolaroidPhoneGirl.webp';
 import portrait from '/assets/photos/about-photo.jpg';
 
@@ -18,6 +19,7 @@ const summaryStars = [
 ];
 
 const serviceStars = ['PastelPurpleStar.png', 'PeachStar.png', 'PinkStar.png', 'PurpleStar.png'];
+const latestBlogPosts = getNewestBlogPosts().slice(0, 3);
 
 const inspirationPhotos = [
   {
@@ -334,6 +336,62 @@ export default function HomePage({ onNavigate }) {
             </div>
           </div>
         </section>
+
+        <section className="home-blog-section section-block" aria-labelledby="home-blog-heading">
+          <div className="home-blog-inner">
+            <div className="section-heading home-blog-heading">
+              <span className="eyebrow">From the blog</span>
+              <h2 id="home-blog-heading">Helpful Ideas for Your Website.</h2>
+              <p>
+                Explore practical tips on website design, SEO, and keeping your
+                small business website working for you.
+              </p>
+            </div>
+
+            <div className="home-blog-grid">
+              {latestBlogPosts.map((post) => {
+                const meta = pageMeta[post.page];
+
+                return (
+                  <article className="home-blog-card" key={post.page}>
+                    <a
+                      className="home-blog-card-link"
+                      href={pageRoutes[post.page]}
+                      onClick={(event) => onNavigate(event, post.page)}
+                    >
+                      <div
+                        className="home-blog-card-art"
+                        aria-hidden="true"
+                        style={{
+                          '--home-blog-image': `url("${post.image || '/assets/photos/blog-post-hero.jpg'}")`,
+                        }}
+                      />
+                      <div className="home-blog-card-copy">
+                        <span className="home-blog-card-category">{meta.category}</span>
+                        <h3>{meta.articleSchema.headline}</h3>
+                        <p>{meta.description}</p>
+                        <span className="home-blog-read-link">
+                          Read article <span aria-hidden="true">→</span>
+                        </span>
+                      </div>
+                    </a>
+                  </article>
+                );
+              })}
+            </div>
+
+            <div className="home-blog-actions">
+              <a
+                className="secondary-btn"
+                href={pageRoutes.blog}
+                onClick={(event) => onNavigate(event, 'blog')}
+              >
+                Explore all articles
+              </a>
+            </div>
+          </div>
+        </section>
+
       <section id="contact" className="contact-section" aria-labelledby="contact-heading">
         <div className="contact-inner">
           <div className="contact-visual">
