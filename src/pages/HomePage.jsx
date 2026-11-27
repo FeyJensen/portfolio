@@ -209,28 +209,36 @@ export default function HomePage({ onNavigate }) {
             <article className="service-card">
               <ul className="service-list">
                 <li>
-                  <span>01</span>
+                  <span className="service-icon-wrap" aria-hidden="true">
+                    <img src="/assets/Icons%20&%20Patterns/Branding_Icon%20Computer.png" alt="" />
+                  </span>
                   <div>
                     <strong>Full-stack website builds</strong>
                     <p>Custom, responsive websites shaped around your business goals.</p>
                   </div>
                 </li>
                 <li>
-                  <span>02</span>
+                  <span className="service-icon-wrap" aria-hidden="true">
+                    <img src="/assets/Icons%20&%20Patterns/Branding_Icone%20Mouse.png" alt="" />
+                  </span>
                   <div>
                     <strong>Landing pages &amp; funnels</strong>
                     <p>Focused experiences designed to guide visitors toward action.</p>
                   </div>
                 </li>
                 <li>
-                  <span>03</span>
+                  <span className="service-icon-wrap" aria-hidden="true">
+                    <img src="/assets/Icons%20&%20Patterns/Branding_Icon%20Heart.png" alt="" />
+                  </span>
                   <div>
                     <strong>UI/UX design systems</strong>
                     <p>Cohesive visual foundations that keep every touchpoint consistent.</p>
                   </div>
                 </li>
                 <li>
-                  <span>04</span>
+                  <span className="service-icon-wrap" aria-hidden="true">
+                    <img src="/assets/Icons%20&%20Patterns/Branding_Icon%20Wifi.png" alt="" />
+                  </span>
                   <div>
                     <strong>Optimization &amp; care</strong>
                     <p>Ongoing improvements for speed, accessibility, and confidence.</p>
@@ -254,21 +262,22 @@ export default function HomePage({ onNavigate }) {
         </section>
 
         <section className="pricing-teaser section-block" aria-labelledby="pricing-teaser-heading">
-          <span className="eyebrow">Small-business-friendly pricing</span>
-          <h2 id="pricing-teaser-heading">
-            Websites Starting at ${pricingPackages[0].price}.
-          </h2>
-          <p>
-            Explore simple website packages with thoughtful design, clear
-            project scopes, and foundational SEO.
-          </p>
-          <a
-            className="primary-btn"
-            href={pageRoutes.pricing}
-            onClick={(event) => onNavigate(event, 'pricing')}
-          >
-            View pricing
-          </a>
+          <div className="pricing-teaser-card">
+            <h2 id="pricing-teaser-heading">
+              Websites Starting at ${pricingPackages[0].price}.
+            </h2>
+            <p>
+              Explore simple website packages with thoughtful design, clear
+              project scopes, and foundational SEO.
+            </p>
+            <a
+              className="primary-btn"
+              href={pageRoutes.pricing}
+              onClick={(event) => onNavigate(event, 'pricing')}
+            >
+              View pricing
+            </a>
+          </div>
         </section>
 
         <section className="inspiration section-block" aria-labelledby="inspiration-heading">
